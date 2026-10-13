@@ -905,10 +905,72 @@ html.hdw-on .new {
 }
 
 /* ==================================================================
+   用户等级色 · 原色还原层（所有主题）
+   原站等级色经 A.Xxx_Name:link (0,1,1) 生效，被本扩展通用
+   a:link (0,1,2) 压制——浅色主题曾因此丢等级色。此处按原站
+   main.css 原值显式还原（裸类 0,2,1 + 伪类组 0,3,1 双保险）；
+   深色主题由下方 hdw-dark 亮化层（同特异性、位置在后）接管。
+   ================================================================== */
+html.hdw-on .User_Name { color: #000000; }
+html.hdw-on a.User_Name:link, html.hdw-on a.User_Name:visited,
+html.hdw-on a.User_Name:hover, html.hdw-on a.User_Name:focus { color: #000000; }
+html.hdw-on .Peasant_Name { color: #708090; }
+html.hdw-on a.Peasant_Name:link, html.hdw-on a.Peasant_Name:visited,
+html.hdw-on a.Peasant_Name:hover, html.hdw-on a.Peasant_Name:focus { color: #708090; }
+html.hdw-on .PowerUser_Name { color: #B38512; }
+html.hdw-on a.PowerUser_Name:link, html.hdw-on a.PowerUser_Name:visited,
+html.hdw-on a.PowerUser_Name:hover, html.hdw-on a.PowerUser_Name:focus { color: #B38512; }
+html.hdw-on .EliteUser_Name { color: #008B8B; }
+html.hdw-on a.EliteUser_Name:link, html.hdw-on a.EliteUser_Name:visited,
+html.hdw-on a.EliteUser_Name:hover, html.hdw-on a.EliteUser_Name:focus { color: #008B8B; }
+html.hdw-on .CrazyUser_Name { color: #00BFFF; }
+html.hdw-on a.CrazyUser_Name:link, html.hdw-on a.CrazyUser_Name:visited,
+html.hdw-on a.CrazyUser_Name:hover, html.hdw-on a.CrazyUser_Name:focus { color: #00BFFF; }
+html.hdw-on .InsaneUser_Name { color: #8B008B; }
+html.hdw-on a.InsaneUser_Name:link, html.hdw-on a.InsaneUser_Name:visited,
+html.hdw-on a.InsaneUser_Name:hover, html.hdw-on a.InsaneUser_Name:focus { color: #8B008B; }
+html.hdw-on .VeteranUser_Name { color: #483D8B; }
+html.hdw-on a.VeteranUser_Name:link, html.hdw-on a.VeteranUser_Name:visited,
+html.hdw-on a.VeteranUser_Name:hover, html.hdw-on a.VeteranUser_Name:focus { color: #483D8B; }
+html.hdw-on .UltimateUser_Name { color: #006400; }
+html.hdw-on a.UltimateUser_Name:link, html.hdw-on a.UltimateUser_Name:visited,
+html.hdw-on a.UltimateUser_Name:hover, html.hdw-on a.UltimateUser_Name:focus { color: #006400; }
+html.hdw-on .NexusMaster_Name { color: #38ACEC; }
+html.hdw-on a.NexusMaster_Name:link, html.hdw-on a.NexusMaster_Name:visited,
+html.hdw-on a.NexusMaster_Name:hover, html.hdw-on a.NexusMaster_Name:focus { color: #38ACEC; }
+html.hdw-on .Flack_Name { color: #FFFF00; }
+html.hdw-on a.Flack_Name:link, html.hdw-on a.Flack_Name:visited,
+html.hdw-on a.Flack_Name:hover, html.hdw-on a.Flack_Name:focus { color: #FFFF00; }
+html.hdw-on .Moderator_Name { color: #1A3DD2; }
+html.hdw-on a.Moderator_Name:link, html.hdw-on a.Moderator_Name:visited,
+html.hdw-on a.Moderator_Name:hover, html.hdw-on a.Moderator_Name:focus { color: #1A3DD2; }
+html.hdw-on .SysOp_Name { color: #a0522d; }
+html.hdw-on a.SysOp_Name:link, html.hdw-on a.SysOp_Name:visited,
+html.hdw-on a.SysOp_Name:hover, html.hdw-on a.SysOp_Name:focus { color: #a0522d; }
+html.hdw-on .StaffLeader_Name { color: #8b0000; }
+html.hdw-on a.StaffLeader_Name:link, html.hdw-on a.StaffLeader_Name:visited,
+html.hdw-on a.StaffLeader_Name:hover, html.hdw-on a.StaffLeader_Name:focus { color: #8b0000; }
+html.hdw-on .Staff_Name { color: #AA3838; }
+html.hdw-on a.Staff_Name:link, html.hdw-on a.Staff_Name:visited,
+html.hdw-on a.Staff_Name:hover, html.hdw-on a.Staff_Name:focus { color: #AA3838; }
+html.hdw-on .Uploader_Name { color: #DC143C; }
+html.hdw-on a.Uploader_Name:link, html.hdw-on a.Uploader_Name:visited,
+html.hdw-on a.Uploader_Name:hover, html.hdw-on a.Uploader_Name:focus { color: #DC143C; }
+html.hdw-on .VIP_Name { color: #009F00; }
+html.hdw-on a.VIP_Name:link, html.hdw-on a.VIP_Name:visited,
+html.hdw-on a.VIP_Name:hover, html.hdw-on a.VIP_Name:focus { color: #009F00; }
+html.hdw-on .Seeder_Name { color: #0000FF; }
+html.hdw-on a.Seeder_Name:link, html.hdw-on a.Seeder_Name:visited,
+html.hdw-on a.Seeder_Name:hover, html.hdw-on a.Seeder_Name:focus { color: #0000FF; }
+html.hdw-on .ExtremeUser_Name { color: #FF5A00; }
+html.hdw-on a.ExtremeUser_Name:link, html.hdw-on a.ExtremeUser_Name:visited,
+html.hdw-on a.ExtremeUser_Name:hover, html.hdw-on a.ExtremeUser_Name:focus { color: #FF5A00; }
+
+/* ==================================================================
    深色主题专属（html.hdw-on.hdw-dark）
    1) 用户等级色：PT 身份语言，全深色主题共用一套亮色映射，
       在 #1f2630 / #2e3440 / #141f18 底上对比度均 ≥ 4.5:1；
-      浅色主题（纸墨）沿用原版等级色，不走此层。
+      浅色主题由上方「原色还原层」回到站点原色。
    2) 暗功能色（暗绿 / 暗紫 / 深蓝统计色 / font[color] 属性色）
       按色相亮化，仅深色主题生效。
    ================================================================== */
@@ -2452,4 +2514,462 @@ html.hdw-on.hdw-t-geyao #back_to_top:hover::before {
 }
 html.hdw-on.hdw-t-geyao #back_to_top:active {
   box-shadow: none;
+}
+
+/* ==================================================================
+   天青专属装饰层（html.hdw-on.hdw-t-tianqing）
+   汝窑。「雨过天青云破处，这般颜色作将来」——宋人美学的静与简：
+     · 蝉翼纹 — 页面锦地，两族抖动折线交叉的细密开片（@0.08）
+     · 玛瑙乳浊 — 容器顶部乳白渐变，玉的浑浊而非纸的白
+     · 晨星稀 — 表头寥寥三粒 1px 微光（釉内气泡）
+     · 芝麻钉 — 题字右端一枚香灰点、器足三钉痕（满釉支烧）
+     · 静中生动 — 唯一动效：focus 光晕 0.4s 缓入，余皆不动
+   与基础变量层（hdw-on）叠加生效。
+   ================================================================== */
+
+/* ── 蝉翼锦地：细密开片，可辨而雅（第十轮 0.20 定档） ── */
+html.hdw-on.hdw-t-tianqing body {
+  background-color: var(--hdw-page);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20viewBox%3D%220%200%20160%20160%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%235f8b8d%22%20stroke-opacity%3D%220.2%22%20stroke-width%3D%220.7%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M-5%2C20%20C40%2C14%2070%2C52%20108%2C60%20C130%2C64%20148%2C92%20165%2C88%22%2F%3E%3Cpath%20d%3D%22M-8%2C70%20C36%2C66%2062%2C104%2096%2C112%20C122%2C118%20140%2C150%20168%2C152%22%2F%3E%3Cpath%20d%3D%22M28%2C-6%20C24%2C38%2060%2C66%2068%2C104%20C74%2C132%20108%2C148%20112%2C166%22%2F%3E%3Cpath%20d%3D%22M78%2C-8%20C74%2C30%20108%2C58%20118%2C96%20C126%2C124%20156%2C142%20162%2C164%22%2F%3E%3Cpath%20d%3D%22M165%2C26%20C124%2C20%2096%2C56%2060%2C64%20C34%2C70%2016%2C100%20-8%2C96%22%2F%3E%3Cpath%20d%3D%22M168%2C76%20C126%2C72%20100%2C108%2066%2C116%20C38%2C122%2020%2C150%20-6%2C148%22%2F%3E%3Cpath%20d%3D%22M132%2C-6%20C136%2C36%20100%2C64%2092%2C102%20C86%2C130%2052%2C146%2048%2C166%22%2F%3E%3Cpath%20d%3D%22M82%2C-8%20C86%2C30%2052%2C58%2042%2C96%20C34%2C124%204%2C142%20-2%2C164%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 160px 160px;
+}
+
+/* ── 玛瑙乳浊：顶部乳白，浑而不透 ── */
+html.hdw-on.hdw-t-tianqing #all_box {
+  background:
+    linear-gradient(180deg, rgba(248, 252, 252, 0.45), rgba(248, 252, 252, 0) 110px),
+    var(--hdw-outer);
+  box-shadow: 0 12px 44px rgba(95, 139, 141, 0.16);
+}
+
+/* ── 釉面：header 渐变 + 底部一线釉足（素，无弦纹） ── */
+html.hdw-on.hdw-t-tianqing #site_header {
+  background: linear-gradient(180deg, var(--hdw-header), var(--hdw-header2));
+  border-bottom: 1px solid #9fb8b5;
+}
+
+/* ── 天青深处：nav 云破带（雨过天青云破处）+ 口沿釉薄一线 ── */
+html.hdw-on.hdw-t-tianqing #site_nav {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22100%22%20height%3D%2244%22%20viewBox%3D%220%200%20100%2044%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e8f1f0%22%20stroke-opacity%3D%220.45%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-6%2C16%20C22%2C8%2052%2C24%2082%2C18%20C96%2C15%20104%2C16%20108%2C18%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M44%2C30%20C62%2C24%2078%2C32%2096%2C28%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2216%22%20cy%3D%2221%22%20r%3D%223.2%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #679799, #568688);
+  background-size: 100px 44px, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: center, 0 0;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(232, 242, 241, 0.35);
+}
+html.hdw-on.hdw-t-tianqing .nav_center a {
+  background: transparent;
+  color: #e8f1f0;
+}
+html.hdw-on.hdw-t-tianqing .nav_center a:hover {
+  background: rgba(232, 242, 241, 0.14);
+  color: #ffffff;
+}
+/* 开光：激活项成釉白窗，如素器上一线刻款 */
+html.hdw-on.hdw-t-tianqing a.nav_item_active,
+html.hdw-on.hdw-t-tianqing a.nav_item_active:hover {
+  background: linear-gradient(180deg, #eef5f4, #e2edec);
+  color: #3f6668;
+  border-radius: 7px 7px 0 0;
+  box-shadow: 0 2px 0 #eaf2f1, 0 0 0 1px #a9c6c5;
+}
+html.hdw-on.hdw-t-tianqing a.nav_item_normal:hover {
+  background: rgba(232, 242, 241, 0.14);
+}
+html.hdw-on.hdw-t-tianqing .scroll-to-fixed-fixed {
+  border-bottom-color: #568688;
+}
+
+/* ── 天青表头：蝉翼纹 + 晨星三粒 ── */
+html.hdw-on.hdw-t-tianqing .torrent_list tr.tab_header,
+html.hdw-on.hdw-t-tianqing .content_tab tr.tab_header {
+  background-image: radial-gradient(circle 1px at 22% 30%, rgba(255,255,255,0.85) 0 0.8px, transparent 1.2px), radial-gradient(circle 1px at 61% 68%, rgba(255,255,255,0.7) 0 0.8px, transparent 1.2px), radial-gradient(circle 1px at 84% 26%, rgba(255,255,255,0.6) 0 0.7px, transparent 1.1px),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20viewBox%3D%220%200%20160%20160%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%235f8b8d%22%20stroke-opacity%3D%220.2%22%20stroke-width%3D%220.7%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M-5%2C20%20C40%2C14%2070%2C52%20108%2C60%20C130%2C64%20148%2C92%20165%2C88%22%2F%3E%3Cpath%20d%3D%22M-8%2C70%20C36%2C66%2062%2C104%2096%2C112%20C122%2C118%20140%2C150%20168%2C152%22%2F%3E%3Cpath%20d%3D%22M28%2C-6%20C24%2C38%2060%2C66%2068%2C104%20C74%2C132%20108%2C148%20112%2C166%22%2F%3E%3Cpath%20d%3D%22M78%2C-8%20C74%2C30%20108%2C58%20118%2C96%20C126%2C124%20156%2C142%20162%2C164%22%2F%3E%3Cpath%20d%3D%22M165%2C26%20C124%2C20%2096%2C56%2060%2C64%20C34%2C70%2016%2C100%20-8%2C96%22%2F%3E%3Cpath%20d%3D%22M168%2C76%20C126%2C72%20100%2C108%2066%2C116%20C38%2C122%2020%2C150%20-6%2C148%22%2F%3E%3Cpath%20d%3D%22M132%2C-6%20C136%2C36%20100%2C64%2092%2C102%20C86%2C130%2052%2C146%2048%2C166%22%2F%3E%3Cpath%20d%3D%22M82%2C-8%20C86%2C30%2052%2C58%2042%2C96%20C34%2C124%204%2C142%20-2%2C164%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #dfebea, #d5e5e4);
+  background-size: 100% 100%, 160px 160px, 100% 100%;
+  background-repeat: no-repeat, repeat, no-repeat;
+}
+html.hdw-on.hdw-t-tianqing .torrent_list th {
+  color: #3d5f60;
+  border-bottom: 1px solid #a9c6c5;
+}
+
+/* ── 题字：衬线宽字距 + 右端一枚芝麻钉 ── */
+html.hdw-on.hdw-t-tianqing .announcebox p,
+html.hdw-on.hdw-t-tianqing .index_left th {
+  background-image: radial-gradient(circle 2px at calc(100% - 12px) 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px),
+    linear-gradient(180deg, #e4efee, #dceae9);
+  background-repeat: no-repeat, repeat;
+  background-position: 0 0, 0 0;
+  color: #3d5f60;
+  font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
+  letter-spacing: 0.15em;
+}
+html.hdw-on.hdw-t-tianqing .index_left th {
+  border-bottom: 1px solid #a9c6c5;
+}
+
+/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一芝麻钉 ── */
+html.hdw-on.hdw-t-tianqing .noraml_box h2,
+html.hdw-on.hdw-t-tianqing .sub_upload div.left h2,
+html.hdw-on.hdw-t-tianqing .offer_box div.left h2,
+html.hdw-on.hdw-t-tianqing .users_box h2 {
+  background-image: radial-gradient(circle 2px at calc(100% - 10px) 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+}
+
+/* ── 公告界栏：左一线素线 ── */
+html.hdw-on.hdw-t-tianqing .announcebox h3 {
+  border-left: 2px solid #5f8b8d;
+  padding-left: 12px;
+}
+
+/* ── 器形圆融：细边轻影 ── */
+html.hdw-on.hdw-t-tianqing .announcebox,
+html.hdw-on.hdw-t-tianqing .index_right {
+  border: 1px solid #c3d5d3;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(95, 139, 141, 0.08);
+}
+html.hdw-on.hdw-t-tianqing .details_box,
+html.hdw-on.hdw-t-tianqing .subtitle_upload_box,
+html.hdw-on.hdw-t-tianqing .offer_box,
+html.hdw-on.hdw-t-tianqing .users_box,
+html.hdw-on.hdw-t-tianqing .noraml_box {
+  border-radius: 10px;
+}
+
+/* ── 釉白瓷钮：白底青字青边，hover 天青地白字 ── */
+html.hdw-on.hdw-t-tianqing .btn,
+html.hdw-on.hdw-t-tianqing .btn2,
+html.hdw-on.hdw-t-tianqing .btns,
+html.hdw-on.hdw-t-tianqing button,
+html.hdw-on.hdw-t-tianqing input[type="submit"],
+html.hdw-on.hdw-t-tianqing input[type="button"],
+html.hdw-on.hdw-t-tianqing .loginbox input.btnl {
+  background: linear-gradient(180deg, #f2f8f7, #e6f0ef);
+  border: 1px solid #5f8b8d;
+  color: #3d5f60;
+  border-radius: 6px;
+}
+html.hdw-on.hdw-t-tianqing .btn:hover,
+html.hdw-on.hdw-t-tianqing .btn2:hover,
+html.hdw-on.hdw-t-tianqing .btns:hover,
+html.hdw-on.hdw-t-tianqing button:hover,
+html.hdw-on.hdw-t-tianqing input[type="submit"]:hover,
+html.hdw-on.hdw-t-tianqing input[type="button"]:hover,
+html.hdw-on.hdw-t-tianqing .loginbox input.btnl:hover {
+  background: linear-gradient(180deg, #679799, #5f8b8d);
+  border-color: #4d7476;
+  color: #ffffff;
+}
+html.hdw-on.hdw-t-tianqing .gobutton {
+  background: linear-gradient(180deg, #679799, #5f8b8d);
+}
+
+/* ── 静中生动：focus 光晕 0.4s 缓入（全站唯一动效） ── */
+html.hdw-on.hdw-t-tianqing input[type="text"],
+html.hdw-on.hdw-t-tianqing input[type="password"],
+html.hdw-on.hdw-t-tianqing input:not([type]),
+html.hdw-on.hdw-t-tianqing select,
+html.hdw-on.hdw-t-tianqing textarea {
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+html.hdw-on.hdw-t-tianqing input[type="text"]:focus,
+html.hdw-on.hdw-t-tianqing input[type="password"]:focus,
+html.hdw-on.hdw-t-tianqing input:not([type]):focus,
+html.hdw-on.hdw-t-tianqing select:focus,
+html.hdw-on.hdw-t-tianqing textarea:focus {
+  border-color: #5f8b8d;
+  box-shadow: 0 0 0 3px rgba(95, 139, 141, 0.18);
+}
+
+/* ── 素器足：footer 一线 + 底部三枚芝麻钉痕（满釉支烧） ── */
+html.hdw-on.hdw-t-tianqing #site_footer {
+  padding-bottom: 26px;
+  border-top: 1px solid #9fb8b5;
+  background-image: radial-gradient(circle 2px at calc(50% - 14px) 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px), radial-gradient(circle 2px at 50% 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px), radial-gradient(circle 2px at calc(50% + 14px) 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px);
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: 0 calc(100% - 10px), 0 calc(100% - 10px), 0 calc(100% - 10px);
+  color: #6e7f7d;
+}
+html.hdw-on.hdw-t-tianqing #site_footer p {
+  color: #6e7f7d;
+}
+
+/* ── 选取即天青 ── */
+html.hdw-on.hdw-t-tianqing ::selection {
+  background: #5f8b8d;
+  color: #ffffff;
+}
+
+/* ── 分页激活：天青地白字 ── */
+html.hdw-on.hdw-t-tianqing .pagination > .active > a,
+html.hdw-on.hdw-t-tianqing .pagination > .active > span,
+html.hdw-on.hdw-t-tianqing .pagination > .active > a:hover,
+html.hdw-on.hdw-t-tianqing .pagination > .active > a:focus {
+  background: linear-gradient(180deg, #679799, #5f8b8d);
+  border-color: #4d7476;
+  color: #ffffff;
+}
+
+/* ── 天青瓷片：tooltip ── */
+html.hdw-on.hdw-t-tianqing div.niceTitle {
+  background: linear-gradient(180deg, #568688, #4a7274);
+  border-radius: 0 7px 7px 7px;
+}
+
+/* ── 素圆钮：返回顶部釉白瓷钮，hover 天青白箭 ── */
+html.hdw-on.hdw-t-tianqing #back_to_top {
+  background: linear-gradient(180deg, #f0f7f6, #e2edec);
+  border: 1px solid #5f8b8d;
+  box-shadow: 0 6px 18px rgba(95, 139, 141, 0.3);
+}
+html.hdw-on.hdw-t-tianqing #back_to_top::before {
+  border-bottom-color: #5f8b8d;
+}
+html.hdw-on.hdw-t-tianqing #back_to_top:hover {
+  background: linear-gradient(180deg, #679799, #5f8b8d);
+  border-color: #4d7476;
+}
+html.hdw-on.hdw-t-tianqing #back_to_top:hover::before {
+  border-bottom-color: #ffffff;
+}
+
+/* ==================================================================
+   钧天专属装饰层（html.hdw-on.hdw-t-juntian）
+   钧窑窑变。「入窑一色，出窑万彩」——铜红在还原焰中不可预知地
+   熔融，名取《钧天广乐》（天上仙乐）：
+     · 熔融锦地 — 多 radial 交融（玫瑰紫/海棠红/天青/月白），
+       fixed 如釉面恒定；40s「窑火未熄」极缓平移（凝视才见釉在流）
+     · 月白口沿 — nav / header 下沿一线月白（与曜变金口沿同族异色）
+     · 海棠表头线 — 表头底 2px 海棠红
+     · 乳光 — 容器 hover 泛极淡紫晕（钧釉侧视的蓝紫萤光）
+     · 窑变球 — 分页激活 / 返回顶部为紫红交融的迷你窑变球
+   与基础变量层（hdw-on）+ 深色文字层（hdw-dark）叠加生效。
+   ================================================================== */
+
+/* ── 熔融锦地：斑块化窑变 + 蚯蚓走泥纹（钧窑独有），
+     窑火未熄 40s 极缓流动（泥痕层固定，reduced-motion 时静止） ── */
+html.hdw-on.hdw-t-juntian body {
+  background-color: var(--hdw-page);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20viewBox%3D%220%200%20160%20160%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a86a78%22%20stroke-opacity%3D%220.3%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M10%2C20%20C30%2C12%2046%2C32%2064%2C26%20C84%2C20%2096%2C38%20118%2C30%20C130%2C26%20140%2C32%20150%2C30%22%20stroke-width%3D%222.6%22%2F%3E%3Cpath%20d%3D%22M96%2C84%20C116%2C76%20128%2C96%20150%2C88%22%20stroke-width%3D%222.2%22%2F%3E%3Cpath%20d%3D%22M18%2C122%20C38%2C112%2050%2C130%2074%2C124%20C90%2C120%20100%2C132%20118%2C126%22%20stroke-width%3D%222.4%22%2F%3E%3Cpath%20d%3D%22M132%2C150%20C142%2C144%20150%2C156%20158%2C150%22%20stroke-width%3D%221.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"), radial-gradient(circle 240px at 20% 10%, rgba(110,55,86,0.50) 0px, transparent 220px),
+    radial-gradient(circle 210px at 82% 22%, rgba(156,74,80,0.45) 0px, transparent 190px),
+    radial-gradient(circle 260px at 55% 82%, rgba(65,98,111,0.45) 0px, transparent 240px),
+    radial-gradient(circle 170px at 90% 76%, rgba(110,55,86,0.30) 0px, transparent 150px),
+    radial-gradient(circle 150px at 8% 62%, rgba(65,98,111,0.35) 0px, transparent 130px),
+    radial-gradient(circle 120px at 46% 34%, rgba(201,195,207,0.18) 0px, transparent 100px);
+  background-size: 160px 160px, 240% 240%;
+  background-position: 0 0, 0% 40%;
+  background-attachment: fixed;
+  animation: hdw-juntian-flow 40s ease-in-out infinite alternate;
+}
+@keyframes hdw-juntian-flow {
+  from { background-position: 0 0, 0% 40%; }
+  to { background-position: 0 0, 100% 60%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.hdw-on.hdw-t-juntian body { animation: none; }
+}
+
+/* ── 釉面：顶部一线月白微光 ── */
+html.hdw-on.hdw-t-juntian #all_box {
+  background:
+    linear-gradient(180deg, rgba(201, 195, 207, 0.06), rgba(201, 195, 207, 0) 110px),
+    var(--hdw-outer);
+  box-shadow: 0 14px 48px rgba(10, 6, 16, 0.6);
+}
+
+/* ── 月白口沿：header 紫黑渐变 + 下沿一线月白 ── */
+html.hdw-on.hdw-t-juntian #site_header {
+  background: linear-gradient(180deg, var(--hdw-header), var(--hdw-header2));
+  border-bottom: 1px solid rgba(201, 195, 207, 0.5);
+}
+
+/* ── 紫红彩带：nav 窑变深处 + 月白口沿 ── */
+html.hdw-on.hdw-t-juntian #site_nav {
+  background: linear-gradient(180deg, #52305c, #3f2748);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 0 rgba(201, 195, 207, 0.35);
+}
+html.hdw-on.hdw-t-juntian .nav_center a {
+  background: transparent;
+  color: #e3d8e2;
+  text-shadow: 0 1px 2px rgba(16, 8, 22, 0.7);
+}
+html.hdw-on.hdw-t-juntian .nav_center a:hover {
+  background: rgba(201, 195, 207, 0.12);
+  color: #f5eef4;
+}
+/* 窑变开光：激活项紫红交融、边若乳光 */
+html.hdw-on.hdw-t-juntian a.nav_item_active,
+html.hdw-on.hdw-t-juntian a.nav_item_active:hover {
+  background: linear-gradient(180deg, #6a3f63, #52305c);
+  color: #f5eef4;
+  border-radius: 7px 7px 0 0;
+  box-shadow: 0 0 0 1px #8a6a94, inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+html.hdw-on.hdw-t-juntian a.nav_item_normal:hover {
+  background: rgba(201, 195, 207, 0.12);
+}
+html.hdw-on.hdw-t-juntian .scroll-to-fixed-fixed {
+  border-bottom-color: #3f2748;
+}
+
+/* ── 深紫表头：蚯蚓走泥纹微痕 + 底 2px 海棠线 ── */
+html.hdw-on.hdw-t-juntian .torrent_list tr.tab_header,
+html.hdw-on.hdw-t-juntian .content_tab tr.tab_header {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22160%22%20height%3D%22160%22%20viewBox%3D%220%200%20160%20160%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23a86a78%22%20stroke-opacity%3D%220.15%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M10%2C20%20C30%2C12%2046%2C32%2064%2C26%20C84%2C20%2096%2C38%20118%2C30%20C130%2C26%20140%2C32%20150%2C30%22%20stroke-width%3D%222.6%22%2F%3E%3Cpath%20d%3D%22M96%2C84%20C116%2C76%20128%2C96%20150%2C88%22%20stroke-width%3D%222.2%22%2F%3E%3Cpath%20d%3D%22M18%2C122%20C38%2C112%2050%2C130%2074%2C124%20C90%2C120%20100%2C132%20118%2C126%22%20stroke-width%3D%222.4%22%2F%3E%3Cpath%20d%3D%22M132%2C150%20C142%2C144%20150%2C156%20158%2C150%22%20stroke-width%3D%221.8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #3a3044, #332a3d);
+  background-size: 160px 160px, 100% 100%;
+  background-repeat: repeat, no-repeat;
+}
+html.hdw-on.hdw-t-juntian .torrent_list th {
+  color: #d9cfe0;
+  border-bottom: 2px solid #9c4a50;
+}
+
+/* ── 题字：左端一粒窑变珠（紫红交融），月白衬线字 ── */
+html.hdw-on.hdw-t-juntian .announcebox p,
+html.hdw-on.hdw-t-juntian .index_left th {
+  background-image: radial-gradient(circle at 9px 50%, rgba(212,154,176,0.95) 0 2px, rgba(110,55,86,0.85) 2.8px 4.5px, transparent 6px),
+    linear-gradient(180deg, #3d3347, #362d40);
+  background-repeat: no-repeat, repeat;
+  background-position: 0 center, 0 0;
+  padding-left: 26px;
+  color: #e6e2ea;
+  font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
+  letter-spacing: 0.1em;
+}
+html.hdw-on.hdw-t-juntian .index_left th {
+  border-bottom: 2px solid #9c4a50;
+}
+
+/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：窑变珠左饰 ── */
+html.hdw-on.hdw-t-juntian .noraml_box h2,
+html.hdw-on.hdw-t-juntian .sub_upload div.left h2,
+html.hdw-on.hdw-t-juntian .offer_box div.left h2,
+html.hdw-on.hdw-t-juntian .users_box h2 {
+  background-image: radial-gradient(circle at 9px 50%, rgba(212,154,176,0.95) 0 2px, rgba(110,55,86,0.85) 2.8px 4.5px, transparent 6px);
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  padding-left: 24px;
+}
+
+/* ── 公告界栏：左玫瑰紫一线 ── */
+html.hdw-on.hdw-t-juntian .announcebox h3 {
+  border-left: 2px solid #b06a8a;
+  padding-left: 12px;
+}
+
+/* ── 器形圆融 + 乳光：hover 泛极淡紫晕（钧釉侧视萤光） ── */
+html.hdw-on.hdw-t-juntian .announcebox,
+html.hdw-on.hdw-t-juntian .index_right {
+  border: 1px solid #4a3f56;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 14px rgba(10, 6, 16, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+html.hdw-on.hdw-t-juntian .announcebox:hover,
+html.hdw-on.hdw-t-juntian .index_right:hover {
+  box-shadow: 0 2px 14px rgba(10, 6, 16, 0.5), 0 0 18px rgba(156, 74, 80, 0.15);
+}
+html.hdw-on.hdw-t-juntian .details_box,
+html.hdw-on.hdw-t-juntian .subtitle_upload_box,
+html.hdw-on.hdw-t-juntian .offer_box,
+html.hdw-on.hdw-t-juntian .users_box,
+html.hdw-on.hdw-t-juntian .noraml_box {
+  border-radius: 10px;
+}
+
+/* ── 茄皮瓷钮：紫底月白字，hover 玫瑰紫地 ── */
+html.hdw-on.hdw-t-juntian .btn,
+html.hdw-on.hdw-t-juntian .btn2,
+html.hdw-on.hdw-t-juntian .btns,
+html.hdw-on.hdw-t-juntian button,
+html.hdw-on.hdw-t-juntian input[type="submit"],
+html.hdw-on.hdw-t-juntian input[type="button"],
+html.hdw-on.hdw-t-juntian .loginbox input.btnl {
+  background: linear-gradient(180deg, #453854, #3b3049);
+  border: 1px solid #5d4a6e;
+  color: #e6dce8;
+  border-radius: 6px;
+}
+html.hdw-on.hdw-t-juntian .btn:hover,
+html.hdw-on.hdw-t-juntian .btn2:hover,
+html.hdw-on.hdw-t-juntian .btns:hover,
+html.hdw-on.hdw-t-juntian button:hover,
+html.hdw-on.hdw-t-juntian input[type="submit"]:hover,
+html.hdw-on.hdw-t-juntian input[type="button"]:hover,
+html.hdw-on.hdw-t-juntian .loginbox input.btnl:hover {
+  background: linear-gradient(180deg, #6e3756, #5d2f49);
+  border-color: #8a6a94;
+  color: #f0eaf3;
+}
+html.hdw-on.hdw-t-juntian .gobutton {
+  background: linear-gradient(180deg, #453854, #3b3049);
+}
+
+/* ── 海棠晕：输入焦点 ── */
+html.hdw-on.hdw-t-juntian input[type="text"]:focus,
+html.hdw-on.hdw-t-juntian input[type="password"]:focus,
+html.hdw-on.hdw-t-juntian input:not([type]):focus,
+html.hdw-on.hdw-t-juntian select:focus,
+html.hdw-on.hdw-t-juntian textarea:focus {
+  border-color: #b06a8a;
+  box-shadow: 0 0 0 3px rgba(176, 106, 138, 0.2);
+}
+
+/* ── 器足：footer 顶部月白一线 + 窑变余韵 ── */
+html.hdw-on.hdw-t-juntian #site_footer {
+  border-top: 1px solid rgba(201, 195, 207, 0.35);
+  background-image:
+    radial-gradient(circle 300px at 20% 0%, rgba(110, 55, 86, 0.08), transparent 280px),
+    radial-gradient(circle 280px at 80% 100%, rgba(65, 98, 111, 0.07), transparent 260px);
+  background-repeat: no-repeat, no-repeat;
+  color: #a89bb5;
+}
+html.hdw-on.hdw-t-juntian #site_footer p {
+  color: #a89bb5;
+}
+
+/* ── 选取即玫瑰紫 ── */
+html.hdw-on.hdw-t-juntian ::selection {
+  background: #6e3756;
+  color: #f5eef4;
+}
+
+/* ── 分页激活：窑变球 ── */
+html.hdw-on.hdw-t-juntian .pagination > .active > a,
+html.hdw-on.hdw-t-juntian .pagination > .active > span,
+html.hdw-on.hdw-t-juntian .pagination > .active > a:hover,
+html.hdw-on.hdw-t-juntian .pagination > .active > a:focus {
+  background: radial-gradient(circle at 32% 30%, #d49ab0, #6e3756);
+  border-color: #8a6a94;
+  color: #f5eef4;
+}
+
+/* ── 紫黑瓷片：tooltip ── */
+html.hdw-on.hdw-t-juntian div.niceTitle {
+  background: linear-gradient(180deg, #241d30, #1a1522);
+  border: 1px solid #5d4a6e;
+  border-radius: 0 7px 7px 7px;
+}
+
+/* ── 窑变球圆钮：返回顶部紫红交融，hover 亮釉 ── */
+html.hdw-on.hdw-t-juntian #back_to_top {
+  background: radial-gradient(circle at 32% 30%, #d49ab0 0 30%, #6e3756 78%);
+  border: 1px solid #8a6a94;
+  box-shadow: 0 6px 18px rgba(10, 6, 16, 0.65);
+}
+html.hdw-on.hdw-t-juntian #back_to_top::before {
+  border-bottom-color: #f5eef4;
+}
+html.hdw-on.hdw-t-juntian #back_to_top:hover {
+  background: radial-gradient(circle at 32% 30%, #e0b3c5 0 34%, #7d3f63 80%);
+  box-shadow: 0 6px 18px rgba(176, 106, 138, 0.35);
 }

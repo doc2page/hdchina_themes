@@ -775,6 +775,158 @@
         scrollbar: '#557c35',
       },
     },
+
+    /*
+     * 天青 — 汝窑。「雨过天青云破处」：宋人美学的静与简，
+     * 玛瑙入釉的乳浊温润、蝉翼细纹若有若无、晨星寥落、芝麻钉痕。
+     * 配套专属装饰层见 core.css 的 hdw-t-tianqing 区块：
+     * 蝉翼纹锦地 / 釉面乳浊光 / 晨星微点 / 芝麻钉题饰 / 素器足。
+     */
+    tianqing: {
+      name: '天青',
+      desc: '汝窑雨过天青，静的极致（深度定制款）',
+      kind: 'light',
+      swatch: ['#eaf2f1', '#5f8b8d', '#d7e4e3', '#8a5a4a', '#33413f'],
+      vars: {
+        /* page = 雨过天空，content = 釉面天青 */
+        page: '#d7e4e3',
+        outer: '#e6efee',
+        border: '#87a3a0',
+        'border-soft': '#c3d5d3',
+
+        /* nav = 天青深处（宋器素身，装饰层只加口沿一线） */
+        nav: '#5f8b8d',
+        'nav-text': '#e5efee',
+        'nav-hover': '#73999a',
+        'nav-hover-text': '#ffffff',
+
+        header: '#e9f1f0',
+        header2: '#e0ebeb',
+        'header-text': '#33413f',
+
+        content: '#eaf2f1',
+        panel: '#dfebea',
+        'panel-2': '#d5e5e4',
+        subpanel: '#e2eeed',
+        'subpanel-2': '#dae9e8',
+
+        row: '#e9f1f0',
+        'row-alt': '#e2edec',
+        'row-alt-2': '#deeae9',
+        'row-hover': '#d9e8e7',
+        sticky: '#dfebea',
+        sticky2: '#d9e7e6',
+        sticky3: '#e8e9dd',
+
+        /* text = 墨青；hover = 香灰胎泛紫 */
+        text: '#33413f',
+        'text-soft': '#6e7f7d',
+        title: '#2b3a38',
+        'title-hover': '#8a5a4a',
+        link: '#4a7b7d',
+        'link-strong': '#3d6b6d',
+        'link-hover': '#2f5e60',
+
+        accent: '#5f8b8d',
+        'accent-soft': '#a9c6c5',
+
+        btn: '#e6f0ef',
+        'btn-text': '#3d5f60',
+        'btn-border': '#a9c2c0',
+
+        input: '#f4f9f8',
+        'input-text': '#33413f',
+
+        tooltip: '#4a7274',
+        'tooltip-text': '#eaf2f1',
+        suggest: '#e6efee',
+
+        free: '#f0e6c0',
+        twoup: '#f2dcdc',
+        twoupfree: '#ddeec5',
+        halfdown: '#e0e4f4',
+        twouphalf: '#d5ecef',
+
+        'logo-filter': 'none',
+        scrollbar: '#a9c2c0',
+      },
+    },
+
+    /*
+     * 钧天 — 钧窑窑变。「入窑一色，出窑万彩」：铜红在还原焰中
+     * 不可预知地熔融——玫瑰紫、海棠红、茄皮紫、天青、月白。
+     * 名取《钧天广乐》（天上仙乐）。配套专属装饰层见 core.css 的
+     * hdw-t-juntian 区块：熔融渐变锦地（fixed + 40s 窑火未熄缓动）、
+     * 月白口沿线 / 海棠表头线 / 乳光 hover / 窑变球激活态。
+     */
+    juntian: {
+      name: '钧天',
+      desc: '钧窑窑变，万彩熔融（深度定制款）',
+      kind: 'dark',
+      swatch: ['#2c2733', '#6e3756', '#9c4a50', '#c9c3cf', '#41626f'],
+      vars: {
+        page: '#241f2b',
+        outer: '#2e2838',
+        border: '#171320',
+        'border-soft': '#4a3f56',
+
+        /* nav = 紫红渐变带（装饰层加月白口沿） */
+        nav: '#472c44',
+        'nav-text': '#e3d8e2',
+        'nav-hover': '#5d3a56',
+        'nav-hover-text': '#f5eef4',
+
+        header: '#3a2f42',
+        header2: '#322840',
+        'header-text': '#d9cfe0',
+
+        content: '#2c2733',
+        panel: '#3a3044',
+        'panel-2': '#44384f',
+        subpanel: '#3d3347',
+        'subpanel-2': '#453a50',
+
+        row: '#302a3a',
+        'row-alt': '#362f40',
+        'row-alt-2': '#3a3345',
+        'row-hover': '#453c52',
+        sticky: '#3d3449',
+        sticky2: '#443a51',
+        sticky3: '#4a3c4a',
+
+        /* text = 月白；link = 海棠粉，hover = 月白亮 */
+        text: '#e6e2ea',
+        'text-soft': '#a89bb5',
+        title: '#f0eaf3',
+        'title-hover': '#c9a0b4',
+        link: '#d49ab0',
+        'link-strong': '#e0b3c5',
+        'link-hover': '#c9c3cf',
+
+        accent: '#b06a8a',
+        'accent-soft': '#6e4a63',
+
+        btn: '#3f3350',
+        'btn-text': '#e6dce8',
+        'btn-border': '#5d4a6e',
+
+        input: '#221d2c',
+        'input-text': '#e6e2ea',
+
+        tooltip: '#1a1522',
+        'tooltip-text': '#e6e2ea',
+        suggest: '#3a3044',
+
+        free: '#4f4526',
+        twoup: '#5a2e3e',
+        twoupfree: '#3d4a35',
+        halfdown: '#3a3f55',
+        twouphalf: '#2b4a58',
+
+        'logo-filter': 'invert(0.88) hue-rotate(180deg) saturate(0.8)',
+        scrollbar: '#5d4a6e',
+      },
+    },
   };
 
   /* 跟随系统：深色时套用暗夜，浅色回到原版 */
