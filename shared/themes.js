@@ -927,6 +927,158 @@
         scrollbar: '#5d4a6e',
       },
     },
+
+    /*
+     * 定窑 — 牙白刻花 · 布局重构款（L1 纯 CSS，不动 DOM）：
+     * 横向导航条 → 左侧全高瓷板侧栏（芒口右缘），用户信息 → 白瓷卡片，
+     * 主表摆脱 1080 固定宽、种子表头吸顶。配套专属布局层见 core.css
+     * 的 hdw-t-dingyao 区块：侧栏 / 芒口线 / 泪痕卡片 / 竹丝刷痕锦地 /
+     * 刻花激活符。
+     */
+    dingyao: {
+      name: '定窑',
+      desc: '牙白瓷板侧栏，布局重构（深度定制款）',
+      kind: 'light',
+      layout: 'dingyao',
+      swatch: ['#f7f5ef', '#8a5a3c', '#4a4438', '#e6e4dd', '#c5bfae'],
+      vars: {
+        page: '#e6e4dd',
+        outer: '#f7f5ef',
+        border: '#8a8068',
+        'border-soft': '#dcd8ca',
+
+        /* nav = 侧栏瓷板（象牙白一阶） */
+        nav: '#f1efe7',
+        'nav-text': '#4a4438',
+        'nav-hover': '#e4e0d2',
+        'nav-hover-text': '#38321f',
+
+        header: '#f7f5ef',
+        header2: '#efede4',
+        'header-text': '#4a4438',
+
+        content: '#faf8f2',
+        panel: '#efede4',
+        'panel-2': '#e6e3d7',
+        subpanel: '#eeebdf',
+        'subpanel-2': '#e7e3d5',
+
+        row: '#f7f4ec',
+        'row-alt': '#f0ede3',
+        'row-alt-2': '#ece8dc',
+        'row-hover': '#e9e5d7',
+        sticky: '#f0ede3',
+        sticky2: '#ebe7d9',
+        sticky3: '#efe9d8',
+
+        /* text = 褐墨；hover = 芝麻酱釉褐 */
+        text: '#4a4438',
+        'text-soft': '#8c8676',
+        title: '#3a3529',
+        'title-hover': '#8a5a3c',
+        link: '#6b5c40',
+        'link-strong': '#5a4c33',
+        'link-hover': '#8a5a3c',
+
+        accent: '#8a5a3c',
+        'accent-soft': '#c5bfae',
+
+        btn: '#f4f1e8',
+        'btn-text': '#4a3f2c',
+        'btn-border': '#b8a988',
+
+        input: '#fcfaf4',
+        'input-text': '#4a4438',
+
+        tooltip: '#4a4438',
+        'tooltip-text': '#faf8f2',
+        suggest: '#f1efe7',
+
+        free: '#f0e6c0',
+        twoup: '#f2dcdc',
+        twoupfree: '#ddeec5',
+        halfdown: '#e0e4f4',
+        twouphalf: '#d5ecef',
+
+        'logo-filter': 'none',
+        scrollbar: '#c5bfae',
+      },
+    },
+
+
+    /*
+     * 青瓶 — 青花长颈瓶 × 定窑布局：瓶颈的纵向纹带正是侧栏构图原型。
+     * 白地青花：竖向缠枝莲侧栏 + 双弦口沿 + 开光激活（矾红点睛）+
+     * 卷草表头 + 宝相锦地。挂载 hdw-layout-dingyao 布局结构。
+     */
+    qingping: {
+      name: '青瓶',
+      desc: '青花缠枝侧栏，布局重构（深度定制款）',
+      kind: 'light',
+      layout: 'dingyao',
+      swatch: ['#eef3f5', '#1c4275', '#24558f', '#b5443c', '#a7b8c6'],
+      vars: {
+        page: '#a7b8c6',
+        outer: '#e9eef1',
+        border: '#16406e',
+        'border-soft': '#b6c9d7',
+
+        /* nav = 白瓷板侧栏（青花白地） */
+        nav: '#eef3f5',
+        'nav-text': '#1e3a5c',
+        'nav-hover': '#d9e6ee',
+        'nav-hover-text': '#143257',
+
+        header: '#f9fbfb',
+        header2: '#ecf1f3',
+        'header-text': '#1e3a5c',
+
+        content: '#f5f8f8',
+        panel: '#e3ecf1',
+        'panel-2': '#d7e4ec',
+        subpanel: '#e6eef3',
+        'subpanel-2': '#dce7ef',
+
+        row: '#f1f5f7',
+        'row-alt': '#e8eff3',
+        'row-alt-2': '#e2ebf1',
+        'row-hover': '#d9e6ee',
+        sticky: '#d8e6f0',
+        sticky2: '#cfe0ec',
+        sticky3: '#e9dfe4',
+
+        text: '#24364a',
+        'text-soft': '#5c7286',
+        title: '#143257',
+        'title-hover': '#b5443c',
+        link: '#24558f',
+        'link-strong': '#194a7d',
+        'link-hover': '#0d6cb5',
+
+        accent: '#24558f',
+        'accent-soft': '#3c6ca0',
+
+        btn: '#eef4f7',
+        'btn-text': '#1c4677',
+        'btn-border': '#9cb9cf',
+
+        input: '#fbfdfd',
+        'input-text': '#24364a',
+
+        tooltip: '#143257',
+        'tooltip-text': '#edf3f8',
+        suggest: '#eef4f8',
+
+        free: '#f0e6c3',
+        twoup: '#efdfe0',
+        twoupfree: '#e3eec7',
+        halfdown: '#e0e4f5',
+        twouphalf: '#d5ecef',
+
+        'logo-filter': 'none',
+        scrollbar: '#7ba3c4',
+      },
+    },
   };
 
   /* 跟随系统：深色时套用暗夜，浅色回到原版 */
