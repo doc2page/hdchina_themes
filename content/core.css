@@ -2973,3 +2973,594 @@ html.hdw-on.hdw-t-juntian #back_to_top:hover {
   background: radial-gradient(circle at 32% 30%, #e0b3c5 0 34%, #7d3f63 80%);
   box-shadow: 0 6px 18px rgba(176, 106, 138, 0.35);
 }
+
+/* ==================================================================
+   定窑布局层（html.hdw-on.hdw-layout-dingyao）— 布局重构 · 结构层
+   L1 纯 CSS 布局变换（不动 DOM，切换即还原），配色全部变量驱动。
+   结构与皮肤分离：本块只含布局结构与通用样式（变量推导），
+   各瓷种的纹样皮肤见其后 hdw-t-dingyao / hdw-t-qingping 皮肤块，
+   由 themes.js 中 layout: 'dingyao' 的主题挂载共享。
+     · 瓷板侧栏 — 横向导航 fixed 左侧全高竖排，右缘一线「芒口」
+       （定窑覆烧口沿无釉露胎）；!important 压制站点 scroll-to-fixed
+       脚本的 inline style
+     · 用户卡片 — 顶部 userinfo 文本流聚为白瓷卡片（圆角/投影/分行）
+     · 泪痕 — 卡片右缘的釉流淌短痕
+     · 竹丝刷痕 — 页面锦地（拉坯丝纹，水平细线与蝉翼/网格区分）
+     · 自适应主宽 — 摆脱 1080 固定宽；种子表头 sticky 吸顶
+     · 刻花符 — 侧栏激活项的刀刻莲弧
+   与基础变量层（hdw-on）叠加生效。
+   ================================================================== */
+
+/* ── 布局一：左侧瓷板侧栏 ──
+   实现要点（scroll-to-fixed 插件兼容）：
+   fixed 落在子元素 .nav_center 上（插件只管 #site_nav）；
+   nav 本体 static 且高 0——插件固定时给 spacer 写 outerHeight(true)，
+   若 nav 自身 100vh 会导致 spacer 整屏高（顶部大面积空白的根因），
+   高 0 则 spacer 为 0；插件写入 nav 的 inline 定位被 static !important 压制。 */
+html.hdw-on.hdw-layout-dingyao #site_nav {
+  position: static !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: visible;
+  background: none;
+  z-index: auto;
+}
+html.hdw-on.hdw-layout-dingyao .nav_center {
+  position: fixed;
+  left: 0;
+  top: var(--hdw-header-h, 116px);
+  width: 150px;
+  height: calc(100vh - var(--hdw-header-h, 116px));
+  z-index: 1000;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 0 28px;
+  box-sizing: border-box;
+  background-image: linear-gradient(180deg, var(--hdw-nav),
+    color-mix(in srgb, var(--hdw-nav), #101010 7%));
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a {
+  display: block;
+  background: transparent;
+  padding: 9px 20px;
+  color: var(--hdw-nav-text);
+  letter-spacing: 0.08em;
+  border-left: none;
+  border-radius: 0;
+  text-shadow: none;
+  position: relative;
+}
+/* 双钩刻线（外粗内细，如刻花双刀）：初始收起，hover/激活时
+   scaleY(0->1) 自上而下"下刀"——定窑刀工的唯一动效 */
+html.hdw-on.hdw-layout-dingyao .nav_center a::before,
+html.hdw-on.hdw-layout-dingyao .nav_center a::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.18s ease-out, opacity 0.18s ease-out;
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a::before {
+  left: 0;
+  width: 3px;
+  background: var(--hdw-accent);
+  border-radius: 0 2px 2px 0;
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a::after {
+  left: 5px;
+  width: 1.5px;
+  background: color-mix(in srgb, var(--hdw-accent), transparent 40%);
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a:hover {
+  background: color-mix(in srgb, var(--hdw-accent) 8%, transparent);
+  color: var(--hdw-nav-hover-text);
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a:hover::before,
+html.hdw-on.hdw-layout-dingyao .nav_center a:hover::after {
+  transform: scaleY(1);
+  opacity: 0.45;
+}
+/* 激活 = 开光：素瓷板上点亮一块更纯的白瓷（开光地），
+   左缘双钩完整下刀，右端一枚刻款符，底部一线火石红（胎釉交界） */
+html.hdw-on.hdw-layout-dingyao a.nav_item_active,
+html.hdw-on.hdw-layout-dingyao a.nav_item_active:hover,
+html.hdw-on.hdw-layout-dingyao body:has(.indexbox) .nav_center a[href$="index.php"] {
+  background-image: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-nav), #ffffff 62%),
+    color-mix(in srgb, var(--hdw-nav), #ffffff 48%));
+  color: var(--hdw-nav-hover-text);
+  font-weight: bold;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+html.hdw-on.hdw-layout-dingyao a.nav_item_active::before,
+html.hdw-on.hdw-layout-dingyao a.nav_item_active::after,
+html.hdw-on.hdw-layout-dingyao a.nav_item_active:hover::before,
+html.hdw-on.hdw-layout-dingyao a.nav_item_active:hover::after,
+html.hdw-on.hdw-layout-dingyao body:has(.indexbox) .nav_center a[href$="index.php"]::before,
+html.hdw-on.hdw-layout-dingyao body:has(.indexbox) .nav_center a[href$="index.php"]::after {
+  transform: scaleY(1);
+  opacity: 1;
+}
+html.hdw-on.hdw-layout-dingyao a.nav_item_normal:hover {
+  background: color-mix(in srgb, var(--hdw-accent) 8%, transparent);
+}
+
+/* ── 布局二：全站让位（含 footer 自动跟随） ── */
+html.hdw-on.hdw-layout-dingyao #all_box {
+  margin-left: 150px;
+}
+
+/* ── 布局三：顶条 sticky 常驻 + 重组（logo 居左、用户卡片居右） ── */
+html.hdw-on.hdw-layout-dingyao .headerbox {
+  position: sticky;
+  top: 0;
+  z-index: 1100;
+  /* 横贯全宽：从让位区拉回（logo 居最左上角，侧栏藏于其下） */
+  margin-left: -150px;
+  width: calc(100% + 150px);
+}
+html.hdw-on.hdw-layout-dingyao #site_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  padding: 14px 22px;
+  background: linear-gradient(180deg, var(--hdw-header), var(--hdw-header2));
+  border-bottom: 1px solid #ddd2bc;
+}
+html.hdw-on.hdw-layout-dingyao .site_logo {
+  flex: none;
+  min-width: 220px;
+  min-height: 56px;
+}
+/* 用户信息 → 白瓷卡片（文本流分行）+ 右缘泪痕 */
+html.hdw-on.hdw-layout-dingyao .userinfo {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.94), rgba(246, 240, 228, 0.94));
+  border: 1px solid #d8ccb2;
+  border-radius: 10px;
+  box-shadow: 0 4px 14px rgba(74, 64, 56, 0.12);
+  padding: 10px 40px 10px 18px;
+  margin: 0;
+  max-width: 640px;
+}
+html.hdw-on.hdw-layout-dingyao .userinfo p {
+  display: block;
+  margin: 2px 0;
+  line-height: 1.75;
+  background: none;
+  border: none;
+}
+html.hdw-on.hdw-layout-dingyao .userinfo .donate {
+  margin: 0 0 4px;
+}
+
+/* ── 布局四：主宽自适应（摆脱 1080 固定），内容居中留白 ── */
+html.hdw-on.hdw-layout-dingyao table.head {
+  width: 100% !important;
+  max-width: 1280px;
+}
+html.hdw-on.hdw-layout-dingyao table.head > tbody > tr > td:first-child {
+  width: 100%;
+  padding-right: 22px;
+}
+
+/* ── 布局五：种子表头 sticky 吸顶（不透明实底） ── */
+html.hdw-on.hdw-layout-dingyao .torrent_list tr.tab_header,
+html.hdw-on.hdw-layout-dingyao .content_tab tr.tab_header {
+  background: linear-gradient(180deg, var(--hdw-panel-2), color-mix(in srgb, var(--hdw-panel-2), #101010 5%));
+}
+html.hdw-on.hdw-layout-dingyao .torrent_list tr.tab_header th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--hdw-accent) 45%, transparent);
+}
+
+/* ── 闪烁防御：菜单点击 focus 描边 / 触摸高亮消除（键盘 focus-visible 保留） ── */
+html.hdw-on.hdw-layout-dingyao .nav_center a {
+  -webkit-tap-highlight-color: transparent;
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a:focus {
+  outline: none;
+}
+html.hdw-on.hdw-layout-dingyao .nav_center a:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--hdw-accent) 60%, transparent);
+  outline-offset: -2px;
+}
+/* 插件 spacer 兜底：scroll-to-fixed 在 nav 前插入的匿名占位 div 一律隐藏
+   （nav 本体高 0 已使 spacer 无高度，此为双保险） */
+html.hdw-on.hdw-layout-dingyao #all_box > div:has(+ #site_nav) {
+  display: none !important;
+}
+
+/* ── 竹丝刷痕锦地：拉坯水平丝纹 ── */
+html.hdw-on.hdw-layout-dingyao body {
+  background-color: var(--hdw-page);
+}
+
+/* ── 瓷面：顶部釉光 ── */
+html.hdw-on.hdw-layout-dingyao #all_box {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.5), rgba(255, 253, 248, 0) 110px),
+    var(--hdw-outer);
+  box-shadow: 0 12px 44px rgba(74, 64, 56, 0.14);
+}
+
+/* ── 面板题字：衬线褐墨 + 左缘刻花褐线 ── */
+html.hdw-on.hdw-layout-dingyao .announcebox p,
+html.hdw-on.hdw-layout-dingyao .index_left th {
+  background-image: linear-gradient(180deg, var(--hdw-panel-2), color-mix(in srgb, var(--hdw-panel-2), #101010 5%));
+  padding-left: 30px;
+  border-left: 3px solid var(--hdw-accent);
+  color: var(--hdw-text);
+  font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
+  letter-spacing: 0.1em;
+}
+html.hdw-on.hdw-layout-dingyao .index_left th {
+  border-bottom: 1px solid var(--hdw-btn-border);
+}
+
+/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一刻款语言 ── */
+html.hdw-on.hdw-layout-dingyao .noraml_box h2,
+html.hdw-on.hdw-layout-dingyao .sub_upload div.left h2,
+html.hdw-on.hdw-layout-dingyao .offer_box div.left h2,
+html.hdw-on.hdw-layout-dingyao .users_box h2 {
+  border-left: 3px solid var(--hdw-accent);
+  padding-left: 26px;
+}
+
+/* ── 公告界栏：左一线 ── */
+html.hdw-on.hdw-layout-dingyao .announcebox h3 {
+  border-left: 2px solid var(--hdw-accent);
+  padding-left: 12px;
+}
+
+/* ── 器形圆融 ── */
+html.hdw-on.hdw-layout-dingyao .announcebox,
+html.hdw-on.hdw-layout-dingyao .index_right {
+  border: 1px solid #ddd2bc;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(74, 64, 56, 0.08);
+}
+html.hdw-on.hdw-layout-dingyao .details_box,
+html.hdw-on.hdw-layout-dingyao .subtitle_upload_box,
+html.hdw-on.hdw-layout-dingyao .offer_box,
+html.hdw-on.hdw-layout-dingyao .users_box,
+html.hdw-on.hdw-layout-dingyao .noraml_box {
+  border-radius: 10px;
+}
+
+/* ── 象牙瓷钮：牙白底褐字褐边 ── */
+html.hdw-on.hdw-layout-dingyao .btn,
+html.hdw-on.hdw-layout-dingyao .btn2,
+html.hdw-on.hdw-layout-dingyao .btns,
+html.hdw-on.hdw-layout-dingyao button,
+html.hdw-on.hdw-layout-dingyao input[type="submit"],
+html.hdw-on.hdw-layout-dingyao input[type="button"],
+html.hdw-on.hdw-layout-dingyao .loginbox input.btnl {
+  background: linear-gradient(180deg, var(--hdw-btn), color-mix(in srgb, var(--hdw-btn), #101010 6%));
+  border: 1px solid var(--hdw-accent);
+  color: var(--hdw-btn-text);
+  border-radius: 6px;
+}
+html.hdw-on.hdw-layout-dingyao .btn:hover,
+html.hdw-on.hdw-layout-dingyao .btn2:hover,
+html.hdw-on.hdw-layout-dingyao .btns:hover,
+html.hdw-on.hdw-layout-dingyao button:hover,
+html.hdw-on.hdw-layout-dingyao input[type="submit"]:hover,
+html.hdw-on.hdw-layout-dingyao input[type="button"]:hover,
+html.hdw-on.hdw-layout-dingyao .loginbox input.btnl:hover {
+  background: linear-gradient(180deg, var(--hdw-accent), color-mix(in srgb, var(--hdw-accent), #101010 10%));
+  border-color: color-mix(in srgb, var(--hdw-accent), #101010 22%);
+  color: #ffffff;
+}
+html.hdw-on.hdw-layout-dingyao .gobutton {
+  background: linear-gradient(180deg, #a06a48, #8a5a3c);
+}
+
+/* ── 焦点：釉褐光晕 ── */
+html.hdw-on.hdw-layout-dingyao input[type="text"]:focus,
+html.hdw-on.hdw-layout-dingyao input[type="password"]:focus,
+html.hdw-on.hdw-layout-dingyao input:not([type]):focus,
+html.hdw-on.hdw-layout-dingyao select:focus,
+html.hdw-on.hdw-layout-dingyao textarea:focus {
+  border-color: var(--hdw-accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--hdw-accent) 15%, transparent);
+}
+
+/* ── 器足：footer 一线 ── */
+html.hdw-on.hdw-layout-dingyao #site_footer {
+  border-top: 1px solid var(--hdw-border-soft);
+  color: var(--hdw-text-soft);
+}
+html.hdw-on.hdw-layout-dingyao #site_footer p {
+  color: var(--hdw-text-soft);
+}
+
+/* ── 选取即釉褐 ── */
+html.hdw-on.hdw-layout-dingyao ::selection {
+  background: var(--hdw-accent);
+  color: #ffffff;
+}
+
+/* ── 分页激活：釉褐地牙白字 ── */
+html.hdw-on.hdw-layout-dingyao .pagination > .active > a,
+html.hdw-on.hdw-layout-dingyao .pagination > .active > span,
+html.hdw-on.hdw-layout-dingyao .pagination > .active > a:hover,
+html.hdw-on.hdw-layout-dingyao .pagination > .active > a:focus {
+  background: linear-gradient(180deg, var(--hdw-accent), color-mix(in srgb, var(--hdw-accent), #101010 10%));
+  border-color: color-mix(in srgb, var(--hdw-accent), #101010 22%);
+  color: #ffffff;
+}
+
+/* ── 褐墨瓷片：tooltip ── */
+html.hdw-on.hdw-layout-dingyao div.niceTitle {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--hdw-tooltip), #ffffff 6%), var(--hdw-tooltip));
+  border-radius: 0 7px 7px 7px;
+}
+
+/* ── 瓷板圆钮：返回顶部牙白钮 ── */
+html.hdw-on.hdw-layout-dingyao #back_to_top {
+  background: linear-gradient(180deg, var(--hdw-panel-2), color-mix(in srgb, var(--hdw-panel-2), #101010 5%));
+  border: 1px solid var(--hdw-accent);
+  box-shadow: 0 6px 18px rgba(74, 64, 56, 0.3);
+}
+html.hdw-on.hdw-layout-dingyao #back_to_top::before {
+  border-bottom-color: var(--hdw-accent);
+}
+html.hdw-on.hdw-layout-dingyao #back_to_top:hover {
+  background: linear-gradient(180deg, var(--hdw-accent), color-mix(in srgb, var(--hdw-accent), #101010 10%));
+  border-color: color-mix(in srgb, var(--hdw-accent), #101010 22%);
+}
+html.hdw-on.hdw-layout-dingyao #back_to_top:hover::before {
+  border-bottom-color: #ffffff;
+}
+
+/* ── 窄屏降级：侧栏收窄为 56px 图标位（首字显示） ── */
+@media (max-width: 1280px) {
+  html.hdw-on.hdw-layout-dingyao #site_nav { width: 56px !important; }
+  html.hdw-on.hdw-layout-dingyao #all_box { margin-left: 56px; }
+  html.hdw-on.hdw-layout-dingyao .headerbox {
+    margin-left: -56px;
+    width: calc(100% + 56px);
+  }
+  html.hdw-on.hdw-layout-dingyao .nav_center a {
+    font-size: 0;
+    padding: 10px 0 10px 21px;
+  }
+  html.hdw-on.hdw-layout-dingyao .nav_center a::first-letter {
+    font-size: 15px;
+    font-weight: bold;
+  }
+}
+
+/* ==================================================================
+   定窑皮肤（html.hdw-on.hdw-t-dingyao）— 挂载于 dingyao 布局结构上：
+   印花竖向串枝 / 镶铜口 / 刻花双钩表头 / 开光白瓷 + 火石红激活 /
+   刻款符 / 竹丝刷痕锦地 / 卡片印花与泪痕。
+   ================================================================== */
+
+/* 侧栏：印花串枝（贴右 repeat-y）+ 镶铜口 */
+html.hdw-on.hdw-t-dingyao .nav_center {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%22140%22%20viewBox%3D%220%200%2064%20140%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.1%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M32%2C0%20C32%2C15%2020%2C35%2032%2C55%20C44%2C75%2020%2C95%2032%2C115%20C32%2C125%2032%2C132%2032%2C140%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2270%22%20r%3D%222.4%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%2032%2070%29%22%20d%3D%22M32%2C67%20C31%2C64.5%2031%2C62%2032%2C59.5%20C33%2C62%2033%2C64.5%2032%2C67%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2860%2032%2070%29%22%20d%3D%22M32%2C67%20C31%2C64.5%2031%2C62%2032%2C59.5%20C33%2C62%2033%2C64.5%2032%2C67%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28120%2032%2070%29%22%20d%3D%22M32%2C67%20C31%2C64.5%2031%2C62%2032%2C59.5%20C33%2C62%2033%2C64.5%2032%2C67%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%2032%2070%29%22%20d%3D%22M32%2C67%20C31%2C64.5%2031%2C62%2032%2C59.5%20C33%2C62%2033%2C64.5%2032%2C67%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28240%2032%2070%29%22%20d%3D%22M32%2C67%20C31%2C64.5%2031%2C62%2032%2C59.5%20C33%2C62%2033%2C64.5%2032%2C67%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28300%2032%2070%29%22%20d%3D%22M32%2C67%20C31%2C64.5%2031%2C62%2032%2C59.5%20C33%2C62%2033%2C64.5%2032%2C67%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M26%2C25%20C18%2C20%2012%2C24%2010%2C31%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M38%2C25%20C46%2C20%2052%2C24%2054%2C31%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M26%2C100%20C18%2C96%2012%2C100%2010%2C107%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M38%2C100%20C46%2C96%2052%2C100%2054%2C107%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M27%2C124%20C22%2C126%2019%2C130%2020%2C134%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M37%2C124%20C42%2C126%2045%2C130%2044%2C134%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, var(--hdw-nav),
+    color-mix(in srgb, var(--hdw-nav), #101010 7%));
+  background-size: 64px 140px, 100% 100%;
+  background-repeat: repeat-y, no-repeat;
+  background-position: right top, 0 0;
+  box-shadow: inset -2px 0 0 #b08050, inset -3px 0 0 color-mix(in srgb, #b08050, #5a3210 55%);
+}
+
+/* 激活：开光白瓷 + 刻款符 + 火石红底线（含首页 :has 镜像） */
+html.hdw-on.hdw-t-dingyao a.nav_item_active,
+html.hdw-on.hdw-t-dingyao a.nav_item_active:hover,
+html.hdw-on.hdw-t-dingyao body:has(.indexbox) .nav_center a[href$="index.php"] {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M2%2C12%20C6%2C4%2010%2C4%2014%2C10%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M4%2C15%20C8%2C10%2011%2C10%2014%2C13%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #fdfbf7, #f3efe4);
+  background-repeat: no-repeat, repeat;
+  background-position: right 10px center, 0 0;
+  background-size: 14px 14px, 100% 100%;
+  color: #3a3324;
+  box-shadow: inset 0 -2px 0 #b05c3a, inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+/* 表头：刻花双钩莲带 */
+html.hdw-on.hdw-t-dingyao .torrent_list tr.tab_header,
+html.hdw-on.hdw-t-dingyao .content_tab tr.tab_header {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2240%22%20height%3D%2230%22%20viewBox%3D%220%200%2040%2030%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-opacity%3D%220.5%22%3E%0A%20%20%3Cpath%20d%3D%22M20%2C5%20C15.5%2C12%2013%2C19%2013%2C26%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M17.5%2C5%20C13%2C12%2010.8%2C18.5%2011%2C23.5%22%20stroke-width%3D%220.8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M20%2C5%20C24.5%2C12%2027%2C19%2027%2C26%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M22.5%2C5%20C27%2C12%2029.2%2C18.5%2029%2C23.5%22%20stroke-width%3D%220.8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%2C3%20H40%22%2F%3E%3Cpath%20d%3D%22M0%2C28%20H40%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, var(--hdw-panel-2), color-mix(in srgb, var(--hdw-panel-2), #101010 5%));
+  background-size: 40px 30px, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: center, 0 0;
+}
+
+/* 面板题字：刻花符左饰 */
+html.hdw-on.hdw-t-dingyao .announcebox p,
+html.hdw-on.hdw-t-dingyao .index_left th {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M2%2C12%20C6%2C4%2010%2C4%2014%2C10%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M4%2C15%20C8%2C10%2011%2C10%2014%2C13%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, var(--hdw-panel-2), color-mix(in srgb, var(--hdw-panel-2), #101010 5%));
+  background-repeat: no-repeat, repeat;
+  background-position: 8px center, 0 0;
+  background-size: 15px 15px, 100% 100%;
+}
+html.hdw-on.hdw-t-dingyao .noraml_box h2,
+html.hdw-on.hdw-t-dingyao .sub_upload div.left h2,
+html.hdw-on.hdw-t-dingyao .offer_box div.left h2,
+html.hdw-on.hdw-t-dingyao .users_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M2%2C12%20C6%2C4%2010%2C4%2014%2C10%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M4%2C15%20C8%2C10%2011%2C10%2014%2C13%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 15px 15px;
+}
+
+/* 用户卡片：印花 + 泪痕 */
+html.hdw-on.hdw-t-dingyao .userinfo {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22110%22%20height%3D%22110%22%20viewBox%3D%220%200%20110%20110%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.2%22%3E%0A%20%20%3Ccircle%20cx%3D%2255%22%20cy%3D%2255%22%20r%3D%224%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2860%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28120%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28240%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28300%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M38%2C55%20C28%2C45%2018%2C46%2010%2C52%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M72%2C55%20C82%2C45%2092%2C46%20100%2C52%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M40%2C62%20C32%2C66%2024%2C66%2018%2C63%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M70%2C62%20C78%2C66%2086%2C66%2092%2C63%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M48%2C42%20C44%2C36%2044%2C30%2047%2C25%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M62%2C42%20C66%2C36%2066%2C30%2063%2C25%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, rgba(255, 253, 248, 0.94), rgba(246, 240, 228, 0.94)),
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2290%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a7c66%22%20stroke-opacity%3D%220.14%22%20stroke-width%3D%221.4%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M6%2C4%20C6%2C20%204%2C32%205%2C52%22%2F%3E%3Cpath%20d%3D%22M14%2C10%20C14%2C26%2016%2C36%2015%2C58%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-position: 0 0, 0 0, right 10px top 6px;
+  background-repeat: repeat, repeat, no-repeat;
+}
+
+/* 返回顶部：一枚定窑印花小盘——盘心印花全浓居中（::before 层承载，
+   可旋转），口沿镶铜；hover 拨动瓷盘近一圈（330deg），移开转回 */
+html.hdw-on.hdw-t-dingyao #back_to_top {
+  background: linear-gradient(180deg, #fdfbf7, #f3efe4);
+  border: 2px solid #b08050;
+  box-shadow: 0 4px 14px rgba(74, 64, 56, 0.3);
+  overflow: hidden;
+}
+html.hdw-on.hdw-t-dingyao #back_to_top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: none;            /* 清基础层箭头残留 */
+  transform: none;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22110%22%20height%3D%22110%22%20viewBox%3D%220%200%20110%20110%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-opacity%3D%220.9%22%20stroke-width%3D%221.2%22%3E%0A%20%20%3Ccircle%20cx%3D%2255%22%20cy%3D%2255%22%20r%3D%224%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2860%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28120%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28240%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28300%2055%2055%29%22%20d%3D%22M55%2C50%20C53.5%2C46.5%2053.5%2C43%2055%2C39.5%20C56.5%2C43%2056.5%2C46.5%2055%2C50%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M38%2C55%20C28%2C45%2018%2C46%2010%2C52%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M72%2C55%20C82%2C45%2092%2C46%20100%2C52%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M40%2C62%20C32%2C66%2024%2C66%2018%2C63%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M70%2C62%20C78%2C66%2086%2C66%2092%2C63%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M48%2C42%20C44%2C36%2044%2C30%2047%2C25%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M62%2C42%20C66%2C36%2066%2C30%2063%2C25%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 44px 44px;
+  background-position: center;
+}
+html.hdw-on.hdw-t-dingyao #back_to_top:hover::before {
+  animation: hdw-spin 6s linear infinite;
+}
+html.hdw-on.hdw-t-dingyao #back_to_top:hover {
+  background: linear-gradient(180deg, #fdfbf7, #f3efe4);   /* 盖掉布局层整钮变色 */
+  border-color: #8a5a3c;
+}
+
+/* body：竹丝刷痕锦地 */
+html.hdw-on.hdw-t-dingyao body {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22120%22%20height%3D%22120%22%20viewBox%3D%220%200%20120%20120%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a8074%22%20stroke-opacity%3D%220.09%22%20stroke-width%3D%220.8%22%3E%3Cpath%20d%3D%22M0%2C20%20H86%22%2F%3E%3Cpath%20d%3D%22M30%2C44%20H120%22%2F%3E%3Cpath%20d%3D%22M0%2C68%20H70%22%2F%3E%3Cpath%20d%3D%22M52%2C92%20H120%22%2F%3E%3Cpath%20d%3D%22M0%2C116%20H40%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 120px 120px;
+}
+
+/* ==================================================================
+   青瓶皮肤（html.hdw-on.hdw-t-qingping）— 青花长颈瓶挂载于 dingyao
+   布局：瓶颈纵向纹带正是侧栏构图原型。白地青花：
+     · 竖向缠枝莲侧栏（贴右 repeat-y）+ 右缘双弦口沿
+     · 开光激活：白瓷开光 + 矾红底线 + 矾红花头
+     · 卷草表头带 / 花头题饰 / 宝相花锦地 / 勾线动效（结构层共享）
+   ================================================================== */
+
+/* 侧栏：竖向缠枝莲 + 双弦口沿 */
+html.hdw-on.hdw-t-qingping .nav_center {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2264%22%20height%3D%22140%22%20viewBox%3D%220%200%2064%20140%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.22%22%20stroke-width%3D%221.2%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M32%2C0%20C32%2C15%2020%2C35%2032%2C55%20C44%2C75%2020%2C95%2032%2C115%20C32%2C125%2032%2C132%2032%2C140%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M32%2C56%20C29.5%2C50%2029.5%2C44%2032%2C38%20C34.5%2C44%2034.5%2C50%2032%2C56%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M32%2C54%20C28%2C52%2026%2C48%2027%2C44%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M32%2C54%20C36%2C52%2038%2C48%2037%2C44%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2232%22%20cy%3D%2236.5%22%20r%3D%221.2%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.22%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M26%2C72%20C19%2C68%2013%2C72%2011%2C79%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M38%2C72%20C45%2C68%2051%2C72%2053%2C79%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M27%2C108%20C21%2C110%2018%2C115%2020%2C120%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M37%2C108%20C43%2C110%2046%2C115%2044%2C120%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M40%2C90%20C46%2C88%2051%2C91%2052%2C96%20C47%2C99%2041%2C96%2040%2C90%20Z%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, var(--hdw-nav),
+    color-mix(in srgb, var(--hdw-nav), #101010 4%));
+  background-size: 64px 140px, 100% 100%;
+  background-repeat: repeat-y, no-repeat;
+  background-position: right top, 0 0;
+  box-shadow: inset -2px 0 0 #1c4275, inset -5px 0 0 rgba(28, 66, 117, 0.35);
+}
+
+/* 激活：青花开光白瓷 + 矾红花头 + 矾红底线（含首页 :has 镜像） */
+html.hdw-on.hdw-t-qingping a.nav_item_active,
+html.hdw-on.hdw-t-qingping a.nav_item_active:hover,
+html.hdw-on.hdw-t-qingping body:has(.indexbox) .nav_center a[href$="index.php"] {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #fbfdfd, #eef3f6);
+  background-repeat: no-repeat, repeat;
+  background-position: right 10px center, 0 0;
+  background-size: 15px 15px, 100% 100%;
+  color: #143257;
+  box-shadow: inset 0 -2px 0 #1c4275, inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* 表头：影青渐变 + 卷草纹带 */
+html.hdw-on.hdw-t-qingping .torrent_list tr.tab_header,
+html.hdw-on.hdw-t-qingping .content_tab tr.tab_header {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2270%22%20height%3D%2236%22%20viewBox%3D%220%200%2070%2036%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.12%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-5%2C18%20C12%2C6%2028%2C30%2045%2C18%20C55%2C10%2062%2C10%2075%2C18%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M14%2C12%20c5%2C-7%2012%2C-3%207%2C4%20c-3%2C3.5%20-7.5%2C1%20-5.5%2C-2%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M33%2C24%20c5%2C7%2012%2C3%207%2C-4%20c-3%2C-3.5%20-7.5%2C-1%20-5.5%2C2%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M52%2C13%20c4%2C-6%2010%2C-2.5%206%2C3.5%20c-2.5%2C3%20-6.5%2C0.8%20-4.8%2C-1.8%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #e9f0f4, #dce8ef);
+  background-size: 70px 36px, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: center, 0 0;
+}
+html.hdw-on.hdw-t-qingping .torrent_list th {
+  color: #16355c;
+  border-bottom: 3px double #8fb0c9;
+}
+
+/* 面板题字：青花衬线 + 花头左饰 */
+html.hdw-on.hdw-t-qingping .announcebox p,
+html.hdw-on.hdw-t-qingping .index_left th {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.5%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%2324558f%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #e9f0f4, #e0eaf0);
+  background-repeat: no-repeat, repeat;
+  background-position: 8px center, 0 0;
+  background-size: 18px 18px, 100% 100%;
+  color: #16355c;
+  font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
+  letter-spacing: 0.1em;
+}
+html.hdw-on.hdw-t-qingping .noraml_box h2,
+html.hdw-on.hdw-t-qingping .sub_upload div.left h2,
+html.hdw-on.hdw-t-qingping .offer_box div.left h2,
+html.hdw-on.hdw-t-qingping .users_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+}
+
+/* body：绢帛宝相花锦地 */
+html.hdw-on.hdw-t-qingping body {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.1%22%20stroke-width%3D%221.4%22%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%227%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%222.6%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2845%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2890%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28135%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28225%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28270%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28315%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 200px 200px;
+}
+
+/* 返回顶部：一枚青花盘心大莲小盘——印花全浓居中（::before 层承载），
+   口沿青弦；hover 拨动瓷盘近一圈（330deg），移开转回 */
+html.hdw-on.hdw-t-qingping #back_to_top {
+  background: linear-gradient(180deg, #fbfdfd, #eef3f6);
+  border: 2px solid #1c4275;
+  box-shadow: 0 4px 14px rgba(28, 66, 117, 0.28);
+  overflow: hidden;
+}
+html.hdw-on.hdw-t-qingping #back_to_top::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: none;            /* 清基础层箭头残留 */
+  transform: none;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2244%22%20height%3D%2244%22%20viewBox%3D%220%200%2044%2044%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%221%22%3E%0A%20%20%3Ccircle%20cx%3D%2222%22%20cy%3D%2222%22%20r%3D%2219%22%20stroke-width%3D%221.5%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2222%22%20cy%3D%2222%22%20r%3D%2216%22%20stroke-width%3D%220.8%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2222%22%20cy%3D%2222%22%20r%3D%224.5%22%20stroke-width%3D%220.9%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2222%22%20cy%3D%2222%22%20r%3D%222.6%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%221%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%2022%2022%29%22%20d%3D%22M22%2C17.5%20C19.6%2C17.5%2018%2C15%2018%2C12.2%20C18%2C9.4%2019.8%2C7.8%2022%2C7.8%20C24.2%2C7.8%2026%2C9.4%2026%2C12.2%20C26%2C15%2024.4%2C17.5%2022%2C17.5%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2860%2022%2022%29%22%20d%3D%22M22%2C17.5%20C19.6%2C17.5%2018%2C15%2018%2C12.2%20C18%2C9.4%2019.8%2C7.8%2022%2C7.8%20C24.2%2C7.8%2026%2C9.4%2026%2C12.2%20C26%2C15%2024.4%2C17.5%2022%2C17.5%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28120%2022%2022%29%22%20d%3D%22M22%2C17.5%20C19.6%2C17.5%2018%2C15%2018%2C12.2%20C18%2C9.4%2019.8%2C7.8%2022%2C7.8%20C24.2%2C7.8%2026%2C9.4%2026%2C12.2%20C26%2C15%2024.4%2C17.5%2022%2C17.5%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%2022%2022%29%22%20d%3D%22M22%2C17.5%20C19.6%2C17.5%2018%2C15%2018%2C12.2%20C18%2C9.4%2019.8%2C7.8%2022%2C7.8%20C24.2%2C7.8%2026%2C9.4%2026%2C12.2%20C26%2C15%2024.4%2C17.5%2022%2C17.5%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28240%2022%2022%29%22%20d%3D%22M22%2C17.5%20C19.6%2C17.5%2018%2C15%2018%2C12.2%20C18%2C9.4%2019.8%2C7.8%2022%2C7.8%20C24.2%2C7.8%2026%2C9.4%2026%2C12.2%20C26%2C15%2024.4%2C17.5%2022%2C17.5%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28300%2022%2022%29%22%20d%3D%22M22%2C17.5%20C19.6%2C17.5%2018%2C15%2018%2C12.2%20C18%2C9.4%2019.8%2C7.8%2022%2C7.8%20C24.2%2C7.8%2026%2C9.4%2026%2C12.2%20C26%2C15%2024.4%2C17.5%2022%2C17.5%20Z%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-size: 44px 44px;
+  background-position: center;
+}
+html.hdw-on.hdw-t-qingping #back_to_top:hover::before {
+  animation: hdw-spin 6s linear infinite;
+}
+html.hdw-on.hdw-t-qingping #back_to_top:hover {
+  background: linear-gradient(180deg, #fbfdfd, #eef3f6);   /* 盖掉布局层整钮变色 */
+  border-color: #143257;
+}
+
+/* 顶栏 header：口沿双弦纹（与青花配色主题同语言） */
+html.hdw-on.hdw-t-qingping #site_header {
+  border-bottom: 5px double #1c4275;
+}
+
+@keyframes hdw-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 用户卡片：白瓷 + 宝相印花底纹 + 青弦右缘 */
+html.hdw-on.hdw-t-qingping .userinfo {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.1%22%20stroke-width%3D%221.4%22%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%227%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%222.6%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2845%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%2890%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28135%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28225%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28270%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%3Cpath%20transform%3D%22rotate%28315%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, rgba(250, 253, 253, 0.95), rgba(238, 244, 247, 0.95));
+  background-repeat: repeat, repeat;
+  /* 大单元（200px）构图：花心落卡片中下部、上部留白——如盘心沉底 */
+  border-color: #b6c9d7;
+  box-shadow: 0 4px 14px rgba(28, 66, 117, 0.12), inset -2px 0 0 rgba(28, 66, 117, 0.35);
+}
