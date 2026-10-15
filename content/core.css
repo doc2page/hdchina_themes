@@ -245,6 +245,13 @@ html.hdw-on .announcebox p {
 html.hdw-on .index_left td.color {
   background-color: var(--hdw-subpanel);
 }
+/* 首页三个卡片（最近上传/热门/经典）的窄列表头（做种/下载）：
+   不套面板题字的纹样 / 衬线 / 宽字距——各主题的 .index_left th
+   题字规则会误中嵌套表格的列表头 */
+html.hdw-on .index_left table.index_new th:not(.left) {
+  background-image: none;
+  padding-left: 8px;
+}
 html.hdw-on .index_left .index_new tr:nth-child(odd) {
   background-color: var(--hdw-row-alt) !important;
 }
@@ -326,7 +333,113 @@ html.hdw-on .forums_bottom_stat span.nowrap:hover {
   background-color: var(--hdw-row-hover);
 }
 html.hdw-on #site_content div.topic_header {
-  background-color: var(--hdw-row-hover);
+  /* 楼层头条：panel-2 深浅两向拉大对比（浅色深化 / 深色亮化）；
+     青花瓷 / 青瓶有皮肤层专属浓度覆盖 */
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 18%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 24%));
+  border-bottom: 1px solid var(--hdw-border-soft);
+  border-radius: 4px;
+}
+html.hdw-on.hdw-dark #site_content div.topic_header {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+  border-bottom-color: var(--hdw-accent-soft);
+}
+/* 论坛板块分组头（站务区 / 主题 / 帖子…表头行）：th 单元格上色——
+   forumhead 表包含整个板块区块（表头行 + 数据行），table/tr 层染色
+   会波及数据行；原站仅强制 tr/td 透明，th 未锁，逐格上色拼成整行 */
+html.hdw-on #site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  border-bottom: 1px solid var(--hdw-border-soft);
+}
+html.hdw-on.hdw-dark #site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+  border-bottom-color: var(--hdw-accent-soft);
+}
+
+/* 求种页表头（normal_tab th）：与论坛分组头同语言——渐变带 + 底线 */
+html.hdw-on .normal_tab th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+  border-color: var(--hdw-border-soft);
+  border-bottom: 1px solid var(--hdw-accent-soft);
+}
+html.hdw-on.hdw-dark .normal_tab th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+
+/* 排行榜表头（top10_box td.colhead）：与求种页表头同语言 */
+html.hdw-on .top10_box td.colhead {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+  border-bottom: 1px solid var(--hdw-accent-soft);
+}
+html.hdw-on.hdw-dark .top10_box td.colhead {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+
+/* 字幕页表头（subupload_tab / uploaded_sub_list）：与求种页表头同语言 */
+html.hdw-on .subupload_tab th,
+html.hdw-on table.uploaded_sub_list th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+  border-color: var(--hdw-border-soft);
+  border-bottom: 1px solid var(--hdw-accent-soft);
+}
+html.hdw-on.hdw-dark .subupload_tab th,
+html.hdw-on.hdw-dark table.uploaded_sub_list th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+
+/* 候选/字幕「规则」正文：随主题文字色（深色主题下原继承黑字不可读） */
+html.hdw-on .offer_box div.left ul li,
+html.hdw-on .offer_box div.left p,
+html.hdw-on .sub_upload div.left p {
+  color: var(--hdw-text);
+}
+
+/* 其余页表头/标题条（种子详情文件列表 / 做种者列表 / 候选 / 字幕上传 / 排行榜菜单）：同语言 */
+html.hdw-on .torrent_files_details th,
+html.hdw-on .peer_list th,
+html.hdw-on .sub_upload div.left h2,
+html.hdw-on .offer_box div.left h2,
+html.hdw-on .offer_box div.right p,
+html.hdw-on .top10_menu b {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+}
+html.hdw-on.hdw-dark .torrent_files_details th,
+html.hdw-on.hdw-dark .peer_list th,
+html.hdw-on.hdw-dark .sub_upload div.left h2,
+html.hdw-on.hdw-dark .offer_box div.left h2,
+html.hdw-on.hdw-dark .offer_box div.right p,
+html.hdw-on.hdw-dark .top10_menu b {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+html.hdw-on #site_content div.topic_header table.topic_header_table {
+  background: none;
 }
 html.hdw-on .meedbox p span b:hover {
   background-color: var(--hdw-row-hover);
@@ -468,15 +581,6 @@ html.hdw-on #thanksbutton #saythanks:hover {
   background-color: var(--hdw-title-hover);
 }
 html.hdw-on #kimdb p.ub_line,
-html.hdw-on .torrent_files_details th,
-html.hdw-on .peer_list th,
-html.hdw-on .sub_upload div.left h2,
-html.hdw-on .subupload_tab th,
-html.hdw-on table.uploaded_sub_list th,
-html.hdw-on .offer_box div.left h2,
-html.hdw-on .offer_box div.right p,
-html.hdw-on .top10_menu b,
-html.hdw-on .normal_tab th,
 html.hdw-on .normal_tab td.qaction a,
 html.hdw-on a.return_normal,
 html.hdw-on .uploaded_sub_box div.left a {
@@ -1201,13 +1305,69 @@ html.hdw-on.hdw-t-qinghua .index_left th {
 
 /* ── 公告界栏：「最近消息」正文左侧双竖弦线，如瓷面题字界格 ── */
 html.hdw-on.hdw-t-qinghua .announcebox h3 {
-  border-left: 3px double #24558f;
   padding-left: 14px;
+}
+
+/* ── 论坛板块分组头：影青彩带（与楼层头条同语言），深字（nav-text 为浅色须覆盖） ── */
+html.hdw-on.hdw-t-qinghua #site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* ── 求种页表头：影青（与分组头同语言） ── */
+html.hdw-on.hdw-t-qinghua .normal_tab th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* ── 排行榜表头：影青（与分组头同语言） ── */
+html.hdw-on.hdw-t-qinghua .top10_box td.colhead {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* ── 字幕页表头：影青（与分组头同语言） ── */
+html.hdw-on.hdw-t-qinghua .subupload_tab th,
+html.hdw-on.hdw-t-qinghua table.uploaded_sub_list th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* ── 其余页表头/标题条：影青（同语言） ── */
+html.hdw-on.hdw-t-qinghua .torrent_files_details th,
+html.hdw-on.hdw-t-qinghua .peer_list th,
+html.hdw-on.hdw-t-qinghua .offer_box div.right p,
+html.hdw-on.hdw-t-qinghua .top10_menu b {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  background-color: #a3c0da;
+}
+
+/* ── 论坛楼层头条：影青深一档，与帖子正文拉开对比 ── */
+/* ── 论坛楼层头条：影青彩带（整体染外层 div） ── */
+html.hdw-on.hdw-t-qinghua #site_content div.topic_header {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  padding: 5px 6px 5px 12px;
+  border-bottom: 1px solid #6f96b5;
+  border-radius: 4px;
+}
+html.hdw-on.hdw-t-qinghua #site_content div.topic_header table.topic_header_table {
+  background: none;
+  border-bottom: none;
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：矾红花头左饰，
      与首页面板的青花题字同一语言 ── */
-html.hdw-on.hdw-t-qinghua .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰，字色随正文——原版语言：主体深字 + striking 警示红 */
+html.hdw-on.hdw-t-qinghua .noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+  padding-left: 28px;
+}
+
+/* 框内小节标题（候选/字幕「规则：」等）：花饰 + 影青底 + 矾红字（与青瓶同语言） */
 html.hdw-on.hdw-t-qinghua .sub_upload div.left h2,
 html.hdw-on.hdw-t-qinghua .offer_box div.left h2,
 html.hdw-on.hdw-t-qinghua .users_box h2 {
@@ -1216,6 +1376,8 @@ html.hdw-on.hdw-t-qinghua .users_box h2 {
   background-position: left center;
   background-size: 18px 18px;
   padding-left: 28px;
+  background-color: #a3c0da;
+  color: #b5443c;
 }
 
 /* ── 器形圆融：独立容器圆角 + 描青细边 ── */
@@ -1428,12 +1590,19 @@ html.hdw-on.hdw-t-meiziqing .index_left th {
 
 /* ── 公告界栏：正文左侧双竖弦线 ── */
 html.hdw-on.hdw-t-meiziqing .announcebox h3 {
-  border-left: 3px double #5d9480;
   padding-left: 14px;
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：铁足赭花饰 ── */
-html.hdw-on.hdw-t-meiziqing .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-meiziqing .noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%239c4f35%22%20stroke-width%3D%221.4%22%3E%0A%20%20%3Cpath%20d%3D%22M8%2C4.6%20C7.1%2C3.5%207.1%2C2.2%208%2C1.3%20C8.9%2C2.2%208.9%2C3.5%208%2C4.6%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8%2C4.6%20C7.1%2C3.5%207.1%2C2.2%208%2C1.3%20C8.9%2C2.2%208.9%2C3.5%208%2C4.6%20Z%22%20transform%3D%22rotate%28120%208%208%29%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8%2C4.6%20C7.1%2C3.5%207.1%2C2.2%208%2C1.3%20C8.9%2C2.2%208.9%2C3.5%208%2C4.6%20Z%22%20transform%3D%22rotate%28240%208%208%29%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%228%22%20cy%3D%228%22%20r%3D%221.5%22%20fill%3D%22%239c4f35%22%20stroke%3D%22none%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 15px 15px;
+  padding-left: 26px;
+}
+
 html.hdw-on.hdw-t-meiziqing .sub_upload div.left h2,
 html.hdw-on.hdw-t-meiziqing .offer_box div.left h2,
 html.hdw-on.hdw-t-meiziqing .users_box h2 {
@@ -1442,6 +1611,7 @@ html.hdw-on.hdw-t-meiziqing .users_box h2 {
   background-position: left center;
   background-size: 15px 15px;
   padding-left: 26px;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
 /* ── 器形圆融：独立容器圆角 + 描青细边 ── */
@@ -1654,12 +1824,19 @@ html.hdw-on.hdw-t-yanzhihong .index_left th {
 
 /* ── 公告界栏：正文左侧金双竖线，如题字界格 ── */
 html.hdw-on.hdw-t-yanzhihong .announcebox h3 {
-  border-left: 3px double #b08d4a;
   padding-left: 14px;
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：小如意头左饰 ── */
-html.hdw-on.hdw-t-yanzhihong .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-yanzhihong .noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d4b878%22%20stroke-width%3D%221.3%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M2.5%2C13%20C2.5%2C9.8%203.7%2C7.6%205.3%2C7.6%20C6.2%2C7.6%206.8%2C8%207.3%2C9%20C7.8%2C7.2%208.4%2C6.4%209%2C6.4%20C9.6%2C6.4%2010.2%2C7.2%2010.7%2C9%20C11.2%2C8%2011.8%2C7.6%2012.7%2C7.6%20C14.3%2C7.6%2015.5%2C9.8%2015.5%2C13%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M9%2C13%20C9%2C14.2%208.6%2C15.1%208%2C15.7%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 16px 16px;
+  padding-left: 28px;
+}
+
 html.hdw-on.hdw-t-yanzhihong .sub_upload div.left h2,
 html.hdw-on.hdw-t-yanzhihong .offer_box div.left h2,
 html.hdw-on.hdw-t-yanzhihong .users_box h2 {
@@ -1668,6 +1845,7 @@ html.hdw-on.hdw-t-yanzhihong .users_box h2 {
   background-position: left center;
   background-size: 16px 16px;
   padding-left: 28px;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
 /* ── 器形圆融：独立容器圆角 + 红细边 ── */
@@ -1887,12 +2065,19 @@ html.hdw-on.hdw-t-yaobian .index_left th {
 
 /* ── 公告界栏：正文左侧金单线 ── */
 html.hdw-on.hdw-t-yaobian .announcebox h3 {
-  border-left: 2px solid #6b4f2e;
   padding-left: 14px;
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：金曜斑左饰 ── */
-html.hdw-on.hdw-t-yaobian .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-yaobian .noraml_box h2 {
+  background-image:
+    radial-gradient(circle at 9px 50%, rgba(212, 169, 78, 0.9) 0 2.5px, rgba(212, 169, 78, 0.3) 3.5px 5.5px, transparent 7px);
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  padding-left: 24px;
+}
+
 html.hdw-on.hdw-t-yaobian .sub_upload div.left h2,
 html.hdw-on.hdw-t-yaobian .offer_box div.left h2,
 html.hdw-on.hdw-t-yaobian .users_box h2 {
@@ -1901,6 +2086,7 @@ html.hdw-on.hdw-t-yaobian .users_box h2 {
   background-repeat: no-repeat;
   background-position: 0 center;
   padding-left: 24px;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
 /* ── 器形圆融：独立容器圆角 + 青灰细边 ── */
@@ -2072,30 +2258,52 @@ html.hdw-on.hdw-t-taotu .torrent_list th {
   border-bottom: 3px solid #a94b3d;
 }
 
-/* ── 红条标题：米色底 + 左 7px 砖红竖条 + 硬阴影 ── */
+/* ── 标题盒：米色底 + 硬阴影（去左红条，与全主题统一） ── */
 html.hdw-on.hdw-t-taotu .announcebox p,
 html.hdw-on.hdw-t-taotu .index_left th {
   background: #e1d6bd;
   color: #292b27;
-  border-left: 7px solid #a94b3d;
   border-bottom: 1px solid #292b27;
   box-shadow: 4px 4px 0 #b8ae9a;
   padding: 8px 10px;
   font-weight: bold;
 }
 
-/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一红条语言 ── */
-html.hdw-on.hdw-t-taotu .noraml_box h2,
+/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一标题盒语言 ── */
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-taotu .noraml_box h2 {
+  display: inline-block;
+  background: #e1d6bd;
+  color: #292b27;
+  border: 2px solid #292b27;
+  box-shadow: 3px 3px 0 #b8ae9a;
+  padding: 4px 10px;
+  padding-left: 26px;
+}
+
 html.hdw-on.hdw-t-taotu .sub_upload div.left h2,
 html.hdw-on.hdw-t-taotu .offer_box div.left h2,
 html.hdw-on.hdw-t-taotu .users_box h2 {
-  border-left: 7px solid #a94b3d;
-  padding-left: 10px;
+  display: inline-block;
+  background: #e1d6bd;
+  color: #292b27;
+  border: 2px solid #292b27;
+  box-shadow: 3px 3px 0 #b8ae9a;
+  padding: 4px 10px;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
-/* ── 公告界栏：左侧粗红条 ── */
+/* ── 论坛楼层头条：直角（野兽派无圆角） ── */
+html.hdw-on.hdw-t-taotu #site_content div.topic_header {
+  border-radius: 0;
+  border-bottom: 2px solid #292b27;
+}
+html.hdw-on.hdw-t-taotu #site_content table.table_forums > tbody > tr > th {
+  border-bottom: 2px solid #292b27;
+}
+
+/* ── 公告界栏 ── */
 html.hdw-on.hdw-t-taotu .announcebox h3 {
-  border-left: 4px solid #a94b3d;
   padding-left: 12px;
 }
 
@@ -2338,16 +2546,26 @@ html.hdw-on.hdw-t-geyao .index_left th {
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一语言 ── */
-html.hdw-on.hdw-t-geyao .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-geyao .noraml_box h2 {
+  text-shadow: 2px 2px 0 #ffffff;
+  padding-left: 26px;
+}
+
 html.hdw-on.hdw-t-geyao .sub_upload div.left h2,
 html.hdw-on.hdw-t-geyao .offer_box div.left h2,
 html.hdw-on.hdw-t-geyao .users_box h2 {
   text-shadow: 2px 2px 0 #ffffff;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
+}
+
+/* ── 论坛楼层头条：直角 ── */
+html.hdw-on.hdw-t-geyao #site_content div.topic_header {
+  border-radius: 0;
 }
 
 /* ── 公告界栏：左侧苔绿粗条 ── */
 html.hdw-on.hdw-t-geyao .announcebox h3 {
-  border-left: 4px solid #557c35;
   padding-left: 12px;
 }
 
@@ -2611,18 +2829,25 @@ html.hdw-on.hdw-t-tianqing .index_left th {
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一芝麻钉 ── */
-html.hdw-on.hdw-t-tianqing .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-tianqing .noraml_box h2 {
+  background-image: radial-gradient(circle 2px at calc(100% - 10px) 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px);
+  background-repeat: no-repeat;
+  background-position: 0 50%;
+  padding-left: 26px;
+}
+
 html.hdw-on.hdw-t-tianqing .sub_upload div.left h2,
 html.hdw-on.hdw-t-tianqing .offer_box div.left h2,
 html.hdw-on.hdw-t-tianqing .users_box h2 {
   background-image: radial-gradient(circle 2px at calc(100% - 10px) 50%, rgba(168,154,140,0.9) 0 1.4px, rgba(168,154,140,0.25) 1.4px 2px, transparent 2.4px);
   background-repeat: no-repeat;
   background-position: 0 50%;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
 /* ── 公告界栏：左一线素线 ── */
 html.hdw-on.hdw-t-tianqing .announcebox h3 {
-  border-left: 2px solid #5f8b8d;
   padding-left: 12px;
 }
 
@@ -2849,7 +3074,14 @@ html.hdw-on.hdw-t-juntian .index_left th {
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：窑变珠左饰 ── */
-html.hdw-on.hdw-t-juntian .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-juntian .noraml_box h2 {
+  background-image: radial-gradient(circle at 9px 50%, rgba(212,154,176,0.95) 0 2px, rgba(110,55,86,0.85) 2.8px 4.5px, transparent 6px);
+  background-repeat: no-repeat;
+  background-position: 0 center;
+  padding-left: 24px;
+}
+
 html.hdw-on.hdw-t-juntian .sub_upload div.left h2,
 html.hdw-on.hdw-t-juntian .offer_box div.left h2,
 html.hdw-on.hdw-t-juntian .users_box h2 {
@@ -2857,11 +3089,11 @@ html.hdw-on.hdw-t-juntian .users_box h2 {
   background-repeat: no-repeat;
   background-position: 0 center;
   padding-left: 24px;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
 /* ── 公告界栏：左玫瑰紫一线 ── */
 html.hdw-on.hdw-t-juntian .announcebox h3 {
-  border-left: 2px solid #b06a8a;
   padding-left: 12px;
 }
 
@@ -3197,7 +3429,6 @@ html.hdw-on.hdw-layout-dingyao .announcebox p,
 html.hdw-on.hdw-layout-dingyao .index_left th {
   background-image: linear-gradient(180deg, var(--hdw-panel-2), color-mix(in srgb, var(--hdw-panel-2), #101010 5%));
   padding-left: 30px;
-  border-left: 3px solid var(--hdw-accent);
   color: var(--hdw-text);
   font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
   letter-spacing: 0.1em;
@@ -3207,17 +3438,14 @@ html.hdw-on.hdw-layout-dingyao .index_left th {
 }
 
 /* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：同一刻款语言 ── */
-html.hdw-on.hdw-layout-dingyao .noraml_box h2,
 html.hdw-on.hdw-layout-dingyao .sub_upload div.left h2,
 html.hdw-on.hdw-layout-dingyao .offer_box div.left h2,
 html.hdw-on.hdw-layout-dingyao .users_box h2 {
-  border-left: 3px solid var(--hdw-accent);
   padding-left: 26px;
 }
 
 /* ── 公告界栏：左一线 ── */
 html.hdw-on.hdw-layout-dingyao .announcebox h3 {
-  border-left: 2px solid var(--hdw-accent);
   padding-left: 12px;
 }
 
@@ -3390,7 +3618,15 @@ html.hdw-on.hdw-t-dingyao .index_left th {
   background-position: 8px center, 0 0;
   background-size: 15px 15px, 100% 100%;
 }
-html.hdw-on.hdw-t-dingyao .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-dingyao .noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%238a5a3c%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M2%2C12%20C6%2C4%2010%2C4%2014%2C10%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M4%2C15%20C8%2C10%2011%2C10%2014%2C13%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 15px 15px;
+  padding-left: 26px;
+}
+
 html.hdw-on.hdw-t-dingyao .sub_upload div.left h2,
 html.hdw-on.hdw-t-dingyao .offer_box div.left h2,
 html.hdw-on.hdw-t-dingyao .users_box h2 {
@@ -3398,6 +3634,7 @@ html.hdw-on.hdw-t-dingyao .users_box h2 {
   background-repeat: no-repeat;
   background-position: left center;
   background-size: 15px 15px;
+  background-color: color-mix(in srgb, var(--hdw-panel-2), #101010 35%);
 }
 
 /* 用户卡片：印花 + 泪痕 */
@@ -3501,7 +3738,15 @@ html.hdw-on.hdw-t-qingping .index_left th {
   font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
   letter-spacing: 0.1em;
 }
-html.hdw-on.hdw-t-qingping .noraml_box h2,
+/* 大标题（noraml_box）：仅花饰无底色（页面级标题不染色带） */
+html.hdw-on.hdw-t-qingping .noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+  padding-left: 26px;
+}
+
 html.hdw-on.hdw-t-qingping .sub_upload div.left h2,
 html.hdw-on.hdw-t-qingping .offer_box div.left h2,
 html.hdw-on.hdw-t-qingping .users_box h2 {
@@ -3509,6 +3754,7 @@ html.hdw-on.hdw-t-qingping .users_box h2 {
   background-repeat: no-repeat;
   background-position: left center;
   background-size: 18px 18px;
+  background-color: #a3c0da;
 }
 
 /* body：绢帛宝相花锦地 */
@@ -3542,6 +3788,52 @@ html.hdw-on.hdw-t-qingping #back_to_top:hover::before {
 html.hdw-on.hdw-t-qingping #back_to_top:hover {
   background: linear-gradient(180deg, #fbfdfd, #eef3f6);   /* 盖掉布局层整钮变色 */
   border-color: #143257;
+}
+
+/* 论坛板块分组头：影青彩带（与楼层头条同语言） */
+html.hdw-on.hdw-t-qingping #site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  border-bottom: 1px solid #6f96b5;
+}
+/* 求种页表头：影青（与分组头同语言） */
+html.hdw-on.hdw-t-qingping .normal_tab th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* 排行榜表头：影青（与分组头同语言） */
+html.hdw-on.hdw-t-qingping .top10_box td.colhead {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* 字幕页表头：影青（与分组头同语言） */
+html.hdw-on.hdw-t-qingping .subupload_tab th,
+html.hdw-on.hdw-t-qingping table.uploaded_sub_list th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* 其余页表头/标题条：影青（同语言；h2 走题字组补底色，勿用 shorthand 清花饰） */
+html.hdw-on.hdw-t-qingping .torrent_files_details th,
+html.hdw-on.hdw-t-qingping .peer_list th,
+html.hdw-on.hdw-t-qingping .offer_box div.right p,
+html.hdw-on.hdw-t-qingping .top10_menu b {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+}
+
+/* 论坛楼层头条：影青深一档，与帖子正文拉开对比 */
+/* ── 论坛楼层头条：影青彩带（整体染外层 div） ── */
+html.hdw-on.hdw-t-qingping #site_content div.topic_header {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  padding: 5px 6px 5px 12px;
+  border-bottom: 1px solid #6f96b5;
+  border-radius: 4px;
+}
+html.hdw-on.hdw-t-qingping #site_content div.topic_header table.topic_header_table {
+  background: none;
+  border-bottom: none;
 }
 
 /* 顶栏 header：口沿双弦纹（与青花配色主题同语言） */
