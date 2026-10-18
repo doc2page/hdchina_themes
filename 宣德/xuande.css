@@ -1,0 +1,1523 @@
+/*
+ * 宣德 · HDWinG 站点主题（独立版，提取自浏览器扩展「瓷之器」v1.4.0）
+ * 宣德青花：分水五色（勾线头浓、莲头分水填彩）、苏麻离青晕散
+ * （表头铁锈斑 / nav 锡光）、开光行 hover、青花莲瓣返回钮、
+ * nav 釉下流光（亮窗左→右传递，纹样静止；reduced-motion 自动静止）。
+ *
+ * 用法：整文件加载于站点 main.css 之后（后台主题注册 / 页头 link /
+ * 用户自定义样式均可）。无需 JS、无外部资源，纹样为内联 SVG。
+ * 用户等级色保持站点原版（附原色还原层）；logo 不反色。
+ */
+
+:root {
+  --hdw-page: #a7b8c6;
+  --hdw-outer: #e9eef1;
+  --hdw-border: #16406e;
+  --hdw-border-soft: #b6c9d7;
+  --hdw-nav: #1c4275;
+  --hdw-nav-text: #d9e5ef;
+  --hdw-nav-hover: #2a568c;
+  --hdw-nav-hover-text: #ffffff;
+  --hdw-header: #f9fbfb;
+  --hdw-header2: #ecf1f3;
+  --hdw-header-text: #1e3a5c;
+  --hdw-content: #f5f8f8;
+  --hdw-panel: #e3ecf1;
+  --hdw-panel-2: #d7e4ec;
+  --hdw-subpanel: #e6eef3;
+  --hdw-subpanel-2: #dce7ef;
+  --hdw-row: #f1f5f7;
+  --hdw-row-alt: #e8eff3;
+  --hdw-row-alt-2: #e2ebf1;
+  --hdw-row-hover: #d9e6ee;
+  --hdw-sticky: #d8e6f0;
+  --hdw-sticky2: #cfe0ec;
+  --hdw-sticky3: #e9dfe4;
+  --hdw-text: #24364a;
+  --hdw-text-soft: #5c7286;
+  --hdw-title: #143257;
+  --hdw-title-hover: #b5443c;
+  --hdw-link: #24558f;
+  --hdw-link-strong: #194a7d;
+  --hdw-link-hover: #0d6cb5;
+  --hdw-accent: #24558f;
+  --hdw-accent-soft: #3c6ca0;
+  --hdw-btn: #eef4f7;
+  --hdw-btn-text: #1c4677;
+  --hdw-btn-border: #9cb9cf;
+  --hdw-input: #fbfdfd;
+  --hdw-input-text: #24364a;
+  --hdw-tooltip: #143257;
+  --hdw-tooltip-text: #edf3f8;
+  --hdw-suggest: #eef4f8;
+  --hdw-free: #f0e6c3;
+  --hdw-twoup: #efdfe0;
+  --hdw-twoupfree: #e3eec7;
+  --hdw-halfdown: #e0e4f5;
+  --hdw-twouphalf: #d5ecef;
+  --hdw-logo-filter: none;
+  --hdw-scrollbar: #7ba3c4;
+}
+
+/*
+ * 瓷之器 — 核心覆盖样式
+ *
+ * 所有规则以 为前缀：content/theme.js 在 document_start
+ * 给 <html> 加 / 去这个类即可整体启用 / 停用主题，页面首帧前生效、无闪白。
+ * 颜色全部取自 :root 上的 --hdw-* 变量（由所选主题注入，见 shared/themes.js）。
+ * 特异性 = 原选择器 + html，注入顺序晚于 main.css，稳定覆盖；
+ * 原样式中带 !important 的行级背景在此同步使用 !important。
+ */
+
+/* ============================== 全局骨架 ============================== */
+
+{
+  background: var(--hdw-page);
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--hdw-page);
+}
+
+#all_box {
+  background-color: var(--hdw-outer);
+}
+
+/* 滚动条 */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hdw-scrollbar);
+  border-radius: 8px;
+  border: 3px solid var(--hdw-page);
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ============================== 文字与链接 ============================== */
+
+a:link,
+a:visited {
+  color: var(--hdw-link);
+}
+a:hover {
+  color: var(--hdw-link-hover);
+}
+a:active {
+  color: var(--hdw-link);
+}
+
+/* ============================== 顶部 header ============================== */
+
+.headerbox {
+  background-color: var(--hdw-header2);
+}
+
+#site_header {
+  background: linear-gradient(180deg, var(--hdw-header), var(--hdw-header2));
+  border-bottom-color: var(--hdw-border);
+}
+
+/* 暗色主题下 logo 反色以保持可读；--hdw-logo-filter 为 none 时无影响 */
+.site_logo {
+  filter: var(--hdw-logo-filter, none);
+}
+
+.user_box {
+  background: none;
+  color: var(--hdw-header-text);
+}
+
+.userinfo p {
+  color: var(--hdw-text-soft);
+}
+
+.user_info {
+  background-color: var(--hdw-panel);
+  border-color: var(--hdw-accent-soft);
+}
+.user_info a {
+  color: var(--hdw-link-strong);
+}
+.user_info a:hover {
+  color: var(--hdw-link-hover);
+}
+.infor_detail td {
+  border-bottom: 1px var(--hdw-border-soft) dashed;
+}
+
+.loadbarbg {
+  background-color: var(--hdw-subpanel);
+}
+
+/* ============================== 导航条 ============================== */
+
+#site_nav {
+  background-color: var(--hdw-nav);
+}
+
+.nav_center a {
+  background: var(--hdw-nav);
+  color: var(--hdw-nav-text);
+}
+.nav_center a:hover {
+  background: var(--hdw-nav-hover);
+  color: var(--hdw-nav-hover-text);
+}
+a.nav_item_active,
+a.nav_item_active:hover {
+  background: var(--hdw-nav-hover);
+  color: var(--hdw-nav-hover-text);
+}
+a.nav_item_normal:hover {
+  background-color: var(--hdw-nav-hover);
+}
+.scroll-to-fixed-fixed {
+  border-bottom-color: var(--hdw-nav-hover);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.45);
+}
+.dropdown-content a {
+  background: var(--hdw-subpanel);
+  color: var(--hdw-text);
+}
+.dropdown-content a:hover {
+  background-color: var(--hdw-row-hover);
+}
+
+/* ============================== 页脚 / 分页 ============================== */
+
+#site_footer {
+  border-top-color: var(--hdw-border-soft);
+  color: var(--hdw-text-soft);
+}
+#site_footer p {
+  color: var(--hdw-text-soft);
+}
+
+.page_prev,
+.page_next {
+  background-color: var(--hdw-panel);
+  border-color: var(--hdw-accent-soft);
+}
+.page_prev a,
+.page_next a,
+.page_number {
+  color: var(--hdw-text);
+}
+.page_number {
+  background-color: var(--hdw-panel);
+}
+.torrent_advice {
+  color: var(--hdw-link-hover);
+}
+.torrent_advice a,
+.torrent_adviceb a {
+  color: var(--hdw-text);
+}
+.torrent_advice a:hover,
+.torrent_adviceb a:hover {
+  color: var(--hdw-title-hover);
+}
+
+.pagination > li > a,
+.pagination > li > span,
+.pager li > a,
+.pager li > span {
+  background-color: var(--hdw-panel);
+  color: var(--hdw-text);
+  border-color: var(--hdw-border-soft);
+}
+.pagination > li > a:hover,
+.pagination > li > a:focus,
+.pager li > a:hover,
+.pager li > a:focus {
+  background-color: var(--hdw-row-hover);
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus {
+  background-color: var(--hdw-accent);
+  border-color: var(--hdw-accent);
+}
+.pagination > .disabled > a,
+.pagination > .disabled > span {
+  background-color: var(--hdw-panel);
+  color: var(--hdw-text-soft);
+}
+
+.label-default {
+  background-color: var(--hdw-accent-soft);
+}
+
+/* 彩色徽章 / 顶栏与求种页的功能按钮（捐赠、签到、21 点、菠菜、
+   添加、查看所有…）：背景保留站点功能色，字色白必须夺回——
+   通用 a:link 与容器级规则（如 .noraml_box p.leftlink a）都会染黑它。
+   label 恒有彩色底，白字任何上下文成立，!important 一劳永逸 */
+.label,
+a.label,
+a.label:link,
+a.label:visited,
+a.label:hover,
+a.label:focus {
+  color: #ffffff !important;
+}
+
+/* ============================== 通用内容容器 ============================== */
+
+table.mainouter {
+  background-color: var(--hdw-content);
+}
+td.shoutrow {
+  background-color: var(--hdw-content);
+}
+td.colhead {
+  background-color: var(--hdw-panel-2);
+  color: var(--hdw-text);
+}
+.cbox {
+  background-color: var(--hdw-outer);
+}
+a.info {
+  background-color: var(--hdw-subpanel);
+  color: var(--hdw-text);
+}
+a.info:hover {
+  background-color: var(--hdw-row-hover);
+}
+
+/* ============================== 首页 ============================== */
+
+.indexbox table,
+.index_left th,
+.index_left td,
+.announcebox,
+.announcebox p {
+  border-color: var(--hdw-border);
+}
+.index_left th,
+.announcebox p {
+  background-color: var(--hdw-panel);
+}
+.index_left td.color {
+  background-color: var(--hdw-subpanel);
+}
+/* 首页三个卡片（最近上传/热门/经典）的窄列表头（做种/下载）：
+   不套面板题字的纹样 / 衬线 / 宽字距——各主题的 .index_left th
+   题字规则会误中嵌套表格的列表头 */
+.index_left table.index_new th:not(.left) {
+  background-image: none;
+  padding-left: 8px;
+}
+.index_left .index_new tr:nth-child(odd) {
+  background-color: var(--hdw-row-alt) !important;
+}
+.index_right {
+  background-color: var(--hdw-panel);
+}
+.announcebox h3 {
+  color: var(--hdw-text-soft);
+}
+.announcebox div.newscontrol {
+  background: var(--hdw-subpanel);
+}
+
+/* ============================== 浮动元素（返回顶部） ============================== */
+
+/* 原为 24x60 图片按钮；改为圆形瓷钮 + 主题色箭头，全主题变量驱动 */
+#back_to_top {
+  width: 44px;
+  height: 44px;
+  background: var(--hdw-panel);
+  border: 1px solid var(--hdw-border-soft);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.28);
+  opacity: 0.96;
+  transition: border-color 0.15s, transform 0.15s;
+}
+#back_to_top::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 54%;
+  transform: translate(-50%, -50%);
+  border: 9px solid transparent;
+  border-bottom: 13px solid var(--hdw-text);
+  border-top-width: 0;
+}
+#back_to_top:hover {
+  border-color: var(--hdw-accent);
+  transform: translateY(-2px);
+}
+#back_to_top:hover::before {
+  border-bottom-color: var(--hdw-link-hover);
+}
+
+/* ============================== 论坛 ============================== */
+
+#site_content table.table_forums th {
+  background-color: var(--hdw-nav);
+  color: var(--hdw-nav-text);
+}
+#site_content table.table_forums tr:nth-child(odd) {
+  background-color: var(--hdw-row-alt);
+}
+#site_content table.forums_viewtopic {
+  background-color: var(--hdw-subpanel);
+  border-color: var(--hdw-border);
+}
+#site_content table.forums_viewtopic td.leftback {
+  background-color: var(--hdw-subpanel-2);
+}
+#site_content table.forums_viewtopic td.body_box div.fakebox {
+  background-color: var(--hdw-subpanel);
+}
+.quickly_reply,
+.forum_bottom_tips,
+.forums_bottom_stat,
+.forum_search,
+.sitemessage,
+table.editor_box {
+  background-color: var(--hdw-subpanel);
+}
+table.editor_box tr.iframe_line {
+  background-color: var(--hdw-subpanel-2);
+}
+.forums_bottom_stat {
+  background-image: linear-gradient(to bottom, var(--hdw-subpanel) 0, var(--hdw-outer) 100%);
+}
+.forums_bottom_stat span.nowrap:hover {
+  background-color: var(--hdw-row-hover);
+}
+#site_content div.topic_header {
+  /* 楼层头条：panel-2 深浅两向拉大对比（浅色深化 / 深色亮化）；
+     青花瓷 / 青瓶有皮肤层专属浓度覆盖 */
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 18%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 24%));
+  border-bottom: 1px solid var(--hdw-border-soft);
+  border-radius: 4px;
+}
+html.hdw-dark #site_content div.topic_header {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+  border-bottom-color: var(--hdw-accent-soft);
+}
+/* 论坛板块分组头（站务区 / 主题 / 帖子…表头行）：th 单元格上色——
+   forumhead 表包含整个板块区块（表头行 + 数据行），table/tr 层染色
+   会波及数据行；原站仅强制 tr/td 透明，th 未锁，逐格上色拼成整行 */
+#site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  border-bottom: 1px solid var(--hdw-border-soft);
+}
+html.hdw-dark #site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+  border-bottom-color: var(--hdw-accent-soft);
+}
+
+/* 求种页表头（normal_tab th）：与论坛分组头同语言——渐变带 + 底线 */
+.normal_tab th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+  border-color: var(--hdw-border-soft);
+  border-bottom: 1px solid var(--hdw-accent-soft);
+}
+html.hdw-dark .normal_tab th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+
+/* 排行榜表头（top10_box td.colhead）：与求种页表头同语言 */
+.top10_box td.colhead {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+  border-bottom: 1px solid var(--hdw-accent-soft);
+}
+html.hdw-dark .top10_box td.colhead {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+
+/* 字幕页表头（subupload_tab / uploaded_sub_list）：与求种页表头同语言 */
+.subupload_tab th,
+table.uploaded_sub_list th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+  border-color: var(--hdw-border-soft);
+  border-bottom: 1px solid var(--hdw-accent-soft);
+}
+html.hdw-dark .subupload_tab th,
+html.hdw-dark table.uploaded_sub_list th {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+
+/* 候选/字幕「规则」正文：随主题文字色（深色主题下原继承黑字不可读） */
+.offer_box div.left ul li,
+.offer_box div.left p,
+.sub_upload div.left p {
+  color: var(--hdw-text);
+}
+
+/* 其余页表头/标题条（种子详情文件列表 / 做种者列表 / 候选 / 字幕上传 / 排行榜菜单）：同语言 */
+.torrent_files_details th,
+.peer_list th,
+.sub_upload div.left h2,
+.offer_box div.left h2,
+.offer_box div.right p,
+.top10_menu b {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #101010 32%),
+    color-mix(in srgb, var(--hdw-panel-2), #101010 38%));
+  color: var(--hdw-title);
+}
+html.hdw-dark .torrent_files_details th,
+html.hdw-dark .peer_list th,
+html.hdw-dark .sub_upload div.left h2,
+html.hdw-dark .offer_box div.left h2,
+html.hdw-dark .offer_box div.right p,
+html.hdw-dark .top10_menu b {
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 16%),
+    color-mix(in srgb, var(--hdw-panel-2), #ffffff 9%));
+}
+#site_content div.topic_header table.topic_header_table {
+  background: none;
+}
+.meedbox p span b:hover {
+  background-color: var(--hdw-row-hover);
+}
+
+/* ============================== 种子列表 ============================== */
+
+.content_tab {
+  background: var(--hdw-panel);
+  border-color: var(--hdw-accent-soft);
+}
+.content_tab td {
+  border-color: var(--hdw-accent-soft);
+}
+.content_tab tr.tab_header,
+.torrent_list tr.tab_header {
+  background: linear-gradient(180deg, var(--hdw-panel-2), var(--hdw-panel));
+}
+
+.torrent_list {
+  background: var(--hdw-row);
+  border-color: var(--hdw-border);
+}
+.torrent_list th,
+.torrent_list td {
+  border-bottom-color: var(--hdw-border);
+}
+.torrent_list tr:hover {
+  background-color: var(--hdw-row-hover);
+}
+.torrent_list tr.toped,
+.torrent_list tr.sticky_bg {
+  background-color: var(--hdw-sticky) !important;
+}
+.torrent_list tr.stickz_bg {
+  background-color: var(--hdw-sticky2) !important;
+}
+.torrent_list tr.topsticky_bg {
+  background-color: var(--hdw-sticky3) !important;
+}
+.torrent_list td.check,
+.torrent_list td.t_cat {
+  background-color: var(--hdw-content);
+}
+.torrent_list td.t_comment,
+.torrent_list td.t_size,
+.torrent_list td.t_leech,
+.torrent_list td.t_uploader,
+.torrent_list td.t_time,
+.torrent_list td.voteres {
+  background-color: var(--hdw-content);
+}
+.torrent_list td.t_name {
+  color: var(--hdw-text);
+}
+.torrent_list td.t_name table.tbname h3 a {
+  color: var(--hdw-title);
+}
+.torrent_list td.t_name table.tbname h3 a:hover {
+  color: var(--hdw-title-hover);
+}
+.torrent_list td.t_comment a,
+.torrent_list td.t_file a {
+  color: var(--hdw-link-strong);
+}
+.torrent_list td.t_comment a:hover,
+.torrent_list td.t_file a:hover {
+  color: var(--hdw-link-hover);
+}
+
+/* 促销 / 免费行底色：保留色相、按主题重新调度 */
+.free_bg {
+  background-color: var(--hdw-free);
+}
+.twoup_bg {
+  background-color: var(--hdw-twoup);
+}
+.twoupfree_bg {
+  background-color: var(--hdw-twoupfree);
+}
+.halfdown_bg {
+  background-color: var(--hdw-halfdown);
+}
+.twouphalfdown_bg {
+  background-color: var(--hdw-twouphalf);
+}
+
+/* ============================== 搜索区 ============================== */
+
+.searchbox td.sbox_name {
+  background-color: var(--hdw-subpanel);
+}
+#suggcontainer {
+  background-color: rgba(18, 22, 30, 0.78);
+}
+#suggcontainer div.suggest_keywords {
+  background-color: var(--hdw-suggest);
+  color: var(--hdw-text);
+}
+#suggcontainer div.suggest_keywords:hover,
+#suggcontainer div.active {
+  background-color: var(--hdw-row-hover);
+}
+.left_searchbar,
+.left_otherbar {
+  background-color: var(--hdw-panel);
+}
+.search_bar {
+  background-color: var(--hdw-subpanel);
+}
+#span_signin {
+  background: var(--hdw-row-alt);
+}
+
+/* ============================== 详情页 ============================== */
+
+.details_box,
+.subtitle_upload_box,
+.offer_box,
+.users_box,
+.noraml_box {
+  background-color: var(--hdw-row-alt);
+}
+.m_name,
+.info_box li.leftb,
+.table_details,
+.uploaded_sub_box form.subtitles_search,
+.offer_box div.left ul,
+.noraml_box p.sub,
+.aboutnexus h3,
+.testdemo,
+.mybonus div.bonus_bar_box {
+  background-color: var(--hdw-subpanel);
+}
+#thanksbutton #saythanks {
+  background-color: var(--hdw-accent-soft);
+}
+#thanksbutton #saythanks:hover {
+  background-color: var(--hdw-title-hover);
+}
+#kimdb p.ub_line,
+.normal_tab td.qaction a,
+a.return_normal,
+.uploaded_sub_box div.left a {
+  background-color: var(--hdw-panel);
+}
+#kothercopy table.detail_moreotherver th {
+  background-color: var(--hdw-panel-2);
+}
+#kothercopy table.detail_moreotherver td.more_cat,
+.cat_backw {
+  background-color: var(--hdw-row);
+}
+.cat_backw {
+  background-color: var(--hdw-row) !important;
+}
+.peer_list td.admin_view_it {
+  background-color: var(--hdw-subpanel-2);
+}
+table.uploaded_sub_list tr:nth-child(odd) {
+  background-color: var(--hdw-row-alt);
+}
+table.uploaded_sub_list td {
+  border-color: var(--hdw-border-soft);
+}
+
+/* ============================== 排行榜 / 用户页等表格 ============================== */
+
+.top10_box tr:nth-child(odd),
+.normal_tab tr:nth-child(odd),
+.w1k table tr:nth-child(odd) {
+  background-color: var(--hdw-row-alt-2);
+}
+.users_box tr:nth-child(odd) {
+  background-color: var(--hdw-row-alt-2) !important;
+}
+ul.menu li a {
+  background-color: var(--hdw-subpanel-2);
+  color: var(--hdw-text);
+}
+ul.menu li a:hover {
+  background-color: var(--hdw-row-hover);
+}
+ul.menu li.selected a {
+  background-color: var(--hdw-row-alt);
+}
+.rounded-list a {
+  background: var(--hdw-subpanel);
+}
+.rounded-list a:hover {
+  background: var(--hdw-row-hover);
+}
+.rectangle-list a {
+  background: var(--hdw-subpanel);
+}
+.rectangle-list a:hover {
+  background: var(--hdw-row-hover);
+}
+
+/* ============================== 表单控件 ============================== */
+
+input[type="text"],
+input[type="password"],
+input[type="search"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input:not([type]),
+select,
+textarea {
+  background-color: var(--hdw-input);
+  color: var(--hdw-input-text);
+  border: 1px solid var(--hdw-btn-border);
+}
+select option,
+select optgroup {
+  background-color: var(--hdw-panel);
+  color: var(--hdw-text);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--hdw-text-soft);
+}
+input[type="text"]:focus,
+input[type="password"]:focus,
+input:not([type]):focus,
+select:focus,
+textarea:focus {
+  border-color: var(--hdw-accent);
+  outline: none;
+}
+
+/* 按钮：覆盖原 btnbg.gif 渐变图 */
+.btn,
+.btn2,
+.btns,
+button,
+input[type="submit"],
+input[type="button"],
+.loginbox input.btnl {
+  background: var(--hdw-btn) none;
+  color: var(--hdw-btn-text);
+  border: 1px solid var(--hdw-btn-border);
+}
+.btn:hover,
+.btn2:hover,
+.btns:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.loginbox input.btnl:hover {
+  background: var(--hdw-row-hover) none;
+  color: var(--hdw-nav-hover-text);
+  border-color: var(--hdw-accent);
+}
+.gobutton {
+  background: var(--hdw-accent-soft);
+}
+.searchbox td.s_button input.btns:hover,
+.stool_box td.s_button input.btns:hover {
+  color: var(--hdw-title-hover);
+}
+.btn .label {
+  color: inherit;
+}
+
+/* 代码块 */
+.codetop {
+  background: var(--hdw-accent-soft) none;
+  color: var(--hdw-nav-hover-text);
+}
+.codemain {
+  background: var(--hdw-input);
+}
+
+/* ============================== 弹层 / 提示 ============================== */
+
+div.niceTitle {
+  background-color: var(--hdw-tooltip);
+  color: var(--hdw-tooltip-text);
+}
+div.smilies td {
+  background-color: var(--hdw-tooltip);
+  color: var(--hdw-tooltip-text);
+}
+div.attach .contents {
+  background: var(--hdw-panel);
+  border-color: var(--hdw-border-soft);
+}
+div.attach .contents strong {
+  color: var(--hdw-link-hover);
+}
+table.float_imdbtips {
+  background: var(--hdw-tooltip);
+}
+table.float_imdbtips td {
+  border: 1px solid var(--hdw-border-soft);
+}
+
+dd.d_tips {
+  color: var(--hdw-text);
+  border-color: var(--hdw-border-soft);
+  background-color: var(--hdw-panel);
+  background-image: none;
+  text-shadow: none;
+}
+.tips dd.d_tips:before {
+  border-right-color: var(--hdw-panel);
+}
+
+/* 外链确认弹窗 */
+#ext_link_confirm .ext_link_box {
+  background: var(--hdw-panel);
+  color: var(--hdw-text);
+  border-color: var(--hdw-accent);
+}
+#ext_link_confirm h3 {
+  color: var(--hdw-text);
+}
+.dropmenu {
+  background: var(--hdw-panel) none;
+}
+
+/* ============================== 杂项 ============================== */
+
+table.message {
+  border-color: var(--hdw-border);
+}
+.w1k table table tr:nth-child(odd),
+.normal_tab table tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+/* ==================================================================
+   文字颜色精修（通用层）
+   原站 243 条 color 声明中的深色文字（#000 / #333 / #444 / #666 /
+   #888 / #204d78 / #48506B / #d9534f 系…）在此统一映射到主题变量。
+   浅色主题（纸墨）的变量值即深色文字，天然正确，无需分支。
+   ================================================================== */
+
+/* body 无显式 color（继承 UA 黑字），深色底必须接管 */
+body {
+  color: var(--hdw-text);
+}
+
+/* ── 种子列表 ── */
+.torrent_list td.t_uploader {
+  color: var(--hdw-text);
+}
+.torrent_list td.t_time,
+.torrent_list td.t_size,
+.torrent_list td.t_completed {
+  color: var(--hdw-text-soft);
+}
+.torrent_list td.t_torrents a,
+.torrent_list td.t_leech a,
+.torrent_list td.t_file a,
+.torrent_list td.t_comment a {
+  color: var(--hdw-link-strong);
+}
+.torrent_list td.t_torrents a:hover,
+.torrent_list td.t_leech a:hover,
+.torrent_list td.t_file a:hover,
+.torrent_list td.t_comment a:hover {
+  color: var(--hdw-link-hover);
+}
+
+/* ── 分页 ── */
+.page_current {
+  color: var(--hdw-link-strong);
+}
+.page_number a {
+  color: var(--hdw-link-hover);
+}
+.page_number a:hover {
+  color: var(--hdw-link-strong);
+}
+.pagination > .disabled > a,
+.pagination > .disabled > span {
+  color: var(--hdw-text-soft);
+}
+
+/* ── 搜索 / 左侧面板 ── */
+.search_content li,
+.search_content li li,
+.search_bar li,
+.other_content li,
+.other_content li li {
+  color: var(--hdw-text);
+}
+.other_content li li.title_w a {
+  color: var(--hdw-text);
+}
+.other_content li li.title_cat a {
+  color: var(--hdw-link-hover);
+}
+.other_content li li.title_cat a:hover {
+  color: var(--hdw-text);
+}
+.other_content li li.title_whdc a {
+  color: var(--hdw-title-hover);
+}
+.search_hotkey a,
+.member_reading a {
+  color: var(--hdw-link-hover);
+}
+.search_hotkey a:hover,
+.member_reading a:hover {
+  color: var(--hdw-text);
+}
+
+/* ── 首页右侧栏 ── */
+.index_right div.siteinfo td,
+.index_right div.siteinfo_c td {
+  color: var(--hdw-text-soft);
+}
+.userinfo p.donate i.percent {
+  color: var(--hdw-text);
+}
+.userinfort p,
+.userinforb p {
+  color: var(--hdw-text-soft);
+}
+
+/* ── 面板红字标题（原 #d9534f / #F00 系） ── */
+.sub_upload div.left h2,
+.offer_box div.left h2,
+.loginbox td.toolbox h3,
+.loginbox td.signup_note,
+.forum_search h2 span,
+.poster_box div.imgbox b,
+.normal_tab td.tracker_url,
+.normal_tab td.qprice,
+.offer_box div.right p {
+  color: var(--hdw-title-hover);
+}
+.offer_box div.right p a {
+  color: var(--hdw-title-hover) !important;
+}
+.offer_box div.right p a:hover {
+  color: var(--hdw-text) !important;
+}
+
+/* ── 列表按钮式链接（原 #444 底浅字 / hover 白） ── */
+.rounded-list a,
+.rectangle-list a,
+.uploaded_sub_list td.report a,
+.request_comm div.left a.rq:not(.label),
+.normal_tab a.rq:not(.label),
+.noraml_box div.left a.rq:not(.label),
+.noraml_box div.left p.leftlink a:not(.label) {
+  color: var(--hdw-text);
+}
+.rounded-list a:hover,
+.rectangle-list a:hover,
+.uploaded_sub_list td.report a:hover,
+.request_comm div.left a.rq:not(.label):hover,
+.normal_tab a.rq:not(.label):hover,
+.noraml_box div.left a.rq:not(.label):hover,
+.noraml_box div.left p.leftlink a:not(.label):hover {
+  color: var(--hdw-nav-hover-text);
+}
+
+/* ── 详情页 ── */
+.m_name h2 {
+  color: var(--hdw-text-soft);
+}
+.m_name h3 {
+  color: var(--hdw-text);
+}
+.info_box li.right b.clip_button {
+  color: var(--hdw-text);
+}
+
+/* ── 论坛 ── */
+.forums_name {
+  color: var(--hdw-text);
+}
+.forums_name a {
+  color: var(--hdw-link-strong) !important;
+}
+.forums_name a:hover {
+  color: var(--hdw-link-hover) !important;
+}
+#site_content table.table_forums th a {
+  color: var(--hdw-nav-text) !important;
+}
+#site_content table.table_forums th a:hover {
+  color: var(--hdw-nav-hover-text) !important;
+}
+#site_content table.forums_viewtopic td.left_user_info a:hover,
+#site_content table.forums_viewtopic td.toolbox a:hover {
+  color: var(--hdw-text);
+}
+#site_content table.forums_viewtopic td.body_box div.forumtext p.editedby {
+  color: var(--hdw-text-soft) !important;
+}
+#site_content table.forums_viewtopic td.body_box div.forumtext p.editedby a {
+  color: var(--hdw-text-soft) !important;
+}
+#site_content table.forums_viewtopic td.body_box div.forumtext p.editedby a:hover {
+  color: var(--hdw-text) !important;
+}
+
+/* ── 排行榜 / 探索页 ── */
+.top10_menu a {
+  color: var(--hdw-text) !important;
+}
+.top10_menu a:hover {
+  color: var(--hdw-nav-hover-text) !important;
+}
+
+/* ── 通用小字 / 次级信息（原 #666 / #888 / #999 / gray） ── */
+.slogan,
+.loginbox td.small,
+.loginbox td span.small,
+.attach .size,
+font.gray,
+.circle-list h2,
+.circle-list p {
+  color: var(--hdw-text-soft);
+}
+.circle-list h2:before {
+  color: var(--hdw-text);
+}
+.circle-list li:hover h2:before {
+  color: var(--hdw-text);
+}
+
+/* ── 页内 logo / 对话框 / 代码块 / 返回链接 ── */
+.logo,
+.dialog td.title,
+.codemain,
+a.info:hover span,
+p.tag_smiles a,
+p.more_smiles a {
+  color: var(--hdw-text);
+}
+a.return_normal {
+  color: var(--hdw-text-soft);
+}
+a.return_normal:hover {
+  color: var(--hdw-text);
+}
+.sitemessage p a.label {
+  color: var(--hdw-text);
+}
+
+/* ── 导航下拉 / 菜单 hover（原 #738BA8） ── */
+ul.menu li a:hover {
+  color: var(--hdw-nav-hover-text);
+}
+
+/* ── 感谢按钮（背景已改 accent-soft） ── */
+#thanksbutton #saythanks {
+  color: var(--hdw-btn-text);
+}
+#thanksbutton #saythanks:hover {
+  color: var(--hdw-nav-hover-text);
+}
+
+/* ── 强调红（原 #ee0000 / #ff0000 / #d9534f !important） ── */
+.red,
+.striking,
+.new {
+  color: var(--hdw-title-hover) !important;
+}
+
+/* ==================================================================
+   用户等级色 · 原色还原层（所有主题）
+   原站等级色经 A.Xxx_Name:link (0,1,1) 生效，被本扩展通用
+   a:link (0,1,2) 压制——浅色主题曾因此丢等级色。此处按原站
+   main.css 原值显式还原（裸类 0,2,1 + 伪类组 0,3,1 双保险）；
+   深色主题由下方 hdw-dark 亮化层（同特异性、位置在后）接管。
+   ================================================================== */
+.User_Name { color: #000000; }
+a.User_Name:link, a.User_Name:visited,
+a.User_Name:hover, a.User_Name:focus { color: #000000; }
+.Peasant_Name { color: #708090; }
+a.Peasant_Name:link, a.Peasant_Name:visited,
+a.Peasant_Name:hover, a.Peasant_Name:focus { color: #708090; }
+.PowerUser_Name { color: #B38512; }
+a.PowerUser_Name:link, a.PowerUser_Name:visited,
+a.PowerUser_Name:hover, a.PowerUser_Name:focus { color: #B38512; }
+.EliteUser_Name { color: #008B8B; }
+a.EliteUser_Name:link, a.EliteUser_Name:visited,
+a.EliteUser_Name:hover, a.EliteUser_Name:focus { color: #008B8B; }
+.CrazyUser_Name { color: #00BFFF; }
+a.CrazyUser_Name:link, a.CrazyUser_Name:visited,
+a.CrazyUser_Name:hover, a.CrazyUser_Name:focus { color: #00BFFF; }
+.InsaneUser_Name { color: #8B008B; }
+a.InsaneUser_Name:link, a.InsaneUser_Name:visited,
+a.InsaneUser_Name:hover, a.InsaneUser_Name:focus { color: #8B008B; }
+.VeteranUser_Name { color: #483D8B; }
+a.VeteranUser_Name:link, a.VeteranUser_Name:visited,
+a.VeteranUser_Name:hover, a.VeteranUser_Name:focus { color: #483D8B; }
+.UltimateUser_Name { color: #006400; }
+a.UltimateUser_Name:link, a.UltimateUser_Name:visited,
+a.UltimateUser_Name:hover, a.UltimateUser_Name:focus { color: #006400; }
+.NexusMaster_Name { color: #38ACEC; }
+a.NexusMaster_Name:link, a.NexusMaster_Name:visited,
+a.NexusMaster_Name:hover, a.NexusMaster_Name:focus { color: #38ACEC; }
+.Flack_Name { color: #FFFF00; }
+a.Flack_Name:link, a.Flack_Name:visited,
+a.Flack_Name:hover, a.Flack_Name:focus { color: #FFFF00; }
+.Moderator_Name { color: #1A3DD2; }
+a.Moderator_Name:link, a.Moderator_Name:visited,
+a.Moderator_Name:hover, a.Moderator_Name:focus { color: #1A3DD2; }
+.SysOp_Name { color: #a0522d; }
+a.SysOp_Name:link, a.SysOp_Name:visited,
+a.SysOp_Name:hover, a.SysOp_Name:focus { color: #a0522d; }
+.StaffLeader_Name { color: #8b0000; }
+a.StaffLeader_Name:link, a.StaffLeader_Name:visited,
+a.StaffLeader_Name:hover, a.StaffLeader_Name:focus { color: #8b0000; }
+.Staff_Name { color: #AA3838; }
+a.Staff_Name:link, a.Staff_Name:visited,
+a.Staff_Name:hover, a.Staff_Name:focus { color: #AA3838; }
+.Uploader_Name { color: #DC143C; }
+a.Uploader_Name:link, a.Uploader_Name:visited,
+a.Uploader_Name:hover, a.Uploader_Name:focus { color: #DC143C; }
+.VIP_Name { color: #009F00; }
+a.VIP_Name:link, a.VIP_Name:visited,
+a.VIP_Name:hover, a.VIP_Name:focus { color: #009F00; }
+.Seeder_Name { color: #0000FF; }
+a.Seeder_Name:link, a.Seeder_Name:visited,
+a.Seeder_Name:hover, a.Seeder_Name:focus { color: #0000FF; }
+.ExtremeUser_Name { color: #FF5A00; }
+a.ExtremeUser_Name:link, a.ExtremeUser_Name:visited,
+a.ExtremeUser_Name:hover, a.ExtremeUser_Name:focus { color: #FF5A00; }
+
+
+/* ==================================================================
+   宣德专属装饰层（html.hdw-t-xuande）
+   白地青花，瓷韵入屏。青花分五色：头浓 #1c4275、正浓 #24558f、
+   影淡 #7ba3c4；矾红 #b5443c 点睛。纹样皆为 inline SVG 勾线，
+   模拟釉下彩「勾线分水」技法：
+     · 缠枝莲带 — nav 主纹彩带
+     · 卷草带 — 种子列表表头（辅纹从简，与主纹繁简相映）
+     · 回纹带   — footer 顶部弦饰
+     · 海水江崖 — footer 底部收尾
+     · 宝相花锦地 — 页面绢帛上的散点暗纹
+     · 花头点缀 — 面板标题条左饰
+   与基础变量层（hdw-on）叠加生效。
+   ================================================================== */
+
+/* ── 绢帛宝相花锦地：极淡散点，若有似无 ── */
+body {
+  background-color: var(--hdw-page);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.1%22%20stroke-width%3D%221.4%22%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%227%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%222.6%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%2845%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%2890%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28135%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28225%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28270%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28315%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── 瓷面：顶部一线釉光，青影笼器 ── */
+#all_box {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 110px),
+    var(--hdw-outer);
+  box-shadow: 0 12px 44px rgba(28, 66, 117, 0.22);
+}
+
+/* ── 口沿弦纹：header 底部双线 ── */
+#site_header {
+  background: linear-gradient(180deg, var(--hdw-header), var(--hdw-header2));
+  border-bottom: 5px double #1c4275;
+}
+
+/* ── 青花缠枝带：nav 为釉下彩绘带，缠枝莲隐于深青 ── */
+#site_nav {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22tin2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.62%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.5%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.30%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22rust2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220.4%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%224.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%223.6%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%223.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%222.7%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%224.2%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%223.2%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e2eef8%22%20stroke-opacity%3D%220.22%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.22%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #20497e, #1a3c6b);
+  background-size: 140px 44px, 100% 100%;
+  background-position: center, 0 0;
+  background-repeat: repeat-x, no-repeat;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+.nav_center a {
+  background: transparent;
+  color: #d7e3ee;
+  text-shadow: 0 1px 2px rgba(10, 25, 48, 0.6);
+}
+.nav_center a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+/* 开光：激活项成白底青字的圆角窗，如瓷带上的开光画面 */
+a.nav_item_active,
+a.nav_item_active:hover {
+  background: linear-gradient(180deg, #f9fbfb, #eef3f6);
+  color: #16355c;
+  border-radius: 7px 7px 0 0;
+  box-shadow: 0 2px 0 #f6f8f8, 0 0 0 1px #7ba3c4;
+}
+a.nav_item_normal:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+.scroll-to-fixed-fixed {
+  border-bottom-color: #1c4275;
+}
+
+/* ── 影青表头：淡青渐变 + 卷草纹带（辅纹从简，与 nav 主纹缠枝莲繁简相映） ── */
+.torrent_list tr.tab_header,
+.content_tab tr.tab_header {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22rust%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23241a0c%22%20stop-opacity%3D%220.85%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.45%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22tin%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220.55%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%223.4%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%2268.2%22%20cy%3D%227.2%22%20r%3D%221.1%22%20fill%3D%22url%28%23tin%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%222.6%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%222.9%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.12%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.12%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #e9f0f4, #dce8ef);
+  background-size: 70px 36px, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: center, 0 0;
+}
+.torrent_list th {
+  color: #16355c;
+  border-bottom: 3px double #8fb0c9;
+}
+
+/* ── 面板题字：衬线青花字 + 左侧花头点缀 ── */
+.announcebox p,
+.index_left th {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%221.0%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%2324558f%22%20stroke%3D%22none%22%20fill-opacity%3D%221.0%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #e9f0f4, #e0eaf0);
+  background-repeat: no-repeat, repeat;
+  background-position: 8px center, 0 0;
+  background-size: 18px 18px, 100% 100%;
+  padding-left: 32px;
+  color: #16355c;
+  font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
+  letter-spacing: 0.1em;
+}
+.index_left th {
+  border-bottom: 3px double #8fb0c9;
+}
+
+/* ── 公告界栏：「最近消息」正文左侧双竖弦线，如瓷面题字界格 ── */
+.announcebox h3 {
+  padding-left: 14px;
+}
+
+/* ── 论坛板块分组头：影青彩带（与楼层头条同语言），深字（nav-text 为浅色须覆盖） ── */
+#site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* ── 求种页表头：影青（与分组头同语言） ── */
+.normal_tab th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* ── 排行榜表头：影青（与分组头同语言） ── */
+.top10_box td.colhead {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* ── 字幕页表头：影青（与分组头同语言） ── */
+.subupload_tab th,
+table.uploaded_sub_list th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* ── 其余页表头/标题条：影青（同语言） ── */
+.torrent_files_details th,
+.peer_list th,
+.offer_box div.right p,
+.top10_menu b {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  background-color: #a3c0da;
+}
+
+/* ── 论坛楼层头条：影青深一档，与帖子正文拉开对比 ── */
+/* ── 论坛楼层头条：影青彩带（整体染外层 div） ── */
+#site_content div.topic_header {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  padding: 5px 6px 5px 12px;
+  border-bottom: 1px solid #6f96b5;
+  border-radius: 4px;
+}
+#site_content div.topic_header table.topic_header_table {
+  background: none;
+  border-bottom: none;
+}
+
+/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：矾红花头左饰，
+     与首页面板的青花题字同一语言 ── */
+/* 大标题（noraml_box）：仅花饰，字色随正文——原版语言：主体深字 + striking 警示红 */
+.noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%221.0%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%20fill-opacity%3D%221.0%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+  padding-left: 28px;
+}
+
+/* 框内小节标题（候选/字幕「规则：」等）：花饰 + 影青底 + 矾红字（与青瓶同语言） */
+.sub_upload div.left h2,
+.offer_box div.left h2,
+.users_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%221.0%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%20fill-opacity%3D%221.0%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+  padding-left: 28px;
+  background-color: #a3c0da;
+  color: #b5443c;
+}
+
+/* ── 器形圆融：独立容器圆角 + 描青细边 ── */
+.announcebox,
+.index_right {
+  border: 1px solid #a9c2d4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 66, 117, 0.1);
+}
+/* 首页右栏顶部弦纹（颈线意象） */
+.index_right {
+  border-top: 3px double #7ba3c4;
+}
+.details_box,
+.subtitle_upload_box,
+.offer_box,
+.users_box,
+.noraml_box {
+  border-radius: 10px;
+}
+
+/* ── 描青瓷钮：白底青字青边，hover 青地白字 ── */
+.btn,
+.btn2,
+.btns,
+button,
+input[type="submit"],
+input[type="button"],
+.loginbox input.btnl {
+  background: linear-gradient(180deg, #fbfdfd, #eef4f7);
+  border: 1px solid #24558f;
+  color: #1c4677;
+  border-radius: 6px;
+}
+.btn:hover,
+.btn2:hover,
+.btns:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover,
+.loginbox input.btnl:hover {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+  border-color: #16355c;
+  color: #ffffff;
+}
+.gobutton {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+}
+
+/* ── 青花晕：输入焦点光环 ── */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input:not([type]):focus,
+select:focus,
+textarea:focus {
+  border-color: #24558f;
+  box-shadow: 0 0 0 3px rgba(36, 85, 143, 0.15);
+}
+
+/* ── 器足：footer 顶部回纹弦饰、底部海水江崖收尾 ── */
+#site_footer {
+  padding-top: 46px;
+  padding-bottom: 44px;
+  border-top: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2236%22%20viewBox%3D%220%200%2024%2036%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.7%22%20stroke-linejoin%3D%22miter%22%3E%0A%20%20%3Cpath%20d%3D%22M0%2C3%20H24%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%2C33%20H24%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M2%2C27%20V9%20H18%20V23%20H9%20V15%20H13%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2280%22%20height%3D%2236%22%20viewBox%3D%220%200%2080%2036%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke-width%3D%221.5%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20stroke%3D%22%2324558f%22%20d%3D%22M0%2C30%20L8%2C17%20L16%2C27%20L26%2C11%20L36%2C27%20L44%2C15%20L54%2C27%20L64%2C12%20L74%2C27%20L80%2C21%22%2F%3E%0A%20%20%3Cpath%20stroke%3D%22%237ba3c4%22%20d%3D%22M0%2C34%20Q9%2C25%2018%2C32%20Q28%2C24%2038%2C32%20Q48%2C24%2058%2C32%20Q68%2C24%2078%2C32%20L80%2C33%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: repeat-x, repeat-x;
+  background-position: top center, bottom center;
+  background-size: 24px 36px, 80px 36px;
+  color: #5c7286;
+}
+#site_footer p {
+  color: #5c7286;
+}
+
+/* ── 选取即着彩 ── */
+::selection {
+  background: #24558f;
+  color: #ffffff;
+}
+
+/* ── 分页激活：青花地白字 ── */
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > a:focus {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+  border-color: #16355c;
+  color: #ffffff;
+}
+
+/* ── 青花瓷片：tooltip 釉光渐变 ── */
+div.niceTitle {
+  background: linear-gradient(180deg, #1a3c6b, #143257);
+  border-radius: 0 7px 7px 7px;
+}
+
+/* ── 器足 Returning：返回顶部为双弦纹圆窗瓷钮，hover 青地白箭 ── */
+#back_to_top {
+  background: linear-gradient(180deg, #f9fbfb, #e9f0f3);
+  border: 3px double #24558f;
+  box-shadow: 0 6px 20px rgba(28, 66, 117, 0.35);
+}
+#back_to_top::before {
+  border-bottom-color: #24558f;
+}
+#back_to_top:hover {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+  border-color: #16355c;
+}
+#back_to_top:hover::before {
+  border-bottom-color: #ffffff;
+}
+
+
+/* ==================================================================
+   宣德专属迭代：开光语言延伸
+   · 行 hover = 开光亮起：白瓷提亮 + 描青细框（锦地开窗）
+   · 返回顶部 = 青花莲瓣钮（静态瓷钮，与青瓶转心盘一动一静成对）
+   ================================================================== */
+
+/* ── 开光 hover：行亮起白瓷，描青细框围合（如锦地上开光画面） ── */
+.torrent_list tbody tr:hover td,
+table.uploaded_sub_list tbody tr:hover td,
+.top10_box tbody tr:hover td {
+  background-color: #f3f7fa;
+}
+.torrent_list tbody tr:hover td,
+table.uploaded_sub_list tbody tr:hover td,
+.top10_box tbody tr:hover td {
+  box-shadow: inset 0 1px 0 rgba(28, 66, 117, 0.35),
+              inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+.torrent_list tbody tr:hover td:first-child,
+table.uploaded_sub_list tbody tr:hover td:first-child,
+.top10_box tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 #1c4275,
+              inset 0 1px 0 rgba(28, 66, 117, 0.35),
+              inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+.torrent_list tbody tr:hover td:last-child,
+table.uploaded_sub_list tbody tr:hover td:last-child,
+.top10_box tbody tr:hover td:last-child {
+  box-shadow: inset -3px 0 0 #1c4275,
+              inset 0 1px 0 rgba(28, 66, 117, 0.35),
+              inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+
+/* ── 返回顶部：青花莲瓣钮（默认青地白莲，hover 白瓷地青莲） ── */
+#back_to_top {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d7e3ee%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%220.9%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23d7e3ee%22%20stroke%3D%22none%22%20fill-opacity%3D%220.9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E") center / 34px 34px no-repeat,
+    linear-gradient(180deg, #20497e, #1a3c6b);
+  border: 2px solid #10233f;
+  box-shadow: 0 6px 20px rgba(28, 66, 117, 0.45);
+}
+#back_to_top::before {
+  content: none;
+  border: none;
+}
+#back_to_top:hover {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%220.95%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%2324558f%22%20stroke%3D%22none%22%20fill-opacity%3D%220.95%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E") center / 34px 34px no-repeat,
+    linear-gradient(180deg, #f9fbfb, #e9f0f3);
+  border-color: #24558f;
+}
+
+/* ── 釉下流光：莲花与锡光点保持一层微亮底（::after 恒 0.18），
+     ::before 再叠同几何亮层、以柔和亮窗 mask 从左到右扫——亮度波依次
+     传递过每朵莲（8s 一轮），如光在瓷带下缓缓流过。纹样本身静止。 ── */
+#site_nav {
+  position: relative;
+}
+#site_nav::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23eaf3fb%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.6%22%20fill%3D%22%23eaf3fb%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%222.1%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%221.7%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.8%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%221.9%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 140px 44px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.18;
+  pointer-events: none;
+}
+#site_nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23eaf3fb%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.6%22%20fill%3D%22%23eaf3fb%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%222.1%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%221.7%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.8%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%221.9%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 140px 44px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.85;
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0, rgba(0, 0, 0, 0.5) 30%, #000 50%, rgba(0, 0, 0, 0.5) 72%, transparent 100%);
+  -webkit-mask-size: 45% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(90deg,
+    transparent 0, rgba(0, 0, 0, 0.5) 30%, #000 50%, rgba(0, 0, 0, 0.5) 72%, transparent 100%);
+  mask-size: 45% 100%;
+  mask-repeat: no-repeat;
+  animation: xd-sweep 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes xd-sweep {
+  from { -webkit-mask-position: -50% 0; mask-position: -50% 0; }
+  to { -webkit-mask-position: 150% 0; mask-position: 150% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #site_nav::before { animation: none; opacity: 0; }
+}
+/* 流光开关（popup 宣德卡片）：关闭时静止——流光层隐藏，微亮底保留 */
+html.hdw-xd-still #site_nav::before {
+  display: none;
+}
