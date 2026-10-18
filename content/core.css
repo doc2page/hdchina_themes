@@ -1491,6 +1491,397 @@ html.hdw-on.hdw-t-qinghua #back_to_top:hover {
 html.hdw-on.hdw-t-qinghua #back_to_top:hover::before {
   border-bottom-color: #ffffff;
 }
+
+
+/* ==================================================================
+   宣德专属装饰层（html.hdw-on.hdw-t-xuande）
+   白地青花，瓷韵入屏。青花分五色：头浓 #1c4275、正浓 #24558f、
+   影淡 #7ba3c4；矾红 #b5443c 点睛。纹样皆为 inline SVG 勾线，
+   模拟釉下彩「勾线分水」技法：
+     · 缠枝莲带 — nav 主纹彩带
+     · 卷草带 — 种子列表表头（辅纹从简，与主纹繁简相映）
+     · 回纹带   — footer 顶部弦饰
+     · 海水江崖 — footer 底部收尾
+     · 宝相花锦地 — 页面绢帛上的散点暗纹
+     · 花头点缀 — 面板标题条左饰
+   与基础变量层（hdw-on）叠加生效。
+   ================================================================== */
+
+/* ── 绢帛宝相花锦地：极淡散点，若有似无 ── */
+html.hdw-on.hdw-t-xuande body {
+  background-color: var(--hdw-page);
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22200%22%20height%3D%22200%22%20viewBox%3D%220%200%20200%20200%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.1%22%20stroke-width%3D%221.4%22%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%227%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%222.6%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20transform%3D%22rotate%280%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%2845%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%2890%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28135%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28180%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28225%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28270%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%3Cpath%20transform%3D%22rotate%28315%20100%20100%29%22%20d%3D%22M100%2C92%20C104%2C84%20104%2C75%20100%2C66%20C96%2C75%2096%2C84%20100%2C92%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.06%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%2212%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22188%22%20cy%3D%22100%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3Ccircle%20cx%3D%22100%22%20cy%3D%22188%22%20r%3D%222%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 200px 200px;
+}
+
+/* ── 瓷面：顶部一线釉光，青影笼器 ── */
+html.hdw-on.hdw-t-xuande #all_box {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 110px),
+    var(--hdw-outer);
+  box-shadow: 0 12px 44px rgba(28, 66, 117, 0.22);
+}
+
+/* ── 口沿弦纹：header 底部双线 ── */
+html.hdw-on.hdw-t-xuande #site_header {
+  background: linear-gradient(180deg, var(--hdw-header), var(--hdw-header2));
+  border-bottom: 5px double #1c4275;
+}
+
+/* ── 青花缠枝带：nav 为釉下彩绘带，缠枝莲隐于深青 ── */
+html.hdw-on.hdw-t-xuande #site_nav {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22tin2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.62%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.5%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.30%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22rust2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220.4%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%224.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%223.6%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%223.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%222.7%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%224.2%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%223.2%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e2eef8%22%20stroke-opacity%3D%220.22%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.22%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #20497e, #1a3c6b);
+  background-size: 140px 44px, 100% 100%;
+  background-position: center, 0 0;
+  background-repeat: repeat-x, no-repeat;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+html.hdw-on.hdw-t-xuande .nav_center a {
+  background: transparent;
+  color: #d7e3ee;
+  text-shadow: 0 1px 2px rgba(10, 25, 48, 0.6);
+}
+html.hdw-on.hdw-t-xuande .nav_center a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+/* 开光：激活项成白底青字的圆角窗，如瓷带上的开光画面 */
+html.hdw-on.hdw-t-xuande a.nav_item_active,
+html.hdw-on.hdw-t-xuande a.nav_item_active:hover {
+  background: linear-gradient(180deg, #f9fbfb, #eef3f6);
+  color: #16355c;
+  border-radius: 7px 7px 0 0;
+  box-shadow: 0 2px 0 #f6f8f8, 0 0 0 1px #7ba3c4;
+}
+html.hdw-on.hdw-t-xuande a.nav_item_normal:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+html.hdw-on.hdw-t-xuande .scroll-to-fixed-fixed {
+  border-bottom-color: #1c4275;
+}
+
+/* ── 影青表头：淡青渐变 + 卷草纹带（辅纹从简，与 nav 主纹缠枝莲繁简相映） ── */
+html.hdw-on.hdw-t-xuande .torrent_list tr.tab_header,
+html.hdw-on.hdw-t-xuande .content_tab tr.tab_header {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22rust%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23241a0c%22%20stop-opacity%3D%220.85%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.45%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22tin%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220.55%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%223.4%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%2268.2%22%20cy%3D%227.2%22%20r%3D%221.1%22%20fill%3D%22url%28%23tin%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%222.6%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%222.9%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.12%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.12%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #e9f0f4, #dce8ef);
+  background-size: 70px 36px, 100% 100%;
+  background-repeat: repeat-x, no-repeat;
+  background-position: center, 0 0;
+}
+html.hdw-on.hdw-t-xuande .torrent_list th {
+  color: #16355c;
+  border-bottom: 3px double #8fb0c9;
+}
+
+/* ── 面板题字：衬线青花字 + 左侧花头点缀 ── */
+html.hdw-on.hdw-t-xuande .announcebox p,
+html.hdw-on.hdw-t-xuande .index_left th {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%221.0%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%2324558f%22%20stroke%3D%22none%22%20fill-opacity%3D%221.0%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+    linear-gradient(180deg, #e9f0f4, #e0eaf0);
+  background-repeat: no-repeat, repeat;
+  background-position: 8px center, 0 0;
+  background-size: 18px 18px, 100% 100%;
+  padding-left: 32px;
+  color: #16355c;
+  font-family: Georgia, "Nimbus Roman", "STSong", "SimSun", serif;
+  letter-spacing: 0.1em;
+}
+html.hdw-on.hdw-t-xuande .index_left th {
+  border-bottom: 3px double #8fb0c9;
+}
+
+/* ── 公告界栏：「最近消息」正文左侧双竖弦线，如瓷面题字界格 ── */
+html.hdw-on.hdw-t-xuande .announcebox h3 {
+  padding-left: 14px;
+}
+
+/* ── 论坛板块分组头：影青彩带（与楼层头条同语言），深字（nav-text 为浅色须覆盖） ── */
+html.hdw-on.hdw-t-xuande #site_content table.table_forums > tbody > tr > th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* ── 求种页表头：影青（与分组头同语言） ── */
+html.hdw-on.hdw-t-xuande .normal_tab th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* ── 排行榜表头：影青（与分组头同语言） ── */
+html.hdw-on.hdw-t-xuande .top10_box td.colhead {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-bottom: 1px solid #6f96b5;
+}
+/* ── 字幕页表头：影青（与分组头同语言） ── */
+html.hdw-on.hdw-t-xuande .subupload_tab th,
+html.hdw-on.hdw-t-xuande table.uploaded_sub_list th {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  border-color: #6f96b5;
+}
+/* ── 其余页表头/标题条：影青（同语言） ── */
+html.hdw-on.hdw-t-xuande .torrent_files_details th,
+html.hdw-on.hdw-t-xuande .peer_list th,
+html.hdw-on.hdw-t-xuande .offer_box div.right p,
+html.hdw-on.hdw-t-xuande .top10_menu b {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  color: #16355c;
+  background-color: #a3c0da;
+}
+
+/* ── 论坛楼层头条：影青深一档，与帖子正文拉开对比 ── */
+/* ── 论坛楼层头条：影青彩带（整体染外层 div） ── */
+html.hdw-on.hdw-t-xuande #site_content div.topic_header {
+  background: linear-gradient(180deg, #b7cfe7, #a3c0da);
+  padding: 5px 6px 5px 12px;
+  border-bottom: 1px solid #6f96b5;
+  border-radius: 4px;
+}
+html.hdw-on.hdw-t-xuande #site_content div.topic_header table.topic_header_table {
+  background: none;
+  border-bottom: none;
+}
+
+/* ── 红字面板题字（求种区 / 字幕区 / 悬赏等 h2）：矾红花头左饰，
+     与首页面板的青花题字同一语言 ── */
+/* 大标题（noraml_box）：仅花饰，字色随正文——原版语言：主体深字 + striking 警示红 */
+html.hdw-on.hdw-t-xuande .noraml_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%221.0%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%20fill-opacity%3D%221.0%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+  padding-left: 28px;
+}
+
+/* 框内小节标题（候选/字幕「规则：」等）：花饰 + 影青底 + 矾红字（与青瓶同语言） */
+html.hdw-on.hdw-t-xuande .sub_upload div.left h2,
+html.hdw-on.hdw-t-xuande .offer_box div.left h2,
+html.hdw-on.hdw-t-xuande .users_box h2 {
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23b5443c%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%221.0%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23b5443c%22%20stroke%3D%22none%22%20fill-opacity%3D%221.0%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%23b5443c%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 18px 18px;
+  padding-left: 28px;
+  background-color: #a3c0da;
+  color: #b5443c;
+}
+
+/* ── 器形圆融：独立容器圆角 + 描青细边 ── */
+html.hdw-on.hdw-t-xuande .announcebox,
+html.hdw-on.hdw-t-xuande .index_right {
+  border: 1px solid #a9c2d4;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(28, 66, 117, 0.1);
+}
+/* 首页右栏顶部弦纹（颈线意象） */
+html.hdw-on.hdw-t-xuande .index_right {
+  border-top: 3px double #7ba3c4;
+}
+html.hdw-on.hdw-t-xuande .details_box,
+html.hdw-on.hdw-t-xuande .subtitle_upload_box,
+html.hdw-on.hdw-t-xuande .offer_box,
+html.hdw-on.hdw-t-xuande .users_box,
+html.hdw-on.hdw-t-xuande .noraml_box {
+  border-radius: 10px;
+}
+
+/* ── 描青瓷钮：白底青字青边，hover 青地白字 ── */
+html.hdw-on.hdw-t-xuande .btn,
+html.hdw-on.hdw-t-xuande .btn2,
+html.hdw-on.hdw-t-xuande .btns,
+html.hdw-on.hdw-t-xuande button,
+html.hdw-on.hdw-t-xuande input[type="submit"],
+html.hdw-on.hdw-t-xuande input[type="button"],
+html.hdw-on.hdw-t-xuande .loginbox input.btnl {
+  background: linear-gradient(180deg, #fbfdfd, #eef4f7);
+  border: 1px solid #24558f;
+  color: #1c4677;
+  border-radius: 6px;
+}
+html.hdw-on.hdw-t-xuande .btn:hover,
+html.hdw-on.hdw-t-xuande .btn2:hover,
+html.hdw-on.hdw-t-xuande .btns:hover,
+html.hdw-on.hdw-t-xuande button:hover,
+html.hdw-on.hdw-t-xuande input[type="submit"]:hover,
+html.hdw-on.hdw-t-xuande input[type="button"]:hover,
+html.hdw-on.hdw-t-xuande .loginbox input.btnl:hover {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+  border-color: #16355c;
+  color: #ffffff;
+}
+html.hdw-on.hdw-t-xuande .gobutton {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+}
+
+/* ── 青花晕：输入焦点光环 ── */
+html.hdw-on.hdw-t-xuande input[type="text"]:focus,
+html.hdw-on.hdw-t-xuande input[type="password"]:focus,
+html.hdw-on.hdw-t-xuande input:not([type]):focus,
+html.hdw-on.hdw-t-xuande select:focus,
+html.hdw-on.hdw-t-xuande textarea:focus {
+  border-color: #24558f;
+  box-shadow: 0 0 0 3px rgba(36, 85, 143, 0.15);
+}
+
+/* ── 器足：footer 顶部回纹弦饰、底部海水江崖收尾 ── */
+html.hdw-on.hdw-t-xuande #site_footer {
+  padding-top: 46px;
+  padding-bottom: 44px;
+  border-top: none;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2236%22%20viewBox%3D%220%200%2024%2036%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.7%22%20stroke-linejoin%3D%22miter%22%3E%0A%20%20%3Cpath%20d%3D%22M0%2C3%20H24%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M0%2C33%20H24%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M2%2C27%20V9%20H18%20V23%20H9%20V15%20H13%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"), url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2280%22%20height%3D%2236%22%20viewBox%3D%220%200%2080%2036%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke-width%3D%221.5%22%20stroke-linejoin%3D%22round%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20stroke%3D%22%2324558f%22%20d%3D%22M0%2C30%20L8%2C17%20L16%2C27%20L26%2C11%20L36%2C27%20L44%2C15%20L54%2C27%20L64%2C12%20L74%2C27%20L80%2C21%22%2F%3E%0A%20%20%3Cpath%20stroke%3D%22%237ba3c4%22%20d%3D%22M0%2C34%20Q9%2C25%2018%2C32%20Q28%2C24%2038%2C32%20Q48%2C24%2058%2C32%20Q68%2C24%2078%2C32%20L80%2C33%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E");
+  background-repeat: repeat-x, repeat-x;
+  background-position: top center, bottom center;
+  background-size: 24px 36px, 80px 36px;
+  color: #5c7286;
+}
+html.hdw-on.hdw-t-xuande #site_footer p {
+  color: #5c7286;
+}
+
+/* ── 选取即着彩 ── */
+html.hdw-on.hdw-t-xuande ::selection {
+  background: #24558f;
+  color: #ffffff;
+}
+
+/* ── 分页激活：青花地白字 ── */
+html.hdw-on.hdw-t-xuande .pagination > .active > a,
+html.hdw-on.hdw-t-xuande .pagination > .active > span,
+html.hdw-on.hdw-t-xuande .pagination > .active > a:hover,
+html.hdw-on.hdw-t-xuande .pagination > .active > a:focus {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+  border-color: #16355c;
+  color: #ffffff;
+}
+
+/* ── 青花瓷片：tooltip 釉光渐变 ── */
+html.hdw-on.hdw-t-xuande div.niceTitle {
+  background: linear-gradient(180deg, #1a3c6b, #143257);
+  border-radius: 0 7px 7px 7px;
+}
+
+/* ── 器足 Returning：返回顶部为双弦纹圆窗瓷钮，hover 青地白箭 ── */
+html.hdw-on.hdw-t-xuande #back_to_top {
+  background: linear-gradient(180deg, #f9fbfb, #e9f0f3);
+  border: 3px double #24558f;
+  box-shadow: 0 6px 20px rgba(28, 66, 117, 0.35);
+}
+html.hdw-on.hdw-t-xuande #back_to_top::before {
+  border-bottom-color: #24558f;
+}
+html.hdw-on.hdw-t-xuande #back_to_top:hover {
+  background: linear-gradient(180deg, #2a568c, #1c4275);
+  border-color: #16355c;
+}
+html.hdw-on.hdw-t-xuande #back_to_top:hover::before {
+  border-bottom-color: #ffffff;
+}
+
+
+/* ==================================================================
+   宣德专属迭代：开光语言延伸
+   · 行 hover = 开光亮起：白瓷提亮 + 描青细框（锦地开窗）
+   · 返回顶部 = 青花莲瓣钮（静态瓷钮，与青瓶转心盘一动一静成对）
+   ================================================================== */
+
+/* ── 开光 hover：行亮起白瓷，描青细框围合（如锦地上开光画面） ── */
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr:hover td,
+html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td,
+html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td {
+  background-color: #f3f7fa;
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr:hover td,
+html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td,
+html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td {
+  box-shadow: inset 0 1px 0 rgba(28, 66, 117, 0.35),
+              inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr:hover td:first-child,
+html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td:first-child,
+html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td:first-child {
+  box-shadow: inset 3px 0 0 #1c4275,
+              inset 0 1px 0 rgba(28, 66, 117, 0.35),
+              inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr:hover td:last-child,
+html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td:last-child,
+html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td:last-child {
+  box-shadow: inset -3px 0 0 #1c4275,
+              inset 0 1px 0 rgba(28, 66, 117, 0.35),
+              inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+
+/* ── 返回顶部：青花莲瓣钮（默认青地白莲，hover 白瓷地青莲） ── */
+html.hdw-on.hdw-t-xuande #back_to_top {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23d7e3ee%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%220.9%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%23d7e3ee%22%20stroke%3D%22none%22%20fill-opacity%3D%220.9%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%23d7e3ee%22%20fill-opacity%3D%220.22%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E") center / 34px 34px no-repeat,
+    linear-gradient(180deg, #20497e, #1a3c6b);
+  border: 2px solid #10233f;
+  box-shadow: 0 6px 20px rgba(28, 66, 117, 0.45);
+}
+html.hdw-on.hdw-t-xuande #back_to_top::before {
+  content: none;
+  border: none;
+}
+html.hdw-on.hdw-t-xuande #back_to_top:hover {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%2324558f%22%20stroke-width%3D%221.5%22%20stroke-opacity%3D%220.95%22%3E%0A%20%20%3Ccircle%20cx%3D%2210%22%20cy%3D%2210%22%20r%3D%222.2%22%20fill%3D%22%2324558f%22%20stroke%3D%22none%22%20fill-opacity%3D%220.95%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C7.5%20C11.5%2C5%2011.5%2C2.5%2010%2C0.5%20C8.5%2C2.5%208.5%2C5%2010%2C7.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M10%2C12.5%20C11.5%2C15%2011.5%2C17.5%2010%2C19.5%20C8.5%2C17.5%208.5%2C15%2010%2C12.5%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M7.5%2C10%20C5%2C11.5%202.5%2C11.5%200.5%2C10%20C2.5%2C8.5%205%2C8.5%207.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M12.5%2C10%20C15%2C11.5%2017.5%2C11.5%2019.5%2C10%20C17.5%2C8.5%2015%2C8.5%2012.5%2C10%20Z%22%20fill%3D%22%2324558f%22%20fill-opacity%3D%220.12%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M8.2%2C8.2%20C6.8%2C6.8%206%2C4.5%207%2C2.6%20C8.9%2C3.6%209.7%2C5.9%208.2%2C8.2%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M11.8%2C11.8%20C13.2%2C13.2%2014%2C15.5%2013%2C17.4%20C11.1%2C16.4%2010.3%2C14.1%2011.8%2C11.8%20Z%22%20opacity%3D%220.55%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E") center / 34px 34px no-repeat,
+    linear-gradient(180deg, #f9fbfb, #e9f0f3);
+  border-color: #24558f;
+}
+
+/* ── 釉下流光：莲花与锡光点保持一层微亮底（::after 恒 0.18），
+     ::before 再叠同几何亮层、以柔和亮窗 mask 从左到右扫——亮度波依次
+     传递过每朵莲（8s 一轮），如光在瓷带下缓缓流过。纹样本身静止。 ── */
+html.hdw-on.hdw-t-xuande #site_nav {
+  position: relative;
+}
+html.hdw-on.hdw-t-xuande #site_nav::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23eaf3fb%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.6%22%20fill%3D%22%23eaf3fb%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%222.1%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%221.7%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.8%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%221.9%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 140px 44px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.18;
+  pointer-events: none;
+}
+html.hdw-on.hdw-t-xuande #site_nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23eaf3fb%22%20stroke-width%3D%221.7%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.30%22%2F%3E%0A%3C%2Fg%3E%0A%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.6%22%20fill%3D%22%23eaf3fb%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%222.1%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%221.7%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.8%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%221.9%22%20fill%3D%22%23eaf3fb%22%20fill-opacity%3D%220.85%22%2F%3E%3C%2Fsvg%3E");
+  background-size: 140px 44px;
+  background-repeat: repeat-x;
+  background-position: center;
+  opacity: 0.85;
+  -webkit-mask-image: linear-gradient(90deg,
+    transparent 0, rgba(0, 0, 0, 0.5) 30%, #000 50%, rgba(0, 0, 0, 0.5) 72%, transparent 100%);
+  -webkit-mask-size: 45% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: linear-gradient(90deg,
+    transparent 0, rgba(0, 0, 0, 0.5) 30%, #000 50%, rgba(0, 0, 0, 0.5) 72%, transparent 100%);
+  mask-size: 45% 100%;
+  mask-repeat: no-repeat;
+  animation: xd-sweep 8s linear infinite;
+  pointer-events: none;
+}
+@keyframes xd-sweep {
+  from { -webkit-mask-position: -50% 0; mask-position: -50% 0; }
+  to { -webkit-mask-position: 150% 0; mask-position: 150% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.hdw-on.hdw-t-xuande #site_nav::before { animation: none; opacity: 0; }
+}
+/* 流光开关（popup 宣德卡片）：关闭时静止——流光层隐藏，微亮底保留 */
+html.hdw-on.hdw-t-xuande.hdw-xd-still #site_nav::before {
+  display: none;
+}
 /* ==================================================================
    梅子青专属装饰层（html.hdw-on.hdw-t-meiziqing）
    龙泉青瓷，无彩绘——装饰全凭釉层厚薄「显色」：

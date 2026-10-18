@@ -39,6 +39,30 @@ function buildCards() {
     desc.textContent = t.desc;
 
     btn.append(swatch, name, desc);
+
+    /* 宣德卡片：右下角「流光」开关（关 = nav 釉下流光静止） */
+    if (id === 'xuande') {
+      const tg = document.createElement('label');
+      tg.className = 'motion-toggle';
+      tg.title = 'nav 釉下流光';
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = true;
+      const track = document.createElement('span');
+      track.className = 'mt-track';
+      const thumb = document.createElement('span');
+      thumb.className = 'mt-thumb';
+      track.appendChild(thumb);
+      tg.append(cb, track);
+      tg.addEventListener('click', (e) => e.stopPropagation());
+      tg.addEventListener('change', () => {
+        chrome.storage.sync.set({ xuandeMotion: cb.checked });
+      });
+      chrome.storage.sync.get({ xuandeMotion: HDW_META.DEFAULTS.xuandeMotion })
+        .then(({ xuandeMotion }) => { cb.checked = xuandeMotion; });
+      btn.appendChild(tg);
+    }
+
     frag.appendChild(btn);
   }
   grid.appendChild(frag);
