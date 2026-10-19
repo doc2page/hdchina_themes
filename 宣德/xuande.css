@@ -1074,7 +1074,7 @@ ul.menu li a:hover {
    原站等级色经 A.Xxx_Name:link (0,1,1) 生效，被本扩展通用
    a:link (0,1,2) 压制——浅色主题曾因此丢等级色。此处按原站
    main.css 原值显式还原（裸类 0,2,1 + 伪类组 0,3,1 双保险）；
-   深色主题由下方 hdw-dark 亮化层（同特异性、位置在后）接管。
+   全部主题一律原色（含深色主题）——身份语义优先于深底对比度。
    ================================================================== */
 .User_Name { color: #000000; }
 a.User_Name:link, a.User_Name:visited,
@@ -1103,33 +1103,42 @@ a.UltimateUser_Name:hover, a.UltimateUser_Name:focus { color: #006400; }
 .NexusMaster_Name { color: #38ACEC; }
 a.NexusMaster_Name:link, a.NexusMaster_Name:visited,
 a.NexusMaster_Name:hover, a.NexusMaster_Name:focus { color: #38ACEC; }
-.Flack_Name { color: #FFFF00; }
-a.Flack_Name:link, a.Flack_Name:visited,
-a.Flack_Name:hover, a.Flack_Name:focus { color: #FFFF00; }
-.Moderator_Name { color: #1A3DD2; }
-a.Moderator_Name:link, a.Moderator_Name:visited,
-a.Moderator_Name:hover, a.Moderator_Name:focus { color: #1A3DD2; }
-.SysOp_Name { color: #a0522d; }
-a.SysOp_Name:link, a.SysOp_Name:visited,
-a.SysOp_Name:hover, a.SysOp_Name:focus { color: #a0522d; }
-.StaffLeader_Name { color: #8b0000; }
-a.StaffLeader_Name:link, a.StaffLeader_Name:visited,
-a.StaffLeader_Name:hover, a.StaffLeader_Name:focus { color: #8b0000; }
-.Staff_Name { color: #AA3838; }
-a.Staff_Name:link, a.Staff_Name:visited,
-a.Staff_Name:hover, a.Staff_Name:focus { color: #AA3838; }
-.Uploader_Name { color: #DC143C; }
-a.Uploader_Name:link, a.Uploader_Name:visited,
-a.Uploader_Name:hover, a.Uploader_Name:focus { color: #DC143C; }
+.Retiree_Name { color: #1cc6d5; }
+a.Retiree_Name:link, a.Retiree_Name:visited,
+a.Retiree_Name:hover, a.Retiree_Name:focus { color: #1cc6d5; }
 .VIP_Name { color: #009F00; }
 a.VIP_Name:link, a.VIP_Name:visited,
 a.VIP_Name:hover, a.VIP_Name:focus { color: #009F00; }
+.Uploader_Name { color: #DC143C; }
+a.Uploader_Name:link, a.Uploader_Name:visited,
+a.Uploader_Name:hover, a.Uploader_Name:focus { color: #DC143C; }
 .Seeder_Name { color: #0000FF; }
 a.Seeder_Name:link, a.Seeder_Name:visited,
 a.Seeder_Name:hover, a.Seeder_Name:focus { color: #0000FF; }
+.Flack_Name { color: #FFFF00; }
+a.Flack_Name:link, a.Flack_Name:visited,
+a.Flack_Name:hover, a.Flack_Name:focus { color: #FFFF00; }
 .ExtremeUser_Name { color: #FF5A00; }
 a.ExtremeUser_Name:link, a.ExtremeUser_Name:visited,
 a.ExtremeUser_Name:hover, a.ExtremeUser_Name:focus { color: #FF5A00; }
+.Moderator_Name { color: #1A3DD2; }
+a.Moderator_Name:link, a.Moderator_Name:visited,
+a.Moderator_Name:hover, a.Moderator_Name:focus { color: #1A3DD2; }
+.ForumModerator_Name { color: #B700B7; }
+a.ForumModerator_Name:link, a.ForumModerator_Name:visited,
+a.ForumModerator_Name:hover, a.ForumModerator_Name:focus { color: #B700B7; }
+.Administrator_Name { color: #4b0082; }
+a.Administrator_Name:link, a.Administrator_Name:visited,
+a.Administrator_Name:hover, a.Administrator_Name:focus { color: #4b0082; }
+.Staff_Name { color: #AA3838; }
+a.Staff_Name:link, a.Staff_Name:visited,
+a.Staff_Name:hover, a.Staff_Name:focus { color: #AA3838; }
+.StaffLeader_Name { color: #8b0000; }
+a.StaffLeader_Name:link, a.StaffLeader_Name:visited,
+a.StaffLeader_Name:hover, a.StaffLeader_Name:focus { color: #8b0000; }
+.SysOp_Name { color: #a0522d; }
+a.SysOp_Name:link, a.SysOp_Name:visited,
+a.SysOp_Name:hover, a.SysOp_Name:focus { color: #a0522d; }
 
 
 /* ==================================================================
