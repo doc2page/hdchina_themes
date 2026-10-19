@@ -88,7 +88,7 @@
     try { localStorage.setItem(key, val); } catch (e) { /* 隐私模式等场景忽略 */ }
   }
 
-  function render(theme, customCSS) {
+  function render(theme, customCSS, xuandeMotion) {
     lsSet(LS_THEME, theme);
     lsSet(LS_CUSTOM, customCSS || '');
     const active = effectiveTheme(theme);
@@ -113,14 +113,20 @@
       root.classList.remove(ON_CLASS, DARK_CLASS);
     }
 
+    /* 宣德流光开关：关闭时挂 hdw-xd-still（core.css 隐藏 nav 流光层，微亮底保留） */
+    root.classList.toggle('hdw-xd-still', active === 'xuande' && xuandeMotion === false);
+
     /* 自定义 CSS 独立于主题开关，始终注入 */
     ensureStyle(CUSTOM_STYLE_ID).textContent = customCSS || '';
   }
 
   async function state() {
-    const sync = await chrome.storage.sync.get({ theme: HDW_META.DEFAULTS.theme });
+    const sync = await chrome.storage.sync.get({
+      theme: HDW_META.DEFAULTS.theme,
+      xuandeMotion: HDW_META.DEFAULTS.xuandeMotion,
+    });
     const local = await chrome.storage.local.get({ customCSS: HDW_META.DEFAULTS.customCSS });
-    return { theme: sync.theme, customCSS: local.customCSS };
+    return { theme: sync.theme, customCSS: local.customCSS, xuandeMotion: sync.xuandeMotion };
   }
 
   function apply() {
@@ -128,13 +134,16 @@
        storage 权威结果到达后校正（正常情况下两者一致，无感） */
     const cachedTheme = lsGet(LS_THEME);
     if (cachedTheme !== null) {
-      render(cachedTheme, lsGet(LS_CUSTOM) || '');
+      render(cachedTheme, lsGet(LS_CUSTOM) || '', true);
     }
-    state().then((s) => render(s.theme, s.customCSS)).catch(() => {});
+    state().then((s) => render(s.theme, s.customCSS, s.xuandeMotion)).catch(() => {});
   }
 
   chrome.storage.onChanged.addListener((changes, area) => {
     if (area === 'sync' && changes.theme) apply();
+    if (area === 'sync' && changes.xuandeMotion) {
+      root.classList.toggle('hdw-xd-still', changes.xuandeMotion.newValue === false);
+    }
     if (area === 'local' && changes.customCSS) apply();
   });
 

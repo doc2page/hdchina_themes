@@ -391,6 +391,85 @@
     },
 
     /*
+     * 宣德 — 宣德青花。青花分水五色：勾线头浓、莲头分水填彩，
+     * 主辅纹同源呼应。苏麻离青晕散、开光延伸等工艺将逐步迭代。
+     * 配套专属装饰层见 core.css 的 hdw-t-xuande 区块。
+     */
+    xuande: {
+      name: '宣德',
+      desc: '宣德青花，分水五色（深度定制款）',
+      kind: 'light',
+      swatch: ['#f6f8f8', '#1c4275', '#24558f', '#3c6ca0', '#b5443c'],
+      vars: {
+        /* 与青花瓷同胎：page = 绢帛托青，outer/content = 瓷面与釉白 */
+        page: '#a7b8c6',
+        outer: '#e9eef1',
+        border: '#16406e',
+        'border-soft': '#b6c9d7',
+
+        /* nav = 头浓青花带 */
+        nav: '#1c4275',
+        'nav-text': '#d9e5ef',
+        'nav-hover': '#2a568c',
+        'nav-hover-text': '#ffffff',
+
+        /* header = 釉白 */
+        header: '#f9fbfb',
+        header2: '#ecf1f3',
+        'header-text': '#1e3a5c',
+
+        content: '#f5f8f8',
+        panel: '#e3ecf1',
+        'panel-2': '#d7e4ec',
+        subpanel: '#e6eef3',
+        'subpanel-2': '#dce7ef',
+
+        row: '#f1f5f7',
+        'row-alt': '#e8eff3',
+        'row-alt-2': '#e2ebf1',
+        'row-hover': '#d9e6ee',
+        sticky: '#d8e6f0',
+        sticky2: '#cfe0ec',
+        sticky3: '#e9dfe4',
+
+        /* text = 墨青；title = 头浓；hover = 矾红彩 */
+        text: '#24364a',
+        'text-soft': '#5c7286',
+        title: '#143257',
+        'title-hover': '#b5443c',
+        link: '#24558f',
+        'link-strong': '#194a7d',
+        'link-hover': '#0d6cb5',
+
+        accent: '#24558f',
+        'accent-soft': '#3c6ca0',
+
+        /* btn = 描青瓷钮（白底青字青边） */
+        btn: '#eef4f7',
+        'btn-text': '#1c4677',
+        'btn-border': '#9cb9cf',
+
+        input: '#fbfdfd',
+        'input-text': '#24364a',
+
+        /* tooltip = 青花瓷片 */
+        tooltip: '#143257',
+        'tooltip-text': '#edf3f8',
+        suggest: '#eef4f8',
+
+        /* 促销色转瓷调 */
+        free: '#f0e6c3',
+        twoup: '#efdfe0',
+        twoupfree: '#e3eec7',
+        halfdown: '#e0e4f5',
+        twouphalf: '#d5ecef',
+
+        'logo-filter': 'none',
+        scrollbar: '#7ba3c4',
+      },
+    },
+
+    /*
      * 梅子青 — 龙泉青瓷。无彩绘，装饰全凭釉层厚薄「显色」：
      * 容器积釉渐变（上浅下深）、暗刻纹极淡如影。铁足赭一点作睛。
      * 配套专属装饰层见 core.css 的 hdw-t-meiziqing 区块：
@@ -1085,7 +1164,7 @@
   const AUTO_DARK = 'slate';
 
   const KEYS = { theme: 'theme', customCSS: 'customCSS' };
-  const DEFAULTS = { theme: 'auto', customCSS: '' };
+  const DEFAULTS = { theme: 'auto', customCSS: '', xuandeMotion: true };
 
   function varsToCSS(t) {
     return ':root{' + Object.keys(t.vars)
