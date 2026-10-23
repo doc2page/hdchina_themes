@@ -397,7 +397,7 @@
      */
     xuande: {
       name: '宣德',
-      desc: '宣德青花，分水五色（深度定制款）',
+      desc: '宣德青花，苏麻离青（深度定制款）',
       kind: 'light',
       swatch: ['#f6f8f8', '#1c4275', '#24558f', '#3c6ca0', '#b5443c'],
       vars: {
@@ -434,12 +434,12 @@
 
         /* text = 墨青；title = 头浓；hover = 矾红彩 */
         text: '#24364a',
-        'text-soft': '#5c7286',
+        'text-soft': '#52677c',
         title: '#143257',
         'title-hover': '#b5443c',
         link: '#24558f',
         'link-strong': '#194a7d',
-        'link-hover': '#0d6cb5',
+        'link-hover': '#b5443c',
 
         accent: '#24558f',
         'accent-soft': '#3c6ca0',

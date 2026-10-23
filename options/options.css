@@ -97,6 +97,29 @@ h1 em {
 
 .lead { color: var(--text-dim); font-size: 13px; line-height: 1.7; margin-bottom: 20px; }
 
+/* ── 主题分区：小节题字 + 弦纹线（与 popup 同语言） ── */
+
+.group-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 26px 0 10px;
+}
+.group:first-of-type .group-head { margin-top: 14px; }
+.group-head span {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--text-dim);
+  flex: none;
+}
+.group-head::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--line-strong), transparent);
+}
+
 /* ── 主题网格 ─────────────────────────────────── */
 
 .theme-grid {
@@ -108,6 +131,7 @@ h1 em {
 
 .card {
   position: relative;
+  min-width: 0;  /* grid 子项默认 min-width:auto 会让 desc 截断撑破 1fr 轨道 */
   border: 1px solid var(--line);
   border-radius: 11px;
   background: var(--bg-raised);
@@ -122,6 +146,10 @@ h1 em {
 .card.selected {
   border-color: var(--accent);
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85), inset 0 0 12px rgba(255, 255, 255, 0.5), 0 0 0 3px rgba(36, 85, 143, 0.16), 0 4px 14px rgba(28, 66, 117, 0.2);
+}
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .swatch {
@@ -141,17 +169,42 @@ h1 em {
   align-items: baseline;
   justify-content: space-between;
 }
+/* 徽标三态：浅色（青灰）/ 深色（靛青）/ 布局（矾红点睛，质变标记） */
 .card-name .kind {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 400;
-  color: var(--text-dim);
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  padding: 1px 6px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  line-height: 1.4;
+  flex: none;
 }
-.card.selected .kind { color: var(--accent); }
+.card-name .k-light {
+  color: var(--text-dim);
+  border-color: var(--line);
+  background: var(--bg-raised);
+}
+.card-name .k-dark {
+  color: var(--accent);
+  border-color: rgba(36, 85, 143, 0.35);
+  background: rgba(36, 85, 143, 0.07);
+}
+.card-name .k-layout {
+  color: #b5443c;
+  border-color: rgba(181, 68, 60, 0.4);
+  background: rgba(181, 68, 60, 0.06);
+}
 
-.card-desc { margin-top: 4px; font-size: 11.5px; line-height: 1.5; color: var(--text-dim); }
+.card-desc {
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* ── 特殊项 ───────────────────────────────────── */
 

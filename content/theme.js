@@ -155,5 +155,62 @@
       .catch(() => {});
   });
 
+  /* 动画国旗（animated-country-flags，竖排精灵 + CSS 逐帧动画）：
+     document_start 即跑 + MutationObserver——img 一出现就替换为 span（首帧前，
+     官方 gif 不会显示）。⚠ 背景图 URL 必须由 JS 以 chrome.runtime.getURL 绝对
+     地址内联设置——content script 注入的 CSS 里相对 url()（content:url 与
+     background:url 皆是）线上按文档基准解析 → hdwing.org/flags/... 404。
+     相位 = 随机负 animation-delay，均匀覆盖全周期、零跳变。精灵播放的
+     keyframes 在 core.css（hdw-flag-play，6064ms = 飘起 113×23 + 落下 165×21）。 */
+  const FLAG_ISO = {
+    afghanistan: 'af', albania: 'al', algeria: 'dz', andorra: 'ad', angola: 'ao',
+    antiguabarbuda: 'ag', argentina: 'ar', australia: 'au', austria: 'at',
+    bahamas: 'bs', bangladesh: 'bd', barbados: 'bb', belgium: 'be', belize: 'bz',
+    bosniaherzegovina: 'ba', brazil: 'br', bulgaria: 'bg', burkinafaso: 'bf',
+    cambodia: 'kh', canada: 'ca', chile: 'cl', china: 'cn', colombia: 'co',
+    congo: 'cg', costarica: 'cr', croatia: 'hr', cuba: 'cu', czechrep: 'cz',
+    denmark: 'dk', dominicanrep: 'do', ecuador: 'ec', egypt: 'eg', estonia: 'ee',
+    finland: 'fi', france: 'fr', germany: 'de', greece: 'gr', guatemala: 'gt',
+    honduras: 'hn', hungary: 'hu', iceland: 'is', india: 'in', ireland: 'ie',
+    israel: 'il', italy: 'it', jamaica: 'jm', japan: 'jp', kiribati: 'ki',
+    kyrgyzstan: 'kg', laos: 'la', latvia: 'lv', lebanon: 'lb', lithuania: 'lt',
+    luxembourg: 'lu', malaysia: 'my', mexico: 'mx', nauru: 'nr',
+    netherlands: 'nl', newzealand: 'nz', nigeria: 'ng', northkorea: 'kp',
+    norway: 'no', pakistan: 'pk', paraguay: 'py', peru: 'pe', philippines: 'ph',
+    poland: 'pl', portugal: 'pt', puertorico: 'pr', romania: 'ro', russia: 'ru',
+    senegal: 'sn', serbia: 'rs', seychelles: 'sc', singapore: 'sg',
+    slovenia: 'si', southafrica: 'za', southkorea: 'kr', spain: 'es',
+    sweden: 'se', switzerland: 'ch', thailand: 'th', togo: 'tg',
+    trinidadandtobago: 'tt', turkey: 'tr', turkmenistan: 'tm', ukraine: 'ua',
+    uk: 'gb', uruguay: 'uy', usa: 'us', uzbekistan: 'uz', vanuatu: 'vu',
+    venezuela: 've', vietnam: 'vn', westernsamoa: 'ws',
+  };
+  function enhanceFlags() {
+    const swap = (img) => {
+      const m = img.src && img.src.match(/([a-z]+)\.gif$/i);
+      const iso = m && FLAG_ISO[m[1].toLowerCase()];
+      if (!iso) return;
+      const span = document.createElement('span');
+      span.className = 'hdw-flag';
+      span.style.backgroundImage = 'url("' +
+        chrome.runtime.getURL('content/flags/' + iso + '.webp') + '")';
+      span.style.animationDelay = -Math.round(Math.random() * 6064) + 'ms';
+      img.replaceWith(span);
+    };
+    const scan = (root) => {
+      if (root.tagName === 'IMG') swap(root);
+      if (root.querySelectorAll) root.querySelectorAll('img[src$=".gif"]').forEach(swap);
+    };
+    scan(document);
+    const obs = new MutationObserver((muts) => {
+      for (const mu of muts) {
+        for (const n of mu.addedNodes) if (n.nodeType === 1) scan(n);
+      }
+    });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+    window.addEventListener('DOMContentLoaded', () => obs.disconnect());
+  }
+  enhanceFlags();
+
   apply();
 })();

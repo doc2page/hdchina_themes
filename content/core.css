@@ -470,6 +470,124 @@ html.hdw-on .torrent_list td {
 html.hdw-on .torrent_list tr:hover {
   background-color: var(--hdw-row-hover);
 }
+
+/* ── 列表行开光（全主题通用版）：主题色提亮 + 左缘竖条 + 上下细线 + 渐变。
+     各主题取自己的 --hdw-accent，色相自动正确；宣德/定窑/青瓶等
+     在各自装饰层有专属开光语言（本文件更靠后，特异性覆盖本组）。 ── */
+html.hdw-on .torrent_list tbody td,
+html.hdw-on table.uploaded_sub_list tbody td,
+html.hdw-on .top10_box tbody td,
+html.hdw-on table.normal_tab tbody td,
+html.hdw-on table.index_new tbody td {
+  transition: background-color 0.14s ease-out, box-shadow 0.14s ease-out;
+}
+html.hdw-on .torrent_list tbody tr:hover td,
+html.hdw-on table.uploaded_sub_list tbody tr:hover td,
+html.hdw-on .top10_box tbody tr:hover td,
+html.hdw-on table.normal_tab tbody tr:hover td,
+html.hdw-on table.index_new tbody tr:hover td {
+  background-color: var(--hdw-row-hover);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--hdw-accent) 30%, transparent),
+              inset 0 -1px 0 color-mix(in srgb, var(--hdw-accent) 30%, transparent);
+}
+/* 促销行悬停保色：色相保留、微提亮——Free / 2x 状态不因悬停而丢失 */
+html.hdw-on .torrent_list tbody tr.free_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-free), #ffffff 14%);
+}
+html.hdw-on .torrent_list tbody tr.twoup_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoup), #ffffff 14%);
+}
+html.hdw-on .torrent_list tbody tr.twoupfree_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoupfree), #ffffff 14%);
+}
+html.hdw-on .torrent_list tbody tr.halfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-halfdown), #ffffff 14%);
+}
+html.hdw-on .torrent_list tbody tr.twouphalfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twouphalf), #ffffff 14%);
+}
+/* 置顶 / 精华行悬停保色：同法——置顶状态色不因悬停而丢失（种子页前排全是 sticky 系） */
+html.hdw-on .torrent_list tbody tr.toped:hover td,
+html.hdw-on .torrent_list tbody tr.sticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on .torrent_list tbody tr.stickz_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky2), #ffffff 14%);
+}
+html.hdw-on .torrent_list tbody tr.topsticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky3), #ffffff 14%);
+}
+
+/* ── 全站链接色渐变（纯 color，无布局属性；各主题层对特定链接的
+     自带 transition 因特异性更高不受影响） ── */
+html.hdw-on a {
+  transition: color 0.1s ease-out;
+}
+
+/* ── 动画国旗（animated-country-flags，竖排精灵 + CSS 逐帧动画）：
+     theme.js enhanceFlags 把国旗 img 替换为 span（背景图 URL 由 JS 绝对地址内联——
+     content script CSS 的相对 url() 线上按文档基准解析会 404）。相位 = 随机负
+     animation-delay（均匀覆盖全周期、零跳变——webp 动画的相位不可控，精灵 +
+     steps 化 keyframes 才能真随机）。替换与尺寸独立于主题开关。
+     新增国家：python3 tools/make_flags.py <iso> 后在此补映射行。 ── */
+.hdw-flag {
+  display: inline-block;
+  vertical-align: middle;
+  width: 32px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: 100% 1012px;
+  background-position: 0 0;
+  animation: hdw-flag-play 6064ms steps(1, end) infinite;
+}
+
+/* 国旗精灵播放（44 帧，飘起 113ms×23 + 落下 165ms×21 = 6064ms）——相位由 animation-delay 随机负值控制，零跳变 */
+@keyframes hdw-flag-play {
+  1.8635% { background-position: 0 0px; }
+  3.7269% { background-position: 0 -24.5px; }
+  5.5904% { background-position: 0 -47.5px; }
+  7.4538% { background-position: 0 -70.5px; }
+  9.3173% { background-position: 0 -93.5px; }
+  11.1807% { background-position: 0 -116.5px; }
+  13.0442% { background-position: 0 -139.5px; }
+  14.9077% { background-position: 0 -162.5px; }
+  16.7711% { background-position: 0 -185.5px; }
+  18.6346% { background-position: 0 -208.5px; }
+  20.4980% { background-position: 0 -231.5px; }
+  22.3615% { background-position: 0 -254.5px; }
+  24.2249% { background-position: 0 -277.5px; }
+  26.0884% { background-position: 0 -300.5px; }
+  27.9518% { background-position: 0 -323.5px; }
+  29.8153% { background-position: 0 -346.5px; }
+  31.6788% { background-position: 0 -369.5px; }
+  33.5422% { background-position: 0 -392.5px; }
+  35.4057% { background-position: 0 -415.5px; }
+  37.2691% { background-position: 0 -438.5px; }
+  39.1326% { background-position: 0 -461.5px; }
+  40.9960% { background-position: 0 -484.5px; }
+  42.8595% { background-position: 0 -507.5px; }
+  45.5805% { background-position: 0 -530.5px; }
+  48.3015% { background-position: 0 -553.5px; }
+  51.0224% { background-position: 0 -576.5px; }
+  53.7434% { background-position: 0 -599.5px; }
+  56.4644% { background-position: 0 -622.5px; }
+  59.1854% { background-position: 0 -645.5px; }
+  61.9063% { background-position: 0 -668.5px; }
+  64.6273% { background-position: 0 -691.5px; }
+  67.3483% { background-position: 0 -714.5px; }
+  70.0693% { background-position: 0 -737.5px; }
+  72.7902% { background-position: 0 -760.5px; }
+  75.5112% { background-position: 0 -783.5px; }
+  78.2322% { background-position: 0 -806.5px; }
+  80.9532% { background-position: 0 -829.5px; }
+  83.6741% { background-position: 0 -852.5px; }
+  86.3951% { background-position: 0 -875.5px; }
+  89.1161% { background-position: 0 -898.5px; }
+  91.8371% { background-position: 0 -921.5px; }
+  94.5580% { background-position: 0 -944.5px; }
+  97.2790% { background-position: 0 -967.5px; }
+  100.0000% { background-position: 0 -990.5px; }
+}
 html.hdw-on .torrent_list tr.toped,
 html.hdw-on .torrent_list tr.sticky_bg {
   background-color: var(--hdw-sticky) !important;
@@ -1195,7 +1313,7 @@ html.hdw-on.hdw-dark option[style*="background"] {
 
 /* ==================================================================
    青花瓷专属装饰层（html.hdw-on.hdw-t-qinghua）
-   白地青花，瓷韵入屏。青花分五色：头浓 #1c4275、正浓 #24558f、
+   白地青花，瓷韵入屏。青料分浓淡：头浓 #1c4275、正浓 #24558f、
    影淡 #7ba3c4；矾红 #b5443c 点睛。纹样皆为 inline SVG 勾线，
    模拟釉下彩「勾线分水」技法：
      · 缠枝莲带 — nav 主纹彩带
@@ -1484,7 +1602,7 @@ html.hdw-on.hdw-t-qinghua #back_to_top:hover::before {
 
 /* ==================================================================
    宣德专属装饰层（html.hdw-on.hdw-t-xuande）
-   白地青花，瓷韵入屏。青花分五色：头浓 #1c4275、正浓 #24558f、
+   白地青花，瓷韵入屏。青料分浓淡：头浓 #1c4275、正浓 #24558f、
    影淡 #7ba3c4；矾红 #b5443c 点睛。纹样皆为 inline SVG 勾线，
    模拟釉下彩「勾线分水」技法：
      · 缠枝莲带 — nav 主纹彩带
@@ -1519,7 +1637,7 @@ html.hdw-on.hdw-t-xuande #site_header {
 
 /* ── 青花缠枝带：nav 为釉下彩绘带，缠枝莲隐于深青 ── */
 html.hdw-on.hdw-t-xuande #site_nav {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22tin2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.62%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.5%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.30%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22rust2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220.4%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%224.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%223.6%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%223.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%222.7%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%224.2%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%223.2%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e2eef8%22%20stroke-opacity%3D%220.22%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.22%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.11%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22tin2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.62%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.5%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220.30%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23d4dae2%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22rust2%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220.4%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230e0a05%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2266%22%20cy%3D%229%22%20r%3D%224.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2266%22%20cy%3D%229%22%20r%3D%223.6%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2229%22%20cy%3D%2214%22%20r%3D%223.6%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%2229%22%20cy%3D%2214%22%20r%3D%222.7%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22107%22%20cy%3D%2227%22%20r%3D%224.2%22%20fill%3D%22url%28%23rust2%29%22%2F%3E%0A%3Ccircle%20cx%3D%22107%22%20cy%3D%2227%22%20r%3D%223.2%22%20fill%3D%22url%28%23tin2%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%23e2eef8%22%20stroke-opacity%3D%220.22%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.28%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.14%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.14%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.22%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%23e2eef8%22%20fill-opacity%3D%220.14%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
     linear-gradient(180deg, #20497e, #1a3c6b);
   background-size: 140px 44px, 100% 100%;
   background-position: center, 0 0;
@@ -1553,7 +1671,7 @@ html.hdw-on.hdw-t-xuande .scroll-to-fixed-fixed {
 /* ── 影青表头：淡青渐变 + 卷草纹带（辅纹从简，与 nav 主纹缠枝莲繁简相映） ── */
 html.hdw-on.hdw-t-xuande .torrent_list tr.tab_header,
 html.hdw-on.hdw-t-xuande .content_tab tr.tab_header {
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22rust%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23241a0c%22%20stop-opacity%3D%220.85%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.45%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22tin%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220.55%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2268.5%22%20cy%3D%227.5%22%20r%3D%223.4%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%2268.2%22%20cy%3D%227.2%22%20r%3D%221.1%22%20fill%3D%22url%28%23tin%29%22%2F%3E%0A%3Ccircle%20cx%3D%2227.5%22%20cy%3D%2212.5%22%20r%3D%222.6%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%22110%22%20cy%3D%2228.5%22%20r%3D%222.9%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.12%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.12%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22140%22%20height%3D%2244%22%20viewBox%3D%220%200%20140%2044%22%3E%0A%3Cdefs%3E%0A%20%20%3CradialGradient%20id%3D%22rust%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23241a0c%22%20stop-opacity%3D%220.5%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%220.45%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220.28%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%233a2a12%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%20%20%3CradialGradient%20id%3D%22tin%22%3E%0A%20%20%20%20%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220.45%22%2F%3E%0A%20%20%20%20%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23c9ced6%22%20stop-opacity%3D%220%22%2F%3E%0A%20%20%3C%2FradialGradient%3E%0A%3C%2Fdefs%3E%0A%3Ccircle%20cx%3D%2266%22%20cy%3D%229%22%20r%3D%223.4%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%2265.7%22%20cy%3D%228.7%22%20r%3D%221.1%22%20fill%3D%22url%28%23tin%29%22%2F%3E%0A%3Ccircle%20cx%3D%2229%22%20cy%3D%2214%22%20r%3D%222.6%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Ccircle%20cx%3D%22107%22%20cy%3D%2227%22%20r%3D%222.9%22%20fill%3D%22url%28%23rust%29%22%2F%3E%0A%3Cg%20fill%3D%22none%22%20stroke%3D%22%231c4275%22%20stroke-opacity%3D%220.19%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%0A%20%20%3Cpath%20d%3D%22M-10%2C22%20C15%2C2%2038%2C42%2063%2C22%20C88%2C2%20111%2C42%20136%2C22%20C146%2C13%20152%2C10%20158%2C16%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M28%2C13%20c6%2C-8%2015%2C-3%209%2C5%20c-3.5%2C4.5%20-9.5%2C1.5%20-7%2C-2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M98%2C31%20c6%2C8%2015%2C3%209%2C-5%20c-3.5%2C-4.5%20-9.5%2C-1.5%20-7%2C2.5%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C20%20C66%2C15%2066%2C9%2063%2C4%20C60%2C9%2060%2C15%2063%2C20%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.1%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C58%2C16%2056%2C11%2057%2C7%20C61%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M63%2C19%20C68%2C16%2070%2C11%2069%2C7%20C65%2C9%2063%2C14%2063%2C19%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%2263%22%20cy%3D%223%22%20r%3D%221.3%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.19%22%20stroke%3D%22none%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M105%2C28%20c5%2C-6%2012%2C-4%2012%2C2%20c-6%2C4%20-12%2C2%20-12%2C-2%20Z%22%20fill%3D%22%231c4275%22%20fill-opacity%3D%220.05%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M107%2C28%20L115%2C27%22%2F%3E%0A%3C%2Fg%3E%3C%2Fsvg%3E"),
     linear-gradient(180deg, #e9f0f4, #dce8ef);
   background-size: 70px 36px, 100% 100%;
   background-repeat: repeat-x, no-repeat;
@@ -1777,7 +1895,26 @@ html.hdw-on.hdw-t-xuande #back_to_top:hover::before {
    · 返回顶部 = 青花莲瓣钮（静态瓷钮，与青瓶转心盘一动一静成对）
    ================================================================== */
 
-/* ── 开光 hover：行亮起白瓷，描青细框围合（如锦地上开光画面） ── */
+/* ── 橘皮釉：瓷面微凹起伏（宣德釉面特征），复申全部层防重置 ── */
+html.hdw-on.hdw-t-xuande #all_box {
+  background:
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22180%22%20height%3D%22180%22%20viewBox%3D%220%200%20180%20180%22%3E%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22180%22%20height%3D%22180%22%3E%3Cfilter%20id%3D%22op%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.95%22%20numOctaves%3D%222%22%20seed%3D%227%22%2F%3E%3CfeColorMatrix%20type%3D%22saturate%22%20values%3D%220%22%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%22180%22%20height%3D%22180%22%20filter%3D%22url%28%23op%29%22%20opacity%3D%220.05%22%2F%3E%3C%2Fsvg%3E%3C%2Fsvg%3E") repeat,
+    linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 110px),
+    var(--hdw-outer);
+  background-blend-mode: soft-light, normal, normal;
+}
+
+/* ── 开光 hover 的进出时间感（瞬时态须有釉的流动感，0.14s 不触发 reflow） ── */
+html.hdw-on.hdw-t-xuande .torrent_list tbody td,
+html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody td,
+html.hdw-on.hdw-t-xuande .top10_box tbody td,
+html.hdw-on.hdw-t-xuande table.normal_tab tbody td,
+html.hdw-on.hdw-t-xuande table.index_new tbody td {
+  transition: background-color 0.14s ease-out, box-shadow 0.14s ease-out;
+}
+
+/* ── 开光 hover：行亮起白瓷，描青细框围合（如锦地上开光画面）。
+     竖条为半透 2px——hover 是瞬时态，全围合实色框是选中态的强度档 ── */
 html.hdw-on.hdw-t-xuande .torrent_list tbody tr:hover td,
 html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td,
 html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td,
@@ -1798,7 +1935,7 @@ html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td:first-child,
 html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td:first-child,
 html.hdw-on.hdw-t-xuande table.normal_tab tbody tr:hover td:first-child,
 html.hdw-on.hdw-t-xuande table.index_new tbody tr:hover td:first-child {
-  box-shadow: inset 3px 0 0 #1c4275,
+  box-shadow: inset 2px 0 0 rgba(28, 66, 117, 0.5),
               inset 0 1px 0 rgba(28, 66, 117, 0.35),
               inset 0 -1px 0 rgba(28, 66, 117, 0.35);
 }
@@ -1807,9 +1944,36 @@ html.hdw-on.hdw-t-xuande table.uploaded_sub_list tbody tr:hover td:last-child,
 html.hdw-on.hdw-t-xuande .top10_box tbody tr:hover td:last-child,
 html.hdw-on.hdw-t-xuande table.normal_tab tbody tr:hover td:last-child,
 html.hdw-on.hdw-t-xuande table.index_new tbody tr:hover td:last-child {
-  box-shadow: inset -3px 0 0 #1c4275,
+  box-shadow: inset -2px 0 0 rgba(28, 66, 117, 0.5),
               inset 0 1px 0 rgba(28, 66, 117, 0.35),
               inset 0 -1px 0 rgba(28, 66, 117, 0.35);
+}
+
+/* ── 促销行悬停保色：开光提亮不丢 Free / 2x 状态色（色相保留微提亮） ── */
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.free_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-free), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.twoup_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoup), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.twoupfree_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoupfree), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.halfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-halfdown), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.twouphalfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twouphalf), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.toped:hover td,
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.sticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.stickz_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky2), #ffffff 14%);
+}
+html.hdw-on.hdw-t-xuande .torrent_list tbody tr.topsticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky3), #ffffff 14%);
 }
 
 /* ── 返回顶部：青花莲瓣钮（默认青地白莲，hover 白瓷地青莲） ── */
@@ -1833,7 +1997,7 @@ html.hdw-on.hdw-t-xuande #back_to_top:hover {
 
 /* ── 釉下流光：莲花与锡光点保持一层微亮底（::after 恒 0.18），
      ::before 再叠同几何亮层、以柔和亮窗 mask 从左到右扫——亮度波依次
-     传递过每朵莲（8s 一轮），如光在瓷带下缓缓流过。纹样本身静止。 ── */
+     传递过每朵莲（12s 一轮，光过瓷面如云过月），纹样本身静止。 ── */
 html.hdw-on.hdw-t-xuande #site_nav {
   position: relative;
 }
@@ -1856,7 +2020,7 @@ html.hdw-on.hdw-t-xuande #site_nav::before {
   background-size: 140px 44px;
   background-repeat: repeat-x;
   background-position: center;
-  opacity: 0.85;
+  opacity: 0.7;
   -webkit-mask-image: linear-gradient(90deg,
     transparent 0, rgba(0, 0, 0, 0.5) 30%, #000 50%, rgba(0, 0, 0, 0.5) 72%, transparent 100%);
   -webkit-mask-size: 45% 100%;
@@ -1865,7 +2029,7 @@ html.hdw-on.hdw-t-xuande #site_nav::before {
     transparent 0, rgba(0, 0, 0, 0.5) 30%, #000 50%, rgba(0, 0, 0, 0.5) 72%, transparent 100%);
   mask-size: 45% 100%;
   mask-repeat: no-repeat;
-  animation: xd-sweep 8s linear infinite;
+  animation: xd-sweep 12s linear infinite;
   pointer-events: none;
 }
 @keyframes xd-sweep {
@@ -3779,7 +3943,7 @@ html.hdw-on.hdw-layout-dingyao .content_tab tr.tab_header {
 }
 html.hdw-on.hdw-layout-dingyao .torrent_list tr.tab_header th {
   position: sticky;
-  top: 0;
+  top: var(--hdw-header-h, 0);  /* 接顶条实际高度——top:0 会被 sticky headerbox 遮住一段 */
   z-index: 5;
   background: none;
   border-bottom: 1px solid color-mix(in srgb, var(--hdw-accent) 45%, transparent);
@@ -4246,4 +4410,140 @@ html.hdw-on.hdw-t-qingping .userinfo {
   /* 大单元（200px）构图：花心落卡片中下部、上部留白——如盘心沉底 */
   border-color: #b6c9d7;
   box-shadow: 0 4px 14px rgba(28, 66, 117, 0.12), inset -2px 0 0 rgba(28, 66, 117, 0.35);
+}
+
+/* ── 行 hover 开光（taotu 专属语言版，覆盖通用版；含促销行保色） ── */
+html.hdw-on.hdw-t-taotu .torrent_list tbody td,
+html.hdw-on.hdw-t-taotu table.uploaded_sub_list tbody td,
+html.hdw-on.hdw-t-taotu .top10_box tbody td,
+html.hdw-on.hdw-t-taotu table.normal_tab tbody td,
+html.hdw-on.hdw-t-taotu table.index_new tbody td {
+  transition: none;  /* 陶土语言：硬切（须显式 none，否则回落基础层通用过渡） */
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr:hover td,
+html.hdw-on.hdw-t-taotu table.uploaded_sub_list tbody tr:hover td,
+html.hdw-on.hdw-t-taotu .top10_box tbody tr:hover td,
+html.hdw-on.hdw-t-taotu table.normal_tab tbody tr:hover td,
+html.hdw-on.hdw-t-taotu table.index_new tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--hdw-row-hover), #ffffff 25%);
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--hdw-accent) 55%, transparent),
+              inset 0 1px 0 color-mix(in srgb, var(--hdw-accent) 32%, transparent),
+              inset 0 -1px 0 color-mix(in srgb, var(--hdw-accent) 32%, transparent);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.free_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-free), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.twoup_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoup), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.twoupfree_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoupfree), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.halfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-halfdown), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.twouphalfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twouphalf), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.toped:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.sticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.stickz_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky2), #ffffff 14%);
+}
+html.hdw-on.hdw-t-taotu .torrent_list tbody tr.topsticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky3), #ffffff 14%);
+}
+
+/* ── 行 hover 开光（dingyao 专属语言版，覆盖通用版；含促销行保色） ── */
+html.hdw-on.hdw-t-dingyao .torrent_list tbody td,
+html.hdw-on.hdw-t-dingyao table.uploaded_sub_list tbody td,
+html.hdw-on.hdw-t-dingyao .top10_box tbody td,
+html.hdw-on.hdw-t-dingyao table.normal_tab tbody td,
+html.hdw-on.hdw-t-dingyao table.index_new tbody td {
+  transition: background-color 0.14s ease-out, box-shadow 0.14s ease-out;
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr:hover td,
+html.hdw-on.hdw-t-dingyao table.uploaded_sub_list tbody tr:hover td,
+html.hdw-on.hdw-t-dingyao .top10_box tbody tr:hover td,
+html.hdw-on.hdw-t-dingyao table.normal_tab tbody tr:hover td,
+html.hdw-on.hdw-t-dingyao table.index_new tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--hdw-row-hover), #ffffff 25%);
+  box-shadow: inset 0 3px 0 -2px color-mix(in srgb, var(--hdw-accent) 60%, transparent),
+              inset 0 -3px 0 -2px color-mix(in srgb, var(--hdw-accent) 60%, transparent);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.free_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-free), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.twoup_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoup), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.twoupfree_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoupfree), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.halfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-halfdown), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.twouphalfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twouphalf), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.toped:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.sticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.stickz_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky2), #ffffff 14%);
+}
+html.hdw-on.hdw-t-dingyao .torrent_list tbody tr.topsticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky3), #ffffff 14%);
+}
+
+/* ── 行 hover 开光（qingping 专属语言版，覆盖通用版；含促销行保色） ── */
+html.hdw-on.hdw-t-qingping .torrent_list tbody td,
+html.hdw-on.hdw-t-qingping table.uploaded_sub_list tbody td,
+html.hdw-on.hdw-t-qingping .top10_box tbody td,
+html.hdw-on.hdw-t-qingping table.normal_tab tbody td,
+html.hdw-on.hdw-t-qingping table.index_new tbody td {
+  transition: background-color 0.14s ease-out, box-shadow 0.14s ease-out;
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr:hover td,
+html.hdw-on.hdw-t-qingping table.uploaded_sub_list tbody tr:hover td,
+html.hdw-on.hdw-t-qingping .top10_box tbody tr:hover td,
+html.hdw-on.hdw-t-qingping table.normal_tab tbody tr:hover td,
+html.hdw-on.hdw-t-qingping table.index_new tbody tr:hover td {
+  background-color: color-mix(in srgb, var(--hdw-row-hover), #ffffff 25%);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--hdw-accent) 32%, transparent),
+              inset 0 -1px 0 color-mix(in srgb, var(--hdw-accent) 32%, transparent);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.free_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-free), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.twoup_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoup), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.twoupfree_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twoupfree), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.halfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-halfdown), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.twouphalfdown_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-twouphalf), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.toped:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.sticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.stickz_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky2), #ffffff 14%);
+}
+html.hdw-on.hdw-t-qingping .torrent_list tbody tr.topsticky_bg:hover td {
+  background-color: color-mix(in srgb, var(--hdw-sticky3), #ffffff 14%);
 }
