@@ -1127,12 +1127,12 @@
         sticky3: '#e9dfe4',
 
         text: '#24364a',
-        'text-soft': '#5c7286',
+        'text-soft': '#52677c',
         title: '#143257',
         'title-hover': '#b5443c',
         link: '#24558f',
         'link-strong': '#194a7d',
-        'link-hover': '#0d6cb5',
+        'link-hover': '#b5443c',
 
         accent: '#24558f',
         'accent-soft': '#3c6ca0',
