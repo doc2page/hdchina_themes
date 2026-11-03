@@ -1,21 +1,17 @@
-/* 瓷之器 — 身份卡模态样式 v9 终稿（Shadow DOM 内注入；青花基调恒定）
-   设计稿：tools/card_design_v2.html（cardmaster，故宫《瓷上莲》永乐团莲程式）
-   档位：t-su 素坯 / t-min 民窑 / t-guan 官窑 / t-dou 斗彩 / t-gong 供器
-   ⚠ 改样式先改设计稿过审，再同步此处（勿直接在此发挥） */
+/* 瓷之器 — 身份卡模态样式（生长体系终稿，Shadow DOM 内注入；设计源 tools/grow_design.html）
+   ⚠ 改样式先改设计稿过审再同步此处 */
 
 :host { all: initial; }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 :host {
-  --tou: #1c4275;      /* 头浓 */
-  --zheng: #24558f;    /* 正浓 */
-  --ying: #7ba3c4;     /* 影淡 */
-  --ying-t: #5b7d9c;   /* 影淡·文 */
-  --hong: #b5443c;     /* 矾红 */
-  --jin: #b08d4a;      /* 哑光金 */
-  --jin-t: #96763a;    /* 哑光金·线 */
-  --bai: #fbfdfd;      /* 釉白 */
-  --tai: #8d877a;      /* 素坯·胎 */
+  --deep: #1c4275;    /* 头浓（勾线） */
+  --mid: #24558f;     /* 正浓 */
+  --pale: #7ba3c4;    /* 影淡 */
+  --red: #b5443c;     /* 矾红 */
+  --red-d: #8e2f28;   /* 矾红·深（红部勾线） */
+  --gold: #b08d4a;    /* 哑光金 */
+  --white: #fbfdfd;   /* 釉白 */
   --serif: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", "Noto Serif SC", serif;
   --sans: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", sans-serif;
   font-family: var(--sans);
@@ -29,124 +25,125 @@
 }
 .overlay.on { opacity: 1; }
 
-/* ── 卡本体 320×480（2:3 收藏印相比例）；出场：瓷牌自案上浮起 ── */
+/* ── 卡 320×480：口沿一线 = 等级色（--rim 渲染时注入）；白丁涩胎边 ── */
 .card {
-  position: relative; width: 320px; height: 480px; flex: none;
-  border-radius: 6px; overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--tou) 55%, transparent); /* 口沿一线：民窑起有釉 */
-  background: radial-gradient(150% 100% at 26% -6%, #ffffff 0%, var(--bai) 46%, #f0f5f7 100%);
-  box-shadow: 0 26px 50px -18px rgba(0, 0, 0, 0.62), 0 6px 16px rgba(0, 0, 0, 0.32);
-  display: flex; flex-direction: column;
+  position: relative; width: 320px; height: 480px; overflow: hidden;
+  background: radial-gradient(140% 90% at 24% 8%, #ffffff 0%, var(--white) 42%, #f2f5f8 100%);
+  border-radius: 10px;
+  border: 1px solid var(--rim, rgba(28, 66, 117, .55));
   color: #24364a;
   transform: translateY(14px) scale(0.985);
   transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .overlay.on .card { transform: none; animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1); }
 @keyframes rise { from { opacity: 0; transform: translateY(18px) scale(0.985); } }
+.card.bare { border-color: rgba(141, 135, 122, .25); }
 
-/* 釉面流光（悬停扫过一次；素坯未上釉不扫光） */
+/* 釉面流光（悬停扫过一次） */
 .glare {
-  position: absolute; inset: 0; z-index: 9; pointer-events: none;
-  background: linear-gradient(112deg, transparent 32%, rgba(255, 255, 255, 0.5) 46%,
-    rgba(255, 255, 255, 0.1) 55%, transparent 68%);
+  position: absolute; inset: 0; pointer-events: none; z-index: 6;
+  background: linear-gradient(115deg, rgba(255,255,255,.55) 0%, rgba(255,255,255,.14) 17%, rgba(255,255,255,0) 30%);
   transform: translateX(-150%);
 }
 .card:hover .glare { transition: transform 0.9s cubic-bezier(0.25, 0.5, 0.2, 1); transform: translateX(150%); }
 
-/* 口沿：无线——档位阶梯只在枝/印/款识/彩上讲，顶部通透 */
-.rim { display: none; }
+/* ── 生长植物带（viewBox 与取景同设计稿） ── */
+.plant { position: absolute; top: 4px; left: 0; width: 267px; height: 310px; z-index: 2; }
 
-/* ── 画面：大留白釉面 ── */
-.field { flex: 1; position: relative; padding: 12px 26px 4px; }
-.rank { /* 左上：用户名（站点等级色，横排截断；浅色系靠描边兜底） */
-  font-family: var(--serif); font-weight: 600; font-size: 16px; letter-spacing: 0.1em;
-  color: var(--tou); padding-left: 2px; max-width: 168px;
-  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-  animation: fadein 0.5s 0.18s backwards;
-}
-
-/* 题款列：名 + 印（右上起笔，印随名后） */
+/* ── 右上竖排雅称 ── */
 .titlecol {
-  position: absolute; top: 16px; right: 16px;
-  display: flex; flex-direction: column; align-items: center; gap: 15px;
-  animation: namein 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.26s backwards;
+  position: absolute; top: 20px; right: 17px; z-index: 4;
+  writing-mode: vertical-rl; text-orientation: mixed;
+  font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.12;
+  letter-spacing: 0.2em; color: var(--deep);
+  animation: namein 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) 0.22s backwards;
 }
 @keyframes namein { from { opacity: 0; transform: translateY(-8px); } }
-.name { /* 右上竖排：档位雅称（每档固定 2 字） */
-  writing-mode: vertical-rl; text-orientation: mixed;
-  font-family: var(--serif); font-weight: 600; font-size: 33px; line-height: 1.12;
-  letter-spacing: 0.2em; color: var(--tou);
-}
-.t-su .name { color: rgba(141, 135, 122, 0.52); font-weight: 500; }
+.card.bare .titlecol { color: rgba(141, 135, 122, 0.72); font-weight: 500; }
 
-/* ── 活枝：团莲（故宫《瓷上莲》永乐缠枝莲程式）——藤势三样，窑彩分档 ── */
-.sprig2 { position: absolute; left: 26px; bottom: 2px; color: var(--tou);
-  transform: scale(1.3); transform-origin: 30% 96%; }
-.sprig2.mid { left: 49px; }
-.sprig2.wide { left: 40px; }
-.t-dou .sprig2 { --shi: rgba(181, 68, 60, 0.82); --rui: var(--hong); }
-.t-gong .sprig2 { color: var(--jin-t); --rui: var(--hong); }
-/* 缠枝抽条：藤先长（分段提按依次出笔）、花后开 */
-.sprig2 .stem { stroke-dasharray: 240; stroke-dashoffset: 240;
-  animation: draw 1.15s 0.3s cubic-bezier(0.45, 0.08, 0.3, 1) forwards; }
-.sprig2 .stem2 { stroke-dasharray: 80; stroke-dashoffset: 80;
-  animation: draw 0.7s 0.7s cubic-bezier(0.45, 0.08, 0.3, 1) forwards; }
-.sprig2 .bloom { opacity: 0; animation: bloomin 0.55s 1.1s ease-out forwards; }
-@keyframes draw { to { stroke-dashoffset: 0; } }
-@keyframes bloomin { to { opacity: 1; } }
-
-/* 民窑：同一语言，更瘦更简（一藤一花一叶） */
-.sprig { position: absolute; left: 30px; bottom: 2px; transform: scale(1.26); transform-origin: 30% 96%; animation: fadein 0.6s 0.3s backwards; }
-
-/* 素坯独句 */
-.hint {
-  position: absolute; left: 28px; bottom: 26px;
-  font-family: var(--serif); font-size: 12px; letter-spacing: 0.34em;
+/* 白丁独句 */
+.hint {  /* 图案区中上居中（白丁无藤，画面留白的题句位） */
+  position: absolute; left: 0; right: 0; top: 150px; z-index: 4;
+  text-align: center;
+  font-family: var(--serif); font-size: 12px; letter-spacing: 0.34em; text-indent: 0.34em;
   color: rgba(141, 135, 122, 0.78); animation: fadein 0.6s 0.3s backwards;
 }
 
-/* ── 数据：左对齐账目 ── */
-.data { height: 118px; flex: none; padding: 13px 26px 0; animation: fadein 0.5s 0.36s backwards; }
-.lab { font-size: 10px; letter-spacing: 0.28em; color: var(--ying-t); }
-.num {
-  margin-top: 3px; font-family: var(--serif); font-weight: 600; font-size: 31px;
-  line-height: 1.1; color: var(--tou); font-variant-numeric: tabular-nums;
+/* ── 双印章（铁律：一律横向长方，禁正方形）── */
+.seal {
+  position: absolute; z-index: 5; display: flex; align-items: center; justify-content: center;
+  border-radius: 4px; height: 26px; max-width: 118px;
+  background-color: var(--ink);
+  background-image:
+    radial-gradient(ellipse at 50% 40%, rgba(251,253,253,.13) 0%, rgba(251,253,253,0) 60%),
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0"/></filter><rect width="64" height="64" filter="url(%23n)"/></svg>');
+  box-shadow: 0 1.5px 5px rgba(20,40,60,.2);
+  animation: fadein 0.5s 0.4s backwards;
 }
+.seal::before { content: ''; position: absolute; inset: 2.5px; border: 1px solid rgba(251,253,253,.92);
+  border-radius: 2px; pointer-events: none; }
+.seal .txt {
+  writing-mode: horizontal-tb; white-space: nowrap; letter-spacing: 1.5px;
+  font-family: var(--serif); font-weight: 600; color: var(--white); line-height: 1.1;
+  overflow: hidden; text-overflow: ellipsis;
+}
+/* 名章：左上，印泥=等级色，微左倾 */
+.seal-n { top: 16px; left: 22px; transform: rotate(-2deg); }
+/* 官印：底部居中，矾红徽记，微右倾，横长方（高 24） */
+.seal-r { bottom: 16px; left: 50%; height: 24px; transform: translateX(-50%) rotate(2deg); }
+.seal-r .txt { letter-spacing: 2px; font-size: 11px; }
+.seal.sy .txt { color: #5a4a00; letter-spacing: 1px; }         /* 黄印泥特例：深褐印文可读 */
+.seal.sy::before { border-color: rgba(90,74,0,.85); }
+.seal.ss .txt { text-shadow: 0 0 1.5px rgba(15,35,55,.5); }    /* 浅色印泥：白文描影增对比 */
+
+/* ── 数据账目 ── */
+.data { height: 118px; flex: none; position: absolute; left: 0; right: 0; bottom: 44px;
+  padding: 13px 26px 0; animation: fadein 0.5s 0.3s backwards; }
+.lab { font-size: 10px; letter-spacing: 0.28em; color: #5b7d9c; }
+.num { margin-top: 3px; font-family: var(--serif); font-weight: 600; font-size: 31px;
+  line-height: 1.1; color: var(--deep); font-variant-numeric: tabular-nums; }
 .num i { font-style: normal; font-size: 13px; font-weight: 400; margin-left: 5px;
-  letter-spacing: 0.08em; color: var(--ying-t); }
+  letter-spacing: 0.08em; color: #5b7d9c; }
 .duo { display: flex; }
 .duo > div { flex: 1; }
 .duo b { display: block; margin-top: 3px; font-family: var(--serif); font-weight: 600;
-  font-size: 16px; color: var(--zheng); font-variant-numeric: tabular-nums; }
-.duo b i { font-style: normal; font-size: 10.5px; font-weight: 400; margin-left: 3px; color: var(--ying-t); }
-
-/* ── 圈足：款识 = 影业等级中文名 ── */
-.foot { height: 50px; flex: none; margin: 0 26px; position: relative;
-  display: flex; align-items: center; justify-content: center; }
-.mark {
-  font-family: var(--serif); font-weight: 600; font-size: 12px;
-  letter-spacing: 0.42em; text-indent: 0.42em; color: var(--zheng);
-  animation: fadein 0.5s 0.52s backwards;
-}
-.t-gong .mark { color: var(--jin-t); }
-.t-gong { border-color: color-mix(in srgb, var(--jin) 78%, transparent); }  /* 供器：描金口沿 */
-.t-min .mark { font-weight: 500; }
-
-/* ── 素坯整卡：胎色无光，留拉坯横痕 ── */
-.t-su {
-  background: #f2eee3;
-  box-shadow: 0 26px 50px -18px rgba(0, 0, 0, 0.55), 0 6px 16px rgba(0, 0, 0, 0.3),
-    inset 0 0 0 1px rgba(141, 135, 122, 0.25);
-}
-.t-su .glare { display: none; }
-.t-su .rank { color: rgba(141, 135, 122, 0.6); }
-.t-su .lab, .t-su .num i, .t-su .duo b i { color: rgba(141, 135, 122, 0.7); }
-.t-su .num { color: rgba(141, 135, 122, 0.62); }
-.t-su .duo b { color: rgba(141, 135, 122, 0.58); }
-.t-su .data { opacity: 0.75; }
-.t-su .mark { color: rgba(141, 135, 122, 0.5); font-weight: 500; }
+  font-size: 16px; color: var(--mid); font-variant-numeric: tabular-nums; }
+.duo b i { font-style: normal; font-size: 10.5px; font-weight: 400; margin-left: 3px; color: #5b7d9c; }
+.card.bare .lab, .card.bare .num i, .card.bare .duo b i { color: rgba(141, 135, 122, .7); }
+.card.bare .num { color: rgba(141, 135, 122, .62); }
+.card.bare .duo b { color: rgba(141, 135, 122, .58); }
 
 @keyframes fadein { from { opacity: 0; } }
+
+/* ── 缠枝抽条（生长动效）：藤自根起分段依次描线，挂件（叶/花/苞/串）后开 ── */
+.plant .stem {
+  stroke-dasharray: var(--dl);
+  stroke-dashoffset: var(--dl);
+  animation: draw 0.42s cubic-bezier(0.45, 0.08, 0.3, 1) calc(var(--di) * 0.13s + 0.28s) forwards;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+/* 挂件逐个随所在藤段描完而现（--t 由 JS 按挂点段号算出）；
+   生长完成后微风摇曳：挂件绕挂点 ±1.2° 摆动（相位按挂点散开，风过莲塘） */
+/* 真实风感三要素：非对称缓动（起慢回快如阵风）、无限不循环感（周期散开）、
+   挂件相位/幅度各异（--ph 相位、--am 幅度由 JS 按挂点散布）——整体如阵风掠过莲塘 */
+.plant .spr {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation:
+    sprin 0.5s ease-out var(--t, 1s) forwards,
+    sway var(--prd, 5s) ease-in-out calc(var(--t, 1s) + 0.6s + var(--ph, 0s)) infinite;
+}
+@keyframes sprin { to { opacity: 1; } }
+@keyframes sway {
+  /* 0° 起步与 sprin 后静止态无缝衔接；阵风渐强 → 渐弱 → 归静再起（循环首尾皆 0°，无跳变） */
+  0%   { transform: rotate(0deg); }
+  16%  { transform: rotate(calc(var(--am, 1deg) *  0.85)); }
+  36%  { transform: rotate(calc(var(--am, 1deg) * -0.6)); }
+  56%  { transform: rotate(calc(var(--am, 1deg) *  0.45)); }
+  76%  { transform: rotate(calc(var(--am, 1deg) * -0.22)); }
+  100% { transform: rotate(0deg); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
