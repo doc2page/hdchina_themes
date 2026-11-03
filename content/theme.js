@@ -171,7 +171,7 @@
     congo: 'cg', costarica: 'cr', croatia: 'hr', cuba: 'cu', czechrep: 'cz',
     denmark: 'dk', dominicanrep: 'do', ecuador: 'ec', egypt: 'eg', estonia: 'ee',
     finland: 'fi', france: 'fr', germany: 'de', greece: 'gr', guatemala: 'gt',
-    honduras: 'hn', hungary: 'hu', iceland: 'is', india: 'in', ireland: 'ie',
+    honduras: 'hn', hongkong: 'hk', hungary: 'hu', iceland: 'is', india: 'in', ireland: 'ie',
     israel: 'il', italy: 'it', jamaica: 'jm', japan: 'jp', kiribati: 'ki',
     kyrgyzstan: 'kg', laos: 'la', latvia: 'lv', lebanon: 'lb', lithuania: 'lt',
     luxembourg: 'lu', malaysia: 'my', mexico: 'mx', nauru: 'nr',
