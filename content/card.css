@@ -1,0 +1,25 @@
+/* 瓷之器 — 身份卡入口图标（页面级；卡片模态样式在 card-modal.css，Shadow DOM 内注入） */
+
+.hdw-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 19px;
+  height: 19px;
+  margin-left: 5px;
+  vertical-align: -4px;
+  border: 1px solid rgba(124, 150, 180, 0.55);
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+  color: #7c96b4;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.hdw-card-btn:hover,
+.hdw-card-btn:focus-visible {
+  color: #b5443c;
+  border-color: rgba(181, 68, 60, 0.65);
+  background: rgba(255, 255, 255, 0.75);
+  outline: none;
+}

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "瓷之器",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "为 HDWinG (hdwing.org) 新增界面主题：暗夜、Nord、纸墨、松烟与青花瓷、梅子青、胭脂红、曜变、陶土、哥窑、天青、钧天、定窑、青瓶、宣德十一款深度定制，深色文字全量精修，支持跟随系统与自定义 CSS，即时切换免刷新。",
   "icons": {
     "16": "icons/icon16.png",
@@ -22,10 +22,12 @@
       ],
       "js": [
         "shared/themes.js",
-        "content/theme.js"
+        "content/theme.js",
+        "content/card.js"
       ],
       "css": [
-        "content/core.css"
+        "content/core.css",
+        "content/card.css"
       ],
       "run_at": "document_start",
       "all_frames": false
@@ -34,7 +36,8 @@
   "web_accessible_resources": [
     {
       "resources": [
-        "content/flags/*.webp"
+        "content/flags/*.webp",
+        "content/card-modal.css"
       ],
       "matches": [
         "*://*.hdwing.org/*"
