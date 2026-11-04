@@ -180,7 +180,7 @@
     poland: 'pl', portugal: 'pt', puertorico: 'pr', romania: 'ro', russia: 'ru',
     senegal: 'sn', serbia: 'rs', seychelles: 'sc', singapore: 'sg',
     slovenia: 'si', southafrica: 'za', southkorea: 'kr', spain: 'es',
-    sweden: 'se', switzerland: 'ch', thailand: 'th', togo: 'tg',
+    slovakia: 'sk', sweden: 'se', switzerland: 'ch', thailand: 'th', togo: 'tg',
     trinidadandtobago: 'tt', turkey: 'tr', turkmenistan: 'tm', ukraine: 'ua',
     uk: 'gb', uruguay: 'uy', usa: 'us', uzbekistan: 'uz', vanuatu: 'vu',
     venezuela: 've', vietnam: 'vn', westernsamoa: 'ws',
